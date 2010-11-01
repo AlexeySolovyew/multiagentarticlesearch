@@ -1,5 +1,7 @@
 package searcher;
 
+import searcher.agents.user.UserAgent;
+
 public class SEBoot {
 
 	public SEBoot() {
@@ -10,7 +12,7 @@ public class SEBoot {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String argsv[] = {"-agents", "UserAgent:searcher.agents.user.UserAgent"};
+		String argsv[] = {"-agents", UserAgent.getAddressName()+":searcher.agents.user.UserAgent"};
 	    jade.Boot.main(argsv);
 
 	}

@@ -37,10 +37,10 @@ public class UserAgentFrame extends JFrame {
 	public UserAgentFrame(UserAgent agent) {
 		super();
 		this.agent = agent;
+		this.setVisible(true);
 		jfInit();
 		this.setSize(600, 600);
 		this.setTitle("UserAgent - " + agent.getName());
-		this.setVisible(true);
 
 	}
 
@@ -73,24 +73,12 @@ public class UserAgentFrame extends JFrame {
 	    msg.addReceiver(agent.getCourierAID());
 	    msg.setContent(inputField.getText());
 	    msg.setLanguage("Plain English");
-	   // msg.setOntology("World Domination");
 	    agent.send(msg);
-	    //outputField.append(msg.getContent());
-		
-		
-		/*ACLMessage aclMsg = new ACLMessage();
-		aclMsg.setSender(agent.getAID());
-		
-		
-		
-		agent.postMessage(aclMsg);
-		sendMsg(jTextField.getText());
-		jTextField.setText("");
-		inputField.ac*/
+		outputField.setText("");
 	}
 
-	public void writeMSG(ACLMessage msg) {
-	    outputField.append(msg.getContent());
+	public void showMSG(ACLMessage msg) {
+	    outputField.append(msg.getSender().getName()+" : "+msg.getContent()+"\n");
 		
 	}
 	
