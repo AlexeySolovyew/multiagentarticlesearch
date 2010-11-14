@@ -25,10 +25,10 @@ public class SearcherCyclicBehaviour extends CyclicBehaviour {
 			if (msgINIT != null) {
 				if (msgINIT.getContent().equals(SearcherAgent.INIT_USER)) {
 					agent.setUserAID(msgINIT.getSender());
-					System.out.println(agent.getName()+" resive msg: INIT_USER");
+					System.out.println(agent.getName()+" receive msg: INIT_USER");
 				} else if (msgINIT.getSender().equals(agent.getUserAgentAID())) {
 					agent.setCourierAID(msgINIT.getContent());
-					System.out.println(agent.getName()+" resive msg: " + msgINIT.getContent());
+					System.out.println(agent.getName()+" receive msg: " + msgINIT.getContent());
 				} else {
 					throw new InitAgentException();
 				}
@@ -42,7 +42,7 @@ public class SearcherCyclicBehaviour extends CyclicBehaviour {
 		if(msg != null){
 			if(msg.getSender().equals(agent.getCourierAgentAID())){
 				agent.sendSearchResult(agent.search(msg));
-				System.out.println(agent.getName()+" resive search msg: "+ msg.getContent());
+				System.out.println(agent.getName()+" receive search msg: "+ msg.getContent());
 			}
 		}else{
 			this.block();
