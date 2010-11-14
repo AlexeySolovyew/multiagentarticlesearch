@@ -24,10 +24,10 @@ public class CourierCyclicBehavior extends CyclicBehaviour {
 			if (msgINIT != null) {
 				if (msgINIT.getContent().equals(CourierAgent.INIT_USER)) {
 					agent.setUserAID(msgINIT.getSender());
-					System.out.println("CouierAgent resive msg1");
+					System.out.println("CouierAgent receive msg1");
 				} else if (msgINIT.getSender().equals(agent.getUserAgentAID())) {
 					agent.setSearchers(msgINIT.getContent());
-					System.out.println("CouierAgent resive msg2");
+					System.out.println("CouierAgent receive msg2");
 				} else {
 					throw new InitAgentException();
 				}
@@ -41,7 +41,7 @@ public class CourierCyclicBehavior extends CyclicBehaviour {
 		if (msgInform != null) {
 			if (msgInform.getSender().equals(agent.getUserAgentAID())) {
 				agent.distributeMSG(msgInform);
-				System.out.println("CouierAgent resive msgSearch = " + msgInform.getContent());
+				System.out.println("CouierAgent receive msgSearch = " + msgInform.getContent());
 
 			}
 		}
