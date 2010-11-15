@@ -28,7 +28,7 @@ public class UserCyclicBehaviour extends CyclicBehaviour {
 			}
 			if (msg.getSender().equals(agent.getResultAgent1AID())
 					|| msg.getSender().equals(agent.getResultAgent2AID())) {
-				agent.showMSG(msg);
+				agent.addPageToFrame(/*msg.getSender()+" - "+*/msg.getContent());
 			}
 
 		} else {
@@ -38,11 +38,11 @@ public class UserCyclicBehaviour extends CyclicBehaviour {
 
 	}
 
-	private void sendMSG(String content, AID reciverAID) {
+	private void sendMSG(String content, AID receiverAID) {
 		ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
 		msg.setSender(agent.getAID());
 		msg.setContent(content);
-		msg.addReceiver(reciverAID);
+		msg.addReceiver(receiverAID);
 		agent.send(msg);
 	}
 
