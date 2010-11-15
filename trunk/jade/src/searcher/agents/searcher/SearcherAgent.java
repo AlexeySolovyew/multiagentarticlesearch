@@ -3,6 +3,7 @@ package searcher.agents.searcher;
 import java.security.acl.Acl;
 import java.util.List;
 
+import searcher.Article;
 import searcher.agents.courier.CourierAgent;
 import searcher.agents.user.UserAgent;
 import jade.core.AID;
@@ -30,7 +31,7 @@ public abstract class SearcherAgent extends Agent {
 		addBehaviour(new SearcherCyclicBehaviour(this));
 	}
 
-	public abstract List<String> search(ACLMessage msg);
+	public abstract List<Article> search(ACLMessage msg);
 
 	public AID getCourierAgentAID() {
 		return courierAgentAID;
@@ -48,11 +49,11 @@ public abstract class SearcherAgent extends Agent {
 		courierAgentAID = new AID(nameAID, AID.ISLOCALNAME);
 	}
 
-	public void sendSearchResult(List<String> search) {
-		for (String pageName : search) {
+	public void sendSearchResult(List<Article> search) {
+		for (Article page : search) {
 			ACLMessage responseMSG = new ACLMessage(ACLMessage.INFORM);
 			responseMSG.setSender(this.getAID());
-			responseMSG.setContent(pageName);
+			responseMSG.setContent(page.getName());
 			responseMSG.addReceiver(this.getUserAgentAID());
 			this.send(responseMSG);			
 		}

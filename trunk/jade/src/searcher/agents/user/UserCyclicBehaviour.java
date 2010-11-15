@@ -2,7 +2,7 @@ package searcher.agents.user;
 
 import searcher.agents.courier.CourierAgent;
 import searcher.exceptions.InitAgentException;
-import sun.management.resources.agent;
+//import sun.management.resources.agent;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;

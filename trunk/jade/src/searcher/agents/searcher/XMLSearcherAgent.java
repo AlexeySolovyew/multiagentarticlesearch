@@ -2,6 +2,7 @@ package searcher.agents.searcher;
 
 import java.util.List;
 
+import searcher.Article;
 import searcher.agents.courier.CourierAgent;
 import searcher.agents.user.UserAgent;
 import jade.core.AID;
@@ -15,7 +16,7 @@ public class XMLSearcherAgent extends SearcherAgent {
 	}
 
 	@Override
-	public List<String> search(ACLMessage msg) {
+	public List<Article> search(ACLMessage msg) {
 		return null;
 		// TODO Auto-generated method stub
 		
