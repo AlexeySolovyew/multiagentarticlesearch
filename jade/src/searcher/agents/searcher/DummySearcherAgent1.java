@@ -3,15 +3,17 @@ package searcher.agents.searcher;
 import java.util.ArrayList;
 import java.util.List;
 
+import searcher.Article;
+
 
 public class DummySearcherAgent1 extends DummySearcherAgent {
-	protected static List<String> pages;
+	protected static List<Article> pages;
 
 	static{
-		 pages = new ArrayList<String>();
-		 pages.add("1 - http://www.google.ru");
-		 pages.add("2 - http://www.nude-dreams.com");
-		 pages.add("3 - http://www.vporyade.ru");
+		 pages = new ArrayList<Article>();
+		 pages.add(new Article("http://www.google.ru", 0));
+		 pages.add(new Article("http://www.nude-dreams.com", 0));
+		 pages.add(new Article("http://www.vporyade.ru",0));
 	}
 
 	public DummySearcherAgent1() {
@@ -19,7 +21,7 @@ public class DummySearcherAgent1 extends DummySearcherAgent {
 	}
 
 	@Override
-	public List<String> getPages() {
+	public List<Article> getPages() {
 		return pages;
 	}
 
