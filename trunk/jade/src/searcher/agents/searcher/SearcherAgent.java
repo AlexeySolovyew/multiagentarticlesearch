@@ -53,7 +53,7 @@ public abstract class SearcherAgent extends Agent {
 		for (Article page : search) {
 			ACLMessage responseMSG = new ACLMessage(ACLMessage.INFORM);
 			responseMSG.setSender(this.getAID());
-			responseMSG.setContent(page.getName());
+			responseMSG.setContent(this.getName()+" - "+page.getName()+" $$ "+page.getRank());
 			responseMSG.addReceiver(this.getUserAgentAID());
 			this.send(responseMSG);			
 		}

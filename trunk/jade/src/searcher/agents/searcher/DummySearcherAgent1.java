@@ -11,9 +11,9 @@ public class DummySearcherAgent1 extends DummySearcherAgent {
 
 	static{
 		 pages = new ArrayList<Article>();
-		 pages.add(new Article("http://www.google.ru", 0));
-		 pages.add(new Article("http://www.nude-dreams.com", 0));
-		 pages.add(new Article("http://www.vporyade.ru",0));
+		 pages.add(new Article("http://www.google.ru", 1));
+		 pages.add(new Article("http://www.nude-dreams.com", 2));
+		 pages.add(new Article("http://www.vporyade.ru",5));
 	}
 
 	public DummySearcherAgent1() {

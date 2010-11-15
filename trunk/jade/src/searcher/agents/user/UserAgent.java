@@ -148,8 +148,8 @@ public class UserAgent extends Agent {
 		return iterator.next();
 	}
 
-	public void showMSG(ACLMessage msg) {
-		itsFrame.showMSG(msg);
+	public void addPageToFrame(String p) {
+		itsFrame.addArticleToFrame(p);
 
 	}
 
