@@ -54,8 +54,8 @@ public class CourierAgent extends Agent {
 	}
 
 	public void setSearchers(String content) {
-		for (StringTokenizer tokenazer = new StringTokenizer(content); tokenazer.hasMoreTokens();) {
-			String searcherName = tokenazer.nextToken();
+		for (StringTokenizer tz = new StringTokenizer(content); tz.hasMoreTokens();) {
+			String searcherName = tz.nextToken();
 			seachersAID.add(new AID(searcherName, AID.ISLOCALNAME));			
 		}
 		
