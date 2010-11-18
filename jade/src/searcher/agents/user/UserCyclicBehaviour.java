@@ -26,8 +26,7 @@ public class UserCyclicBehaviour extends CyclicBehaviour {
 			if (msg.getSender().equals(agent.getAID())) {
 				agent.send(msg);
 			}
-			if (msg.getSender().equals(agent.getResultAgent1AID())
-					|| msg.getSender().equals(agent.getResultAgent2AID())) {
+			if (agent.thinkThatResultAgentIs(msg.getSender())) {
 				agent.addPageToFrame(/*msg.getSender()+" - "+*/msg.getContent());
 			}
 

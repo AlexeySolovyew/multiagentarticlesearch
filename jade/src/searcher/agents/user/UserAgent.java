@@ -40,6 +40,9 @@ public class UserAgent extends Agent {
 
 
 	private static final int DummySearchAngen2 = 2;
+
+
+	private static final int GOOGLE_SearchAgent = 3;
 	
 	
 	private static String ADDRESS_NAME = "useragent";
@@ -60,6 +63,7 @@ public class UserAgent extends Agent {
 			createCourierAgent(container);
 			createDummySA1(container);
 			createDummySA2(container);
+			createGoogleSA(container);
 			sendInitMSGs();
 		} catch (Exception e) {
 			System.err.println("Exception while adding agents: " + e);
@@ -67,6 +71,22 @@ public class UserAgent extends Agent {
 		}
 	}
 
+
+	private void createGoogleSA(PlatformController container) {
+		String searchAgent = this.SEARCHER_AGENT_NAME + GOOGLE_SearchAgent;
+		AgentController search;
+		try {
+			search = container.createNewAgent(searchAgent,
+					"searcher.agents.searcher.GoogleSearcherAgent", null);
+			search.start();
+		} catch (ControllerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		AID AID_searcherAgent = new AID(searchAgent, AID.ISLOCALNAME);
+		searchers.add(AID_searcherAgent);
+		
+	}
 
 	private void sendInitMSGs() {
 		sendInitMSG(CourierAgent.INIT_USER, this.getCourierAID());
@@ -138,16 +158,6 @@ public class UserAgent extends Agent {
 		return courierAgentAID;
 	}
 
-	public Object getResultAgent1AID() {
-		return searchers.iterator().next();
-	}
-
-	public Object getResultAgent2AID() {
-		Iterator<AID> iterator = searchers.iterator();
-		iterator.next();
-		return iterator.next();
-	}
-
 	public void addPageToFrame(String p) {
 		itsFrame.addArticleToFrame(p);
 
@@ -170,6 +180,10 @@ public class UserAgent extends Agent {
 			searchNames += this.SEARCHER_AGENT_NAME+numberAgent +" ";
 		}
 		return searchNames;
+	}
+
+	public boolean thinkThatResultAgentIs(AID sender) {
+		return searchers.contains(sender);
 	}
 
 	/*
