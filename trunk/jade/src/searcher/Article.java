@@ -17,5 +17,10 @@ public class Article {
 		rank = r;
 		name = s;
 	}
+	
+	public Article(String s) {
+		rank = 0;
+		name = s;
+	}
 }
 	
