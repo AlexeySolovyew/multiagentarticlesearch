@@ -14,16 +14,17 @@ public abstract class SearcherAgent extends Agent {
 
 	public static final String INIT_USER = "INIT_USER";
 	private AID courierAgentAID;
+	private AID aggregatorAgentAID;
 	private AID userAgentAID;
-	
-	public SearcherAgent(){
-		
+
+	public SearcherAgent() {
+
 	}
 
-	/*public SearcherAgent(AID AID_courierAgent, UserAgent userAgent) {
-		this.AID_courierAgent = AID_courierAgent;
-		this.userAgent = userAgent;
-	}*/
+	/*
+	 * public SearcherAgent(AID AID_courierAgent, UserAgent userAgent) {
+	 * this.AID_courierAgent = AID_courierAgent; this.userAgent = userAgent; }
+	 */
 
 	@Override
 	protected void setup() {
@@ -36,8 +37,8 @@ public abstract class SearcherAgent extends Agent {
 	public AID getCourierAgentAID() {
 		return courierAgentAID;
 	}
-	
-	public AID getUserAgentAID(){
+
+	public AID getUserAgentAID() {
 		return userAgentAID;
 	}
 
@@ -49,14 +50,19 @@ public abstract class SearcherAgent extends Agent {
 		courierAgentAID = new AID(nameAID, AID.ISLOCALNAME);
 	}
 
+	public void setAggregatorAID(String nameAID) {
+		aggregatorAgentAID = new AID(nameAID, AID.ISLOCALNAME);
+	}
+
 	public void sendSearchResult(List<Article> search) {
 		for (Article page : search) {
 			ACLMessage responseMSG = new ACLMessage(ACLMessage.INFORM);
 			responseMSG.setSender(this.getAID());
-			responseMSG.setContent(this.getName()+" - "+page.getName()+" $$ "+page.getRank());
-			responseMSG.addReceiver(this.getUserAgentAID());
-			this.send(responseMSG);			
+			responseMSG.setContent(this.getName() + " - " + page.getName()
+			/*		+ " $$ " + page.getRank()*/);
+			// responseMSG.addReceiver(this.getUserAgentAID());
+			responseMSG.addReceiver(aggregatorAgentAID);
+			this.send(responseMSG);
 		}
-		
 	}
 }

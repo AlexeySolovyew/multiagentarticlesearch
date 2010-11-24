@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import searcher.agents.aggregator.AggregatorAgent;
 import searcher.agents.courier.CourierAgent;
 import searcher.agents.searcher.SearcherAgent;
 import searcher.agents.searcher.DummySearcherAgent;
@@ -34,6 +35,8 @@ public class UserAgent extends Agent {
 
 
 	private static final String COURIER_AGENT_NAME = "courierAgent";
+	
+	private static final String AGGREGATOR_AGENT_NAME = "aggregatorAgent";
 
 
 	private static final int DummySearchAngen1 = 1;
@@ -48,6 +51,7 @@ public class UserAgent extends Agent {
 	private static String ADDRESS_NAME = "useragent";
 	private UserAgentFrame itsFrame;
 	private AID courierAgentAID;
+	private AID aggregatorAgentAID;
 	private Set<AID> searchers;
 	//private AID AID_searcherAgent1;
 	//private AID AID_searcherAgent2;
@@ -61,6 +65,7 @@ public class UserAgent extends Agent {
 		try {
 			searchers = new HashSet<AID>();
 			createCourierAgent(container);
+			createAggregatorAgent(container);
 			createDummySA1(container);
 			createDummySA2(container);
 			createGoogleSA(container);
@@ -91,10 +96,13 @@ public class UserAgent extends Agent {
 	private void sendInitMSGs() {
 		sendInitMSG(CourierAgent.INIT_USER, this.getCourierAID());
 		sendInitMSG(this.getSearchAgentsName(), this.getCourierAID());
+		sendInitMSG(AggregatorAgent.INIT_USER, this.getAggregatorAID());
+		sendInitMSG(this.getSearchAgentsName(), this.getAggregatorAID());
 		
 		for (AID searchAID : searchers) {
 			sendInitMSG(CourierAgent.INIT_USER, searchAID);
 			sendInitMSG(this.COURIER_AGENT_NAME, searchAID);
+			sendFinishingInitMSG(this.AGGREGATOR_AGENT_NAME,searchAID);
 		}
 
 
@@ -102,6 +110,10 @@ public class UserAgent extends Agent {
 	
 	private void sendInitMSG(String content, AID reciverAID) {
 		sendMSG(INIT, content, reciverAID);
+	}
+	
+	private void sendFinishingInitMSG(String content, AID reciverAID) {
+		sendMSG(ACLMessage.SUBSCRIBE, content, reciverAID);
 	}
 	
 	private void sendMSG(int performative, String content, AID reciverAID) {
@@ -122,6 +134,13 @@ public class UserAgent extends Agent {
 		courierAgentAID = new AID(this.COURIER_AGENT_NAME, AID.ISLOCALNAME);
 	}
 
+	private void createAggregatorAgent(PlatformController container) throws ControllerException, StaleProxyException {
+		AgentController cour = container.createNewAgent(this.AGGREGATOR_AGENT_NAME,
+				"searcher.agents.aggregator.AggregatorAgent", null);
+		cour.start();
+		aggregatorAgentAID = new AID(this.AGGREGATOR_AGENT_NAME, AID.ISLOCALNAME);
+	}
+	
 	private void createDummySA1(PlatformController container) {
 		createDummySA(this.DummySearchAngen1, container);
 		
@@ -158,6 +177,20 @@ public class UserAgent extends Agent {
 		return courierAgentAID;
 	}
 
+	public AID getAggregatorAID() {
+		return aggregatorAgentAID;
+	}
+	
+	public Object getResultAgent1AID() {
+		return searchers.iterator().next();
+	}
+
+	public Object getResultAgent2AID() {
+		Iterator<AID> iterator = searchers.iterator();
+		iterator.next();
+		return iterator.next();
+	}
+
 	public void addPageToFrame(String p) {
 		itsFrame.addArticleToFrame(p);
 
@@ -165,7 +198,7 @@ public class UserAgent extends Agent {
 
 	/**
 	 * 
-	 * Get address name. This name must using for create UserAgent,becose
+	 * Get address name. This name must using for create UserAgent,because
 	 * addressName used for sending ACLMessag this Agent
 	 * 
 	 * @return addressName
