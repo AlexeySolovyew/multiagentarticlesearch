@@ -1,6 +1,7 @@
 package searcher.agents.user;
 
 import jade.core.AID;
+import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.tools.testagent.TestAgent;
 import jade.util.leap.Collection;
@@ -18,6 +19,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
+import examples.party.HostAgent;
 
 public class UserAgentFrame extends JFrame {
 
@@ -74,14 +77,18 @@ public class UserAgentFrame extends JFrame {
 	}
 
 	private void searchButton_actionPerformed() {
-		ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-		msg.setSender(agent.getAID());
-		msg.addReceiver(agent.getCourierAID());
-		msg.setContent(inputField.getText());
-		msg.setLanguage("Plain English");
-		agent.send(msg);
 		outputField.setText("");
 		resultPages.clear();
+		agent.addBehaviour( new OneShotBehaviour() {
+            public void action() {
+            	ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+        		msg.setSender(agent.getAID());
+        		msg.addReceiver(agent.getCourierAID());
+        		msg.setContent(inputField.getText());
+        		msg.setLanguage("Plain English");
+        		agent.send(msg);
+            }
+        } );
 	}
 
 	public void showAll() throws InterruptedException {

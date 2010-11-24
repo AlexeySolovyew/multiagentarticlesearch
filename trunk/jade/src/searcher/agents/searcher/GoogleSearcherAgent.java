@@ -32,7 +32,7 @@ public class GoogleSearcherAgent extends SearcherAgent {
 			List<Article> result = new ArrayList<Article>();
 			for(int i = 0; i < arrayRes.length(); i++){
 				String url = arrayRes.getJSONObject(i).getString("url");
-				result.add(new Article(url));
+				result.add(new Article(url,0));
 			}
 			return result;
 		} catch (JSONException e) {
@@ -43,12 +43,12 @@ public class GoogleSearcherAgent extends SearcherAgent {
 		return null;
 	}
 	
-	private static JSONObject request(String guery) {
+	private static JSONObject request(String query) {
 		URL url;
 		JSONObject json = null;
 		try {
 			url = new URL(
-					"http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=" + guery);
+					"http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=" + query);
 			URLConnection connection = url.openConnection();
 			//connection.addRequestProperty("Referer",
 			//		"http://www.mysite.com/index.html");

@@ -17,7 +17,7 @@ public class CourierAgent extends Agent {
 
 	public static final String INIT_USER = "INIT_USER";
 	private AID userAgentAID;
-	private Set<AID> seachersAID = new HashSet<AID>();
+	private Set<AID> searchersAID = new HashSet<AID>();
 
 	public CourierAgent() {
 
@@ -43,7 +43,7 @@ public class CourierAgent extends Agent {
 		newMSG.setSender(this.getAID());
 		newMSG.setContent(msg.getContent());
 		newMSG.setLanguage("Plain English");
-		for (AID AID_searcherAgent : seachersAID) {
+		for (AID AID_searcherAgent : searchersAID) {
 			newMSG.addReceiver(AID_searcherAgent);
 		}
 		this.send(newMSG);
@@ -56,7 +56,7 @@ public class CourierAgent extends Agent {
 	public void setSearchers(String content) {
 		for (StringTokenizer tz = new StringTokenizer(content); tz.hasMoreTokens();) {
 			String searcherName = tz.nextToken();
-			seachersAID.add(new AID(searcherName, AID.ISLOCALNAME));			
+			searchersAID.add(new AID(searcherName, AID.ISLOCALNAME));			
 		}
 		
 	}
