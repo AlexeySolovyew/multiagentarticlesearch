@@ -1,6 +1,7 @@
 package searcher.agents.user;
 
-import searcher.agents.courier.CourierAgent;
+import searcher.Article;
+import searcher.agents.orchestrator.OrchestratorAgent;
 import searcher.exceptions.InitAgentException;
 //import sun.management.resources.agent;
 import jade.core.AID;
@@ -26,8 +27,8 @@ public class UserCyclicBehaviour extends CyclicBehaviour {
 			if (msg.getSender().equals(agent.getAID())) {
 				agent.send(msg);
 			}
-			if (agent.getAggregatorAID().equals(msg.getSender())) {
-				agent.addPageToFrame(/*msg.getSender()+" - "+*/msg.getContent());
+			if (agent.getOrchestratorAID().equals(msg.getSender())) {
+				agent.addPageToFrame(/*msg.getSender()+" - "+*/new Article(msg.getContent()));
 			}
 
 		} else {

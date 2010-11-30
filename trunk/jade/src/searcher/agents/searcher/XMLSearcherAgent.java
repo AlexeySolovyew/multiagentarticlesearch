@@ -3,7 +3,7 @@ package searcher.agents.searcher;
 import java.util.List;
 
 import searcher.Article;
-import searcher.agents.courier.CourierAgent;
+import searcher.agents.orchestrator.OrchestratorAgent;
 import searcher.agents.user.UserAgent;
 import jade.core.AID;
 import jade.lang.acl.ACLMessage;

@@ -4,7 +4,7 @@ import java.security.acl.Acl;
 import java.util.List;
 
 import searcher.Article;
-import searcher.agents.courier.CourierAgent;
+import searcher.agents.orchestrator.OrchestratorAgent;
 import searcher.agents.user.UserAgent;
 import jade.core.AID;
 import jade.core.Agent;
@@ -34,7 +34,7 @@ public abstract class SearcherAgent extends Agent {
 
 	public abstract List<Article> search(ACLMessage msg);
 
-	public AID getCourierAgentAID() {
+	public AID getOrchestratorAgentAID() {
 		return courierAgentAID;
 	}
 
@@ -46,7 +46,7 @@ public abstract class SearcherAgent extends Agent {
 		userAgentAID = aid;
 	}
 
-	public void setCourierAID(String nameAID) {
+	public void setOrchestratorAID(String nameAID) {
 		courierAgentAID = new AID(nameAID, AID.ISLOCALNAME);
 	}
 
@@ -58,8 +58,7 @@ public abstract class SearcherAgent extends Agent {
 		for (Article page : search) {
 			ACLMessage responseMSG = new ACLMessage(ACLMessage.INFORM);
 			responseMSG.setSender(this.getAID());
-			responseMSG.setContent(this.getName() + " - " + page.getName()
-			/*		+ " $$ " + page.getRank()*/);
+			responseMSG.setContent(/*this.getName() + " - " + */page.toString());
 			// responseMSG.addReceiver(this.getUserAgentAID());
 			responseMSG.addReceiver(aggregatorAgentAID);
 			this.send(responseMSG);

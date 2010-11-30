@@ -1,4 +1,4 @@
-package searcher.agents.courier;
+package searcher.agents.orchestrator;
 
 import java.io.Serializable;
 
@@ -9,11 +9,11 @@ import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
-public class CourierCyclicBehavior extends CyclicBehaviour {
+public class OrchestratorCyclicBehavior extends CyclicBehaviour {
 
-	private CourierAgent agent;
+	private OrchestratorAgent agent;
 
-	public CourierCyclicBehavior(CourierAgent a) {
+	public OrchestratorCyclicBehavior(OrchestratorAgent a) {
 		this.agent = a;
 	}
 
@@ -24,12 +24,12 @@ public class CourierCyclicBehavior extends CyclicBehaviour {
 		try {
 
 			if (msgINIT != null) {
-				if (msgINIT.getContent().equals(CourierAgent.INIT_USER)) {
+				if (msgINIT.getContent().equals(OrchestratorAgent.INIT_USER)) {
 					agent.setUserAID(msgINIT.getSender());
-					System.out.println("CouierAgent receive msg1");
+					System.out.println("OrchestratorAgent receives msg1");
 				} else if (msgINIT.getSender().equals(agent.getUserAgentAID())) {
 					agent.setSearchers(msgINIT.getContent());
-					System.out.println("CouierAgent receive msg2");
+					System.out.println("OrchestratorAgent receives msg2");
 				} else {
 					throw new InitAgentException();
 				}
@@ -43,7 +43,7 @@ public class CourierCyclicBehavior extends CyclicBehaviour {
 		if (msgInform != null) {
 			if (msgInform.getSender().equals(agent.getUserAgentAID())) {
 				agent.distributeMSG(msgInform);
-				System.out.println("CouierAgent receive msgSearch = " + msgInform.getContent());
+				System.out.println("OrchestratorAgent receives msgSearch = " + msgInform.getContent());
 
 			}
 		}

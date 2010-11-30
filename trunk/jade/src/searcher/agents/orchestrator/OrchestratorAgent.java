@@ -1,4 +1,4 @@
-package searcher.agents.courier;
+package searcher.agents.orchestrator;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -13,13 +13,13 @@ import jade.core.AID;
 import jade.core.Agent;
 import jade.lang.acl.ACLMessage;
 
-public class CourierAgent extends Agent {
+public class OrchestratorAgent extends Agent {
 
 	public static final String INIT_USER = "INIT_USER";
 	private AID userAgentAID;
 	private Set<AID> searchersAID = new HashSet<AID>();
 
-	public CourierAgent() {
+	public OrchestratorAgent() {
 
 	}
 
@@ -31,7 +31,7 @@ public class CourierAgent extends Agent {
 	@Override
 	protected void setup() {
 		super.setup();
-		addBehaviour(new CourierCyclicBehavior(this));
+		addBehaviour(new OrchestratorCyclicBehavior(this));
 	}
 
 	public AID getUserAgentAID() {
