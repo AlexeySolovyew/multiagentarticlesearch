@@ -24,12 +24,21 @@ public class UserCyclicBehaviour extends CyclicBehaviour {
 				.MatchPerformative(ACLMessage.INFORM));
 		if (msg != null) {
 
-			if (msg.getSender().equals(agent.getAID())) {
-				agent.send(msg);
+			/*if (msg.getSender().equals(agent.getAID())) {
+			//	agent.send(msg);
+				agent.sendMSG(msg);
+			}*/
+		/*	if (agent.getOrchestratorAID().equals(msg.getSender())) {
+				agent.addPageToFrame(msg.getSender()+" - "+new Article(msg.getContent()));
 			}
-			if (agent.getOrchestratorAID().equals(msg.getSender())) {
+		*/
+		
+			//жесткое палево, убрать срочно, сразу как появится реализация новой схемы взаимодействия агентов
+			
+			if (agent.getAggregatorAID().equals(msg.getSender())) {
 				agent.addPageToFrame(/*msg.getSender()+" - "+*/new Article(msg.getContent()));
 			}
+			
 
 		} else {
 			// agent.blockingReceive();
@@ -38,12 +47,13 @@ public class UserCyclicBehaviour extends CyclicBehaviour {
 
 	}
 
-	private void sendMSG(String content, AID receiverAID) {
-		ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+/*	private void sendMSG(String content, AID receiverAID) {
+		ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
 		msg.setSender(agent.getAID());
 		msg.setContent(content);
 		msg.addReceiver(receiverAID);
 		agent.send(msg);
 	}
+	*/
 
 }

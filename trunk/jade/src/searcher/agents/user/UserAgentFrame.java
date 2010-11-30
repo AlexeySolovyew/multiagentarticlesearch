@@ -84,7 +84,7 @@ public class UserAgentFrame extends JFrame {
 		resultPages.clear();
 		agent.addBehaviour( new OneShotBehaviour() {
             public void action() {
-            	ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+            	ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
         		msg.setSender(agent.getAID());
         		msg.addReceiver(agent.getOrchestratorAID());
         		msg.setContent(inputField.getText());

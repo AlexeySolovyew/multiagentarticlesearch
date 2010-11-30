@@ -44,11 +44,12 @@ public class AggregatorAgent extends Agent {
 		return searchersAID.iterator().next();
 	}
 
-	public void sendArticle(String page) {
+	public void sendArticle(Article page) {
 			ACLMessage responseMSG = new ACLMessage(ACLMessage.INFORM);
 			responseMSG.setSender(this.getAID());
 			Random random = new Random();
-			responseMSG.setContent(page+ " $$ " + random.nextInt(20)%20);
+			page.setRank(page.getRank()+random.nextInt(20)%20);
+			responseMSG.setContent(page.toString());
 			// responseMSG.addReceiver(this.getUserAgentAID());
 			responseMSG.addReceiver(userAgentAID);
 			this.send(responseMSG);
