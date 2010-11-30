@@ -13,7 +13,7 @@ import jade.lang.acl.ACLMessage;
 public abstract class SearcherAgent extends Agent {
 
 	public static final String INIT_USER = "INIT_USER";
-	private AID courierAgentAID;
+	private AID orchestratorAgentAID;
 	private AID aggregatorAgentAID;
 	private AID userAgentAID;
 
@@ -35,7 +35,7 @@ public abstract class SearcherAgent extends Agent {
 	public abstract List<Article> search(ACLMessage msg);
 
 	public AID getOrchestratorAgentAID() {
-		return courierAgentAID;
+		return orchestratorAgentAID;
 	}
 
 	public AID getUserAgentAID() {
@@ -47,7 +47,7 @@ public abstract class SearcherAgent extends Agent {
 	}
 
 	public void setOrchestratorAID(String nameAID) {
-		courierAgentAID = new AID(nameAID, AID.ISLOCALNAME);
+		orchestratorAgentAID = new AID(nameAID, AID.ISLOCALNAME);
 	}
 
 	public void setAggregatorAID(String nameAID) {

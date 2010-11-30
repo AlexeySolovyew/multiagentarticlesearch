@@ -38,16 +38,16 @@ public class OrchestratorCyclicBehavior extends CyclicBehaviour {
 			// TODO: handle exception
 			e.printStackTrace();
 		} 
-		ACLMessage msgInform = agent.receive(MessageTemplate
-				.MatchPerformative(ACLMessage.INFORM));
-		if (msgInform != null) {
-			if (msgInform.getSender().equals(agent.getUserAgentAID())) {
-				agent.distributeMSG(msgInform);
-				System.out.println("OrchestratorAgent receives msgSearch = " + msgInform.getContent());
+		ACLMessage msgRequest = agent.receive(MessageTemplate
+				.MatchPerformative(ACLMessage.REQUEST));
+		if (msgRequest != null) {
+			if (msgRequest.getSender().equals(agent.getUserAgentAID())) {
+				agent.distributeMSG(msgRequest);
+				System.out.println("OrchestratorAgent receives msgSearch = " + msgRequest.getContent());
 
 			}
 		}
-		if (msgINIT == null && msgInform == null) {
+		if (msgINIT == null && msgRequest == null) {
 			this.block();
 		}
 	}

@@ -1,5 +1,6 @@
 package searcher.agents.aggregator;
 
+import searcher.Article;
 import searcher.agents.searcher.SearcherAgent;
 import searcher.agents.user.UserAgent;
 import searcher.exceptions.InitAgentException;
@@ -29,7 +30,7 @@ public class AggregatorCyclicBehaviour extends CyclicBehaviour {
 							+ " receive msg: INIT_USER");
 				} else if (msgINIT.getSender().equals(agent.getUserAgentAID())) {
 					agent.setSearchers(msgINIT.getContent());
-					System.out.println("AggregatorAgent receive msg2");
+					System.out.println("AggregatorAgent receives msg2");
 				} else {
 					throw new InitAgentException();
 				}
@@ -47,7 +48,8 @@ public class AggregatorCyclicBehaviour extends CyclicBehaviour {
 			//	currentAID = agent.getNextSearcherAID();
 			//}
 			//if (currentAID != null) {
-				agent.sendArticle(/* msg.getSender()+" - "+ */msg.getContent());
+				agent.sendArticle(/* msg.getSender()+" - "+ */new Article(msg.getContent()));
+				System.out.println("AggregatorAgent receives"+msg.getContent());
 			//}
 
 		} else {
