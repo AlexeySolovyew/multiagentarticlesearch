@@ -17,20 +17,18 @@ import org.xml.sax.SAXException;
 public class Article {
 
 	private static final String DELIM = "&";
-	private String name;
-	private int rank;
+	private static final String TITLE = "title";
+	private static final String RANK = "rank";
+	private static final String URL = "url";
+	private static final String AUTHOR = "author";
+	private String title = "title";
+	private int rank = 0;
+	private String url = "url";
+	private String author = "author";
 
-	public String getName() {
-		return name;
-	}
-
-	public int getRank() {
-		return rank;
-	}
-
-	public Article(String s, int r) {
-		rank = r;
-		name = s;
+	public Article(String url, int rank) {
+		this.rank = rank;
+		this.url = url;
 	}
 
 	/**
@@ -58,19 +56,55 @@ public class Article {
 			e.printStackTrace();
 		}
 		Element root = document.getDocumentElement();
-		NodeList nodeListName = root.getElementsByTagName("name");
-		String name = nodeListName.item(0).getTextContent();
-		this.name = name;
-		NodeList nodeListRank = root.getElementsByTagName("rank");
+		
+		NodeList nodeListTitle = root.getElementsByTagName(TITLE);
+		String title = nodeListTitle.item(0).getTextContent();
+		this.title = title;
+		
+		NodeList nodeListRank = root.getElementsByTagName(RANK);
 		String rank = nodeListRank.item(0).getTextContent();
 		this.rank = new Integer(rank);
+		
+		NodeList nodeListURL = root.getElementsByTagName(URL);
+		String url = nodeListURL.item(0).getTextContent();
+		this.url = url;
+		
+		NodeList nodeListAuthor = root.getElementsByTagName(AUTHOR);
+		String author = nodeListAuthor.item(0).getTextContent();
+		this.author = author;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	/**
+	 * 
+	 * @return URL
+	 */
+	public String getName() {
+		return url;
+	}
+
+	public int getRank() {
+		return rank;
+	}
+	
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
+
+	public String getAuthor() {
+		return author;
 	}
 
 	public String toString() {
 		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" 
 				+ "<article>"
-				+   "<name>PAGE1111</name>"
-				+   "<rank>rank10</rank>"
+				+   "<" + TITLE + ">" + title + "</" + TITLE + ">"
+				+   "<" + RANK  + ">" + rank  + "</" + RANK  + ">"
+				+   "<" + URL   + ">" + url   + "</" + URL   + ">"
+				+   "<" + AUTHOR + ">" + author + "</" + AUTHOR + ">"
 				+ "</article>";
 	}
 }
