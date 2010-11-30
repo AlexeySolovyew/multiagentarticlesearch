@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 
 import examples.party.HostAgent;
 
@@ -37,10 +38,10 @@ public class UserAgentFrame extends JFrame {
 		super();
 		this.resultPages = new ArrayList<String>();
 		this.agent = agent;
-		this.setVisible(true);
 		jfInit();
 		this.setSize(600, 600);
 		this.setTitle("UserAgent - " + agent.getName());
+		this.setVisible(true);
 
 	}
 
