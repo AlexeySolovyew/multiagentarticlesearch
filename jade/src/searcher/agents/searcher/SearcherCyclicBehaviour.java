@@ -1,6 +1,6 @@
 package searcher.agents.searcher;
 
-import searcher.agents.courier.CourierAgent;
+import searcher.agents.orchestrator.OrchestratorAgent;
 import searcher.agents.user.UserAgent;
 import searcher.exceptions.InitAgentException;
 import jade.core.Agent;
@@ -28,7 +28,7 @@ public class SearcherCyclicBehaviour extends CyclicBehaviour {
 					System.out.println(agent.getName()
 							+ " receive msg: INIT_USER");
 				} else if (msgINIT.getSender().equals(agent.getUserAgentAID())) {
-					agent.setCourierAID(msgINIT.getContent());
+					agent.setOrchestratorAID(msgINIT.getContent());
 					System.out.println(agent.getName() + " receive msg: "
 							+ msgINIT.getContent());
 				} else {
@@ -52,7 +52,7 @@ public class SearcherCyclicBehaviour extends CyclicBehaviour {
 		ACLMessage msg = agent.receive(MessageTemplate
 				.MatchPerformative(ACLMessage.INFORM));
 		if (msg != null) {
-			if (msg.getSender().equals(agent.getCourierAgentAID())) {
+			if (msg.getSender().equals(agent.getOrchestratorAgentAID())) {
 				agent.sendSearchResult(agent.search(msg));
 				System.out.println(agent.getName() + " receive search msg: "
 						+ msg.getContent());

@@ -21,6 +21,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
+import searcher.Article;
+
 import examples.party.HostAgent;
 
 public class UserAgentFrame extends JFrame {
@@ -32,11 +34,11 @@ public class UserAgentFrame extends JFrame {
 	private JButton searchButton;
 	private JTextArea outputField;
 	private JTextField inputField;
-	private List<String> resultPages;
+	private List<Article> resultPages;
 
 	public UserAgentFrame(UserAgent agent) {
 		super();
-		this.resultPages = new ArrayList<String>();
+		this.resultPages = new ArrayList<Article>();
 		this.agent = agent;
 		jfInit();
 		this.setSize(600, 600);
@@ -45,10 +47,10 @@ public class UserAgentFrame extends JFrame {
 
 	}
 
-	public void addArticleToFrame(String a) {
+	public void addArticleToFrame(Article a) {
 		resultPages.add(a);
 		try {
-			showAll();
+			sortAndShow();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -84,7 +86,7 @@ public class UserAgentFrame extends JFrame {
             public void action() {
             	ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
         		msg.setSender(agent.getAID());
-        		msg.addReceiver(agent.getCourierAID());
+        		msg.addReceiver(agent.getOrchestratorAID());
         		msg.setContent(inputField.getText());
         		msg.setLanguage("Plain English");
         		agent.send(msg);
@@ -92,34 +94,20 @@ public class UserAgentFrame extends JFrame {
         } );
 	}
 
-	public void showAll() throws InterruptedException {
+	public void sortAndShow() throws InterruptedException {
 		//wait(2000);
 		outputField.setText("");
-		Collections.sort(resultPages, new Comparator<String>() {
+		Collections.sort(resultPages, new Comparator<Article>() {
 
-			public int compare(String o1, String o2) {
-
-				String r1 = o1.substring(o1.lastIndexOf(" $$ "));
-				String r2 = o2.substring(o2.lastIndexOf(" $$ "));
-				int rmin = Math.min(r1.length(), r2.length());
-
-				for (int i = 0; i < rmin; i++)
-					if (r1.charAt(i) < r2.charAt(i)) {
-						return 1;
-					} else {
-						if (r1.charAt(i) > r2.charAt(i)) {
-							return -1;
-						}
-					}
-				if (rmin == r1.length()) {
-					return -1;
-				}
-				return 1;
-
+			public int compare(Article o1, Article o2) {
+				return o1.getRank()-o2.getRank();
 			}
 		});
+		
 		for (int i=0;i<resultPages.size();i++) {
-			outputField.append(resultPages.get(i).substring(0,resultPages.get(i).lastIndexOf(" $$ ") )+"\n");
+			outputField.append("Title="+resultPages.get(i).getTitle()+"\n"
+					+"URL="+resultPages.get(i).getURL()+"\n"
+					+"Author="+resultPages.get(i).getAuthor()+"\n"+"\n");
 		}
 
 	}

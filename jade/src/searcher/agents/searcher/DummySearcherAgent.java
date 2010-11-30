@@ -10,7 +10,7 @@ import java.util.List;
 //import com.sun.xml.internal.bind.v2.runtime.Name;
 
 import searcher.Article;
-import searcher.agents.courier.CourierAgent;
+import searcher.agents.orchestrator.OrchestratorAgent;
 import searcher.agents.user.UserAgent;
 
 public abstract class DummySearcherAgent extends SearcherAgent {

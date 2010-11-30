@@ -21,16 +21,23 @@ public class Article {
 	private static final String RANK = "rank";
 	private static final String URL = "url";
 	private static final String AUTHOR = "author";
-	private String title = "title";
+	private String title = "no title";
 	private int rank = 0;
-	private String url = "url";
-	private String author = "author";
+	private String url = "no url";
+	private String author = "no author";
 
 	public Article(String url, int rank) {
 		this.rank = rank;
 		this.url = url;
 	}
 
+	public Article(String url, int rank, String title, String author) {
+		this.rank = rank;
+		this.url = url;
+		this.author=author;
+		this.title=title;
+	}
+	
 	/**
 	 * 
 	 * @param articleAsString
@@ -78,11 +85,7 @@ public class Article {
 		return title;
 	}
 
-	/**
-	 * 
-	 * @return URL
-	 */
-	public String getName() {
+	public String getURL() {
 		return url;
 	}
 

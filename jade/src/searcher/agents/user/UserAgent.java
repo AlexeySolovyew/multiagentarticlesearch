@@ -6,8 +6,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import searcher.Article;
 import searcher.agents.aggregator.AggregatorAgent;
-import searcher.agents.courier.CourierAgent;
+import searcher.agents.orchestrator.OrchestratorAgent;
 import searcher.agents.searcher.SearcherAgent;
 import searcher.agents.searcher.DummySearcherAgent;
 import searcher.exceptions.InitAgentException;
@@ -34,7 +35,7 @@ public class UserAgent extends Agent {
 	private static final String SEARCHER_AGENT_NAME = "searcherAgent";
 
 
-	private static final String COURIER_AGENT_NAME = "courierAgent";
+	private static final String ORCHESTRATOR_AGENT_NAME = "orchestratorAgent";
 	
 	private static final String AGGREGATOR_AGENT_NAME = "aggregatorAgent";
 
@@ -50,25 +51,24 @@ public class UserAgent extends Agent {
 	
 	private static String ADDRESS_NAME = "useragent";
 	private UserAgentFrame itsFrame;
-	private AID courierAgentAID;
+	private AID orchestratorAgentAID;
 	private AID aggregatorAgentAID;
 	private Set<AID> searchers;
-	//private AID AID_searcherAgent1;
-	//private AID AID_searcherAgent2;
+	private AID AID_searcherAgent1;
+	private AID AID_searcherAgent2;
 
-	public UserAgent() {
-
-	}
+//	public UserAgent() {
+// }
 
 	private void initRelatedAgents() {
 		PlatformController container = getContainerController();
 		try {
-			searchers = new HashSet<AID>();
-			createCourierAgent(container);
-			createAggregatorAgent(container);
-			createDummySA1(container);
-			createDummySA2(container);
-			createGoogleSA(container);
+//			searchers = new HashSet<AID>();
+			createOrchestratorAgent(container);
+//			createAggregatorAgent(container);
+//			createDummySA1(container);
+//			createDummySA2(container);
+//			createGoogleSA(container);
 			sendInitMSGs();
 		} catch (Exception e) {
 			System.err.println("Exception while adding agents: " + e);
@@ -77,7 +77,7 @@ public class UserAgent extends Agent {
 	}
 
 
-	private void createGoogleSA(PlatformController container) {
+/*	private void createGoogleSA(PlatformController container) {
 		String searchAgent = this.SEARCHER_AGENT_NAME + GOOGLE_SearchAgent;
 		AgentController search;
 		try {
@@ -92,56 +92,58 @@ public class UserAgent extends Agent {
 		searchers.add(AID_searcherAgent);
 		
 	}
+	*/
 
 	private void sendInitMSGs() {
-		sendInitMSG(CourierAgent.INIT_USER, this.getCourierAID());
-		sendInitMSG(this.getSearchAgentsName(), this.getCourierAID());
-		sendInitMSG(AggregatorAgent.INIT_USER, this.getAggregatorAID());
-		sendInitMSG(this.getSearchAgentsName(), this.getAggregatorAID());
+		sendInitMSG(OrchestratorAgent.INIT_USER, this.getOrchestratorAID());
+//		sendInitMSG(this.getSearchAgentsName(), this.getOrchestratorAID());
+//		sendInitMSG(AggregatorAgent.INIT_USER, this.getAggregatorAID());
+//		sendInitMSG(this.getSearchAgentsName(), this.getAggregatorAID());
 		
-		for (AID searchAID : searchers) {
+/*		for (AID searchAID : searchers) {
 			sendInitMSG(CourierAgent.INIT_USER, searchAID);
 			sendInitMSG(this.COURIER_AGENT_NAME, searchAID);
 			sendFinishingInitMSG(this.AGGREGATOR_AGENT_NAME,searchAID);
 		}
+		*/
 
 
 	}
 	
-	private void sendInitMSG(String content, AID reciverAID) {
-		sendMSG(INIT, content, reciverAID);
+	private void sendInitMSG(String content, AID recieverAID) {
+		sendMSG(INIT, content, recieverAID);
 	}
 	
-	private void sendFinishingInitMSG(String content, AID reciverAID) {
-		sendMSG(ACLMessage.SUBSCRIBE, content, reciverAID);
+	private void sendFinishingInitMSG(String content, AID recieverAID) {
+		sendMSG(ACLMessage.SUBSCRIBE, content, recieverAID);
 	}
 	
-	private void sendMSG(int performative, String content, AID reciverAID) {
+	private void sendMSG(int performative, String content, AID recieverAID) {
 		ACLMessage msg = new ACLMessage(performative);
 		msg.setSender(getAID());
 		msg.setContent(content);
-		msg.addReceiver(reciverAID);
+		msg.addReceiver(recieverAID);
 		send(msg);
 	}
 
-	private void createCourierAgent(PlatformController container)
+	private void createOrchestratorAgent(PlatformController container)
 			throws ControllerException, StaleProxyException {
 		//CourierAgent test_courierAgent = new CourierAgent();
 		// Object[] argsCour = { this, searchers };
-		AgentController cour = container.createNewAgent(this.COURIER_AGENT_NAME,
-				"searcher.agents.courier.CourierAgent", null);
+		AgentController cour = container.createNewAgent(this.ORCHESTRATOR_AGENT_NAME,
+				"searcher.agents.orchestrator.OrchestratorAgent", null);
 		cour.start();
-		courierAgentAID = new AID(this.COURIER_AGENT_NAME, AID.ISLOCALNAME);
+		orchestratorAgentAID = new AID(this.ORCHESTRATOR_AGENT_NAME, AID.ISLOCALNAME);
 	}
 
-	private void createAggregatorAgent(PlatformController container) throws ControllerException, StaleProxyException {
+/*	private void createAggregatorAgent(PlatformController container) throws ControllerException, StaleProxyException {
 		AgentController cour = container.createNewAgent(this.AGGREGATOR_AGENT_NAME,
 				"searcher.agents.aggregator.AggregatorAgent", null);
 		cour.start();
 		aggregatorAgentAID = new AID(this.AGGREGATOR_AGENT_NAME, AID.ISLOCALNAME);
 	}
-	
-	private void createDummySA1(PlatformController container) {
+	*/
+/*	private void createDummySA1(PlatformController container) {
 		createDummySA(this.DummySearchAngen1, container);
 		
 	}
@@ -165,7 +167,7 @@ public class UserAgent extends Agent {
 		AID AID_searcherAgent = new AID(searchAgent, AID.ISLOCALNAME);
 		searchers.add(AID_searcherAgent);
 	}
-
+*/
 	protected void setup() {
 		super.setup();
 		itsFrame = new UserAgentFrame(this);
@@ -173,11 +175,11 @@ public class UserAgent extends Agent {
 		addBehaviour(new UserCyclicBehaviour(this));
 	}
 
-	public AID getCourierAID() {
-		return courierAgentAID;
+	public AID getOrchestratorAID() {
+		return orchestratorAgentAID;
 	}
 
-	public AID getAggregatorAID() {
+/*	public AID getAggregatorAID() {
 		return aggregatorAgentAID;
 	}
 	
@@ -190,10 +192,9 @@ public class UserAgent extends Agent {
 		iterator.next();
 		return iterator.next();
 	}
-
-	public void addPageToFrame(String p) {
+*/
+	public void addPageToFrame(Article p) {
 		itsFrame.addArticleToFrame(p);
-
 	}
 
 	/**
@@ -207,17 +208,19 @@ public class UserAgent extends Agent {
 		return ADDRESS_NAME ;
 	}
 
-	public String getSearchAgentsName() {
+/*	public String getSearchAgentsName() {
 		String searchNames = "";
 		for (int numberAgent = 1; numberAgent<=searchers.size();numberAgent++) {
 			searchNames += this.SEARCHER_AGENT_NAME+numberAgent +" ";
 		}
 		return searchNames;
 	}
+	*/
 
-	public boolean thinkThatResultAgentIs(AID sender) {
+/*	public boolean thinkThatResultAgentIs(AID sender) {
 		return searchers.contains(sender);
 	}
+	*/
 
 	/*
 	 * public void processIncomingMessage(ACLMessage msg) {
