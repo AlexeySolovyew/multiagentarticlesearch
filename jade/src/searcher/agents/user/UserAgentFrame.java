@@ -8,6 +8,7 @@ import jade.util.leap.Collection;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
@@ -31,10 +33,7 @@ public class UserAgentFrame extends JFrame {
 
 	private UserAgent agent;
 
-	// private JTextArea jTextArea;
-	// private JTextField jTextField;
 	private JButton searchButton;
-	// private JTextArea outputField;
 	private JPanel p;
 	private JTextField inputField;
 	private JTextPane outputField;
@@ -66,9 +65,14 @@ public class UserAgentFrame extends JFrame {
 		// this.setFrameIcon("images/dummy.gif");
 		Container container = this.getContentPane();
 		container.setLayout(new BorderLayout());
-		// outputField = new JTextArea();
 		p = new JPanel();
 		outputField = new JTextPane();
+		JScrollPane paneScrollPane = new JScrollPane(outputField);
+	    paneScrollPane.setVerticalScrollBarPolicy(
+	                        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+	    paneScrollPane.setPreferredSize(new Dimension(250, 155));
+	    paneScrollPane.setMinimumSize(new Dimension(10, 10));
+	    
 		inputField = new JTextField();
 		searchButton = new JButton("search");
 		searchButton.addActionListener(new ActionListener() {
@@ -80,7 +84,7 @@ public class UserAgentFrame extends JFrame {
 
 		});
 
-		container.add(outputField, BorderLayout.CENTER);
+		container.add(paneScrollPane, BorderLayout.CENTER);
 		p.setLayout(new BoxLayout(p, BoxLayout.X_AXIS));
 		p.add(inputField);
 		p.add(searchButton);
@@ -115,11 +119,6 @@ public class UserAgentFrame extends JFrame {
 
 		String s = "";
 		for (int i = 0; i < resultPages.size(); i++) {
-			/*
-			 * outputField.append("Title="+resultPages.get(i).getTitle()+"\n"
-			 * +"URL="+resultPages.get(i).getURL()+"\n"
-			 * +"Author="+resultPages.get(i).getAuthor()+"\n"+"\n");
-			 */
 			s += "<TABLE BORDER=3 WIDTH=100%>"
 					+ "<TR><TD WIDTH=200><B>Title</B></TD><TD>"
 					+ resultPages.get(i).getTitle() + "</TD></TR>"
@@ -132,7 +131,6 @@ public class UserAgentFrame extends JFrame {
 
 		}
 		outputField.setContentType("text/html");
-		//outputField.setAutoscrolls(true);
 		outputField.setEditable(false);
 		outputField.setText(s);
 
