@@ -29,8 +29,10 @@ public class AggregatorCyclicBehaviour extends CyclicBehaviour {
 					System.out.println(agent.getName()
 							+ " receive msg: INIT_USER");
 				} else if (msgINIT.getSender().equals(agent.getUserAgentAID())) {
-					agent.setSearchers(msgINIT.getContent());
-					System.out.println("AggregatorAgent receives msg2");
+					/*
+					 * agent.setSearchers(msgINIT.getContent());
+					 * System.out.println("AggregatorAgent receives msg2");
+					 */
 				} else {
 					throw new InitAgentException();
 				}
@@ -42,15 +44,12 @@ public class AggregatorCyclicBehaviour extends CyclicBehaviour {
 		ACLMessage msg = agent.receive(MessageTemplate
 				.MatchPerformative(ACLMessage.INFORM));
 		if (msg != null) {
-
-			//AID currentAID = agent.getNextSearcherAID();
-			//while (currentAID != null && !msg.getSender().equals(currentAID)) {
-			//	currentAID = agent.getNextSearcherAID();
-			//}
-			//if (currentAID != null) {
-				agent.sendArticle(/* msg.getSender()+" - "+ */new Article(msg.getContent()));
-				System.out.println("AggregatorAgent receives"+msg.getContent());
-			//}
+			if (agent.getSearchersAID().contains(msg.getSender())) {
+				agent.sendArticle(/* msg.getSender()+" - "+ */new Article(msg
+						.getContent()));
+				System.out.println("AggregatorAgent receives"
+						+ msg.getContent());
+			}
 
 		} else {
 			// agent.blockingReceive();
