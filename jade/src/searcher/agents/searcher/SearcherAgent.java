@@ -8,6 +8,12 @@ import searcher.agents.orchestrator.OrchestratorAgent;
 import searcher.agents.user.UserAgent;
 import jade.core.AID;
 import jade.core.Agent;
+import jade.domain.DFService;
+import jade.domain.FIPAException;
+import jade.domain.FIPANames;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
+import jade.domain.FIPAAgentManagement.Property;
+import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
 
 public abstract class SearcherAgent extends Agent {
@@ -29,6 +35,34 @@ public abstract class SearcherAgent extends Agent {
 	@Override
 	protected void setup() {
 		super.setup();
+
+		// это поле должно отличаться у конкретных сёчеров
+		String serviceName = "common search";
+
+		// Register the service
+		System.out.println("Agent " + getLocalName()
+				+ " registering service \"" + serviceName
+				+ "\" of type \"search-articles\"");
+		try {
+			DFAgentDescription dfd = new DFAgentDescription();
+			dfd.setName(getAID());
+			ServiceDescription sd = new ServiceDescription();
+			sd.setName(serviceName);
+			sd.setType("search-articles");
+			// Agents that want to use this service need to "know" the
+			// search-articles-ontology
+			sd.addOntologies("search-articles-ontology");
+			// Agents that want to use this service need to "speak" the FIPA-SL
+			// language
+			sd.addLanguages(FIPANames.ContentLanguage.FIPA_SL);
+			// sd.addProperties(new Property("country", "Italy"));
+			dfd.addServices(sd);
+
+			DFService.register(this, dfd);
+		} catch (FIPAException fe) {
+			fe.printStackTrace();
+		}
+
 		addBehaviour(new SearcherCyclicBehaviour(this));
 	}
 
@@ -58,7 +92,8 @@ public abstract class SearcherAgent extends Agent {
 		for (Article page : search) {
 			ACLMessage responseMSG = new ACLMessage(ACLMessage.INFORM);
 			responseMSG.setSender(this.getAID());
-			responseMSG.setContent(/*this.getName() + " - " + */page.toString());
+			responseMSG.setContent(/* this.getName() + " - " + */page
+					.toString());
 			// responseMSG.addReceiver(this.getUserAgentAID());
 			responseMSG.addReceiver(aggregatorAgentAID);
 			this.send(responseMSG);
