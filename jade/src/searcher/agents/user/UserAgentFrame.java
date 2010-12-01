@@ -67,6 +67,8 @@ public class UserAgentFrame extends JFrame {
 		container.setLayout(new BorderLayout());
 		p = new JPanel();
 		outputField = new JTextPane();
+		outputField.setContentType("text/html");
+		outputField.setEditable(false);
 		JScrollPane paneScrollPane = new JScrollPane(outputField);
 	    paneScrollPane.setVerticalScrollBarPolicy(
 	                        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -89,7 +91,7 @@ public class UserAgentFrame extends JFrame {
 		p.add(inputField);
 		p.add(searchButton);
 		// container.add(searchButton, BorderLayout.SOUTH);
-		container.add(p, BorderLayout.SOUTH);
+		container.add(p, BorderLayout.NORTH);
 	}
 
 	private void searchButton_actionPerformed() {
@@ -130,8 +132,6 @@ public class UserAgentFrame extends JFrame {
 					+ "</TABLE><BR>";
 
 		}
-		outputField.setContentType("text/html");
-		outputField.setEditable(false);
 		outputField.setText(s);
 
 	}
