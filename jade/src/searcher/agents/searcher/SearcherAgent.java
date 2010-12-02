@@ -84,13 +84,13 @@ public abstract class SearcherAgent extends Agent {
 		orchestratorAgentAID = new AID(nameAID, AID.ISLOCALNAME);
 	}
 
-	public void setAggregatorAID(String nameAID) {
-		aggregatorAgentAID = new AID(nameAID, AID.ISLOCALNAME);
+	public void setAggregatorAgentAID(AID aid) {
+		aggregatorAgentAID = aid;
 	}
 
 	public void sendSearchResult(List<Article> search) {
 		for (Article page : search) {
-			ACLMessage responseMSG = new ACLMessage(ACLMessage.INFORM);
+			ACLMessage responseMSG = new ACLMessage(ACLMessage.PROPOSE);
 			responseMSG.setSender(this.getAID());
 			responseMSG.setContent(/* this.getName() + " - " + */page
 					.toString());
