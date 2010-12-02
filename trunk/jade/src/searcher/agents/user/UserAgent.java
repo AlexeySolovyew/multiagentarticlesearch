@@ -32,30 +32,30 @@ public class UserAgent extends Agent {
 	public static final int INIT = ACLMessage.PROXY;
 
 
-	private static final String SEARCHER_AGENT_NAME = "searcherAgent";
+	//private static final String SEARCHER_AGENT_NAME = "searcherAgent";
 
 
 	private static final String ORCHESTRATOR_AGENT_NAME = "orchestratorAgent";
 	
-	private static final String AGGREGATOR_AGENT_NAME = "aggregatorAgent";
+	//private static final String AGGREGATOR_AGENT_NAME = "aggregatorAgent";
 
 
-	private static final int DummySearchAgent1 = 1;
+	//private static final int DummySearchAgent1 = 1;
 
 
-	private static final int DummySearchAgent2 = 2;
+	//private static final int DummySearchAgent2 = 2;
 
 
-	private static final int GOOGLE_SearchAgent = 3;
+	//private static final int GOOGLE_SearchAgent = 3;
 	
 	
 	private static String ADDRESS_NAME = "useragent";
 	private UserAgentFrame itsFrame;
 	private AID orchestratorAgentAID;
-	private AID aggregatorAgentAID;
-	private Set<AID> searchers;
-	private AID AID_searcherAgent1;
-	private AID AID_searcherAgent2;
+	//private AID aggregatorAgentAID;
+	//private Set<AID> searchers;
+	//private AID AID_searcherAgent1;
+	//private AID AID_searcherAgent2;
 
 //	public UserAgent() {
 // }
@@ -63,12 +63,12 @@ public class UserAgent extends Agent {
 	private void initRelatedAgents() {
 		PlatformController container = getContainerController();
 		try {
-			searchers = new HashSet<AID>();
+		//	searchers = new HashSet<AID>();
 			createOrchestratorAgent(container);
-		createAggregatorAgent(container);
-		createDummySA1(container);	
-		createDummySA2(container);
-		createGoogleSA(container);
+	//	createAggregatorAgent(container);
+	//	createDummySA1(container);	
+	//	createDummySA2(container);
+	//	createGoogleSA(container);
 			sendInitMSGs();
 		} catch (Exception e) {
 			System.err.println("Exception while adding agents: " + e);
@@ -77,7 +77,7 @@ public class UserAgent extends Agent {
 	}
 
 
-	private void createGoogleSA(PlatformController container) {
+	/*private void createGoogleSA(PlatformController container) {
 		String searchAgent = this.SEARCHER_AGENT_NAME + GOOGLE_SearchAgent;
 		AgentController search;
 		try {
@@ -91,20 +91,20 @@ public class UserAgent extends Agent {
 		AID AID_searcherAgent = new AID(searchAgent, AID.ISLOCALNAME);
 		searchers.add(AID_searcherAgent);
 		
-	}
+	}*/
 	
 
 	private void sendInitMSGs() {
 		sendInitMSG(OrchestratorAgent.INIT_USER, this.getOrchestratorAID());
-		sendInitMSG(this.getSearchAgentsName(), this.getOrchestratorAID());
-		sendInitMSG(AggregatorAgent.INIT_USER, this.getAggregatorAID());
-		sendInitMSG(this.getSearchAgentsName(), this.getAggregatorAID());
+	//	sendInitMSG(this.getSearchAgentsName(), this.getOrchestratorAID());
+	//	sendInitMSG(AggregatorAgent.INIT_USER, this.getAggregatorAID());
+	//	sendInitMSG(this.getSearchAgentsName(), this.getAggregatorAID());
 		
-		for (AID searchAID : searchers) {
-			sendInitMSG(OrchestratorAgent.INIT_USER, searchAID);
-			sendInitMSG(this.ORCHESTRATOR_AGENT_NAME, searchAID);
-			sendFinishingInitMSG(this.AGGREGATOR_AGENT_NAME,searchAID);
-		}
+	//	for (AID searchAID : searchers) {
+	//		sendInitMSG(OrchestratorAgent.INIT_USER, searchAID);
+		//	sendInitMSG(this.ORCHESTRATOR_AGENT_NAME, searchAID);
+		//	sendFinishingInitMSG(this.AGGREGATOR_AGENT_NAME,searchAID);
+	//	}
 		
 
 
@@ -114,9 +114,9 @@ public class UserAgent extends Agent {
 		sendMSG(INIT, content, recieverAID);
 	}
 	
-	private void sendFinishingInitMSG(String content, AID recieverAID) {
+	/*private void sendFinishingInitMSG(String content, AID recieverAID) {
 		sendMSG(ACLMessage.SUBSCRIBE, content, recieverAID);
-	}
+	}*/
 	
 	private void sendMSG(int performative, String content, AID recieverAID) {
 		ACLMessage msg = new ACLMessage(performative);
@@ -135,22 +135,22 @@ public class UserAgent extends Agent {
 		orchestratorAgentAID = new AID(this.ORCHESTRATOR_AGENT_NAME, AID.ISLOCALNAME);
 	}
 
-	private void createAggregatorAgent(PlatformController container) throws ControllerException, StaleProxyException {
+	/*private void createAggregatorAgent(PlatformController container) throws ControllerException, StaleProxyException {
 		AgentController cour = container.createNewAgent(this.AGGREGATOR_AGENT_NAME,
 				"searcher.agents.aggregator.AggregatorAgent", null);
 		cour.start();
 		aggregatorAgentAID = new AID(this.AGGREGATOR_AGENT_NAME, AID.ISLOCALNAME);
-	}
+	}*/
 	
-	private void createDummySA1(PlatformController container) {
+	/*private void createDummySA1(PlatformController container) {
 		createDummySA(this.DummySearchAgent1, container);
 		
-	}
-	private void createDummySA2(PlatformController container) {
+	}*/
+	/*private void createDummySA2(PlatformController container) {
 		createDummySA(this.DummySearchAgent2, container);
 		
-	}
-	private void createDummySA(int numberSA,PlatformController container) {
+	}*/
+	/*private void createDummySA(int numberSA,PlatformController container) {
 		//SearcherAgent test_searcherAgent = new DummySearcherAgent();
 		// Object[] argsSearch = {AID_courierAgent,this, pages};
 		String searchAgent = this.SEARCHER_AGENT_NAME + numberSA;
@@ -165,7 +165,7 @@ public class UserAgent extends Agent {
 		}
 		AID AID_searcherAgent = new AID(searchAgent, AID.ISLOCALNAME);
 		searchers.add(AID_searcherAgent);
-	}
+	}*/
 
 	protected void setup() {
 		super.setup();
@@ -177,19 +177,19 @@ public class UserAgent extends Agent {
 	public AID getOrchestratorAID() {
 		return orchestratorAgentAID;
 	}
-	public AID getAggregatorAID() {
+	/*public AID getAggregatorAID() {
 		return aggregatorAgentAID;
-	}
+	}*/
 	
-	public Object getResultAgent1AID() {
+	/*public Object getResultAgent1AID() {
 		return searchers.iterator().next();
-	}
+	}*/
 
-	public Object getResultAgent2AID() {
+	/*public Object getResultAgent2AID() {
 		Iterator<AID> iterator = searchers.iterator();
 		iterator.next();
 		return iterator.next();
-	}
+	}*/
 
 	public void addPageToFrame(Article p) {
 		itsFrame.addArticleToFrame(p);
@@ -206,18 +206,18 @@ public class UserAgent extends Agent {
 		return ADDRESS_NAME ;
 	}
 
-	public String getSearchAgentsName() {
+	/*public String getSearchAgentsName() {
 		String searchNames = "";
 		for (int numberAgent = 1; numberAgent<=searchers.size();numberAgent++) {
 			searchNames += this.SEARCHER_AGENT_NAME+numberAgent +" ";
 		}
 		return searchNames;
-	}
+	}*/
 	
 
-	public boolean thinkThatResultAgentIs(AID sender) {
+	/*public boolean thinkThatResultAgentIs(AID sender) {
 		return searchers.contains(sender);
-	}
+	}*/
 	
 
 	/*

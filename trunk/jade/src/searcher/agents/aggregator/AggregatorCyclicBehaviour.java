@@ -1,6 +1,9 @@
 package searcher.agents.aggregator;
 
+import java.util.Set;
+
 import searcher.Article;
+import searcher.agents.orchestrator.OrchestratorAgent;
 import searcher.agents.searcher.SearcherAgent;
 import searcher.agents.user.UserAgent;
 import searcher.exceptions.InitAgentException;
@@ -22,39 +25,56 @@ public class AggregatorCyclicBehaviour extends CyclicBehaviour {
 	public void action() {
 		ACLMessage msgINIT = agent.receive(MessageTemplate
 				.MatchPerformative(UserAgent.INIT));
-		try {
-			if (msgINIT != null) {
-				if (msgINIT.getContent().equals(AggregatorAgent.INIT_USER)) {
-					agent.setUserAID(msgINIT.getSender());
-					System.out.println(agent.getName()
-							+ " receive msg: INIT_USER");
-				} else if (msgINIT.getSender().equals(agent.getUserAgentAID())) {
-					/*
-					 * agent.setSearchers(msgINIT.getContent());
-					 * System.out.println("AggregatorAgent receives msg2");
-					 */
-				} else {
-					throw new InitAgentException();
-				}
-			}
-		} catch (InitAgentException e) {
-			// TODO: handle exception
-			e.printStackTrace();
+		if (msgINIT != null) {
+			if (msgINIT.getContent().equals(AggregatorAgent.INIT_USER)) {
+				agent.setUserAgentAID(msgINIT.getSender());
+				System.out.println(agent.getName() + " receive msg: INIT_USER");
+			} /*
+			 * else if (msgINIT.getSender().equals(agent.getUserAgentAID())) {
+			 * 
+			 * agent.setSearchers(msgINIT.getContent());
+			 * System.out.println("AggregatorAgent receives msg2");
+			 * 
+			 * }
+			 */
+			/*
+			 * else if (msgINIT.getContent().equals(
+			 * AggregatorAgent.INCOMING_NOTICE)) {
+			 * agent.setOrchestratorAgentAID(msgINIT.getSender());
+			 * System.out.println(agent.getName() + " receive msg: " +
+			 * AggregatorAgent.INCOMING_NOTICE);
+			 * 
+			 * } }else { throw new InitAgentException(); }
+			 */
 		}
 		ACLMessage msg = agent.receive(MessageTemplate
-				.MatchPerformative(ACLMessage.INFORM));
+				.MatchPerformative(ACLMessage.PROPOSE));
 		if (msg != null) {
-			if (agent.getSearchersAID().contains(msg.getSender())) {
+			if (agent.getSearcherAgentsAID().contains(msg.getSender())) {
 				agent.sendArticle(/* msg.getSender()+" - "+ */new Article(msg
 						.getContent()));
 				System.out.println("AggregatorAgent receives"
 						+ msg.getContent());
 			}
 
-		} else {
-			// agent.blockingReceive();
+		}
+		ACLMessage msgRequest = agent.receive(MessageTemplate
+				.MatchPerformative(ACLMessage.REQUEST));
+		if (msgRequest != null) {
+			agent.setOrchestratorAgentAID(msgRequest.getSender());
+			agent.addMsgToQueueOfSearchersMSGs(msgRequest);
+			Set<AID> searcherAIDS = agent.getSearcherAgentsAID();
+			if (!searcherAIDS.isEmpty()) {
+				for (AID searchAID : searcherAIDS) {
+					agent.sendMsgFromQueueToAgent(searchAID);
+				}
+			}
+			System.out.println("AggregatorAgent receives msgSearch = "
+					+ msgRequest.getContent());
+
+		}
+		if (msgINIT == null && msg == null && msgRequest == null) {
 			this.block();
 		}
 	}
-
 }

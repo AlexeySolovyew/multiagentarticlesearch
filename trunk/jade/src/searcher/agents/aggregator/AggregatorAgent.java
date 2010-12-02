@@ -1,6 +1,7 @@
 package searcher.agents.aggregator;
 
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -13,6 +14,7 @@ import jade.core.AID;
 import jade.core.Agent;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
+import jade.domain.FIPANames;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.Property;
 import jade.domain.FIPAAgentManagement.SearchConstraints;
@@ -23,13 +25,22 @@ import jade.util.leap.Iterator;
 
 public class AggregatorAgent extends Agent {
 	public static final String INIT_USER = "INIT_USER";
+	public static final String INCOMING_NOTICE = "I_NEED_YOUR_SERVICE";
 	private AID userAgentAID;
+	private AID orchestratorAgentAID;
+	private LinkedList<ACLMessage> queueOfSearchersMSGs = new LinkedList<ACLMessage>();
 	private Set<AID> searchersAID = new HashSet<AID>();
 	private Set<String> pages = new HashSet<String>();
 
 	protected void setup() {
 		super.setup();
 
+		provideService();
+
+		subscribeOnService();
+	}
+
+	private void subscribeOnService() {
 		DFAgentDescription template = new DFAgentDescription();
 		ServiceDescription templateSd = new ServiceDescription();
 		templateSd.setType("search-articles");
@@ -74,6 +85,9 @@ public class AggregatorAgent extends Agent {
 											+ "\" provided by agent "
 											+ provider.getName());
 									searchersAID.add(provider);
+									if (!queueOfSearchersMSGs.isEmpty()) {
+										sendMsgFromQueueToAgent(provider);
+									}
 								}
 							}
 						}
@@ -82,7 +96,7 @@ public class AggregatorAgent extends Agent {
 				} catch (FIPAException fe) {
 					fe.printStackTrace();
 				}
-				if (searchersAID.size() == 3) {
+				if (searchersAID.size() == 6) {
 					myAgent.addBehaviour(new AggregatorCyclicBehaviour(
 							(AggregatorAgent) myAgent));
 				}
@@ -90,11 +104,48 @@ public class AggregatorAgent extends Agent {
 		});
 	}
 
+	private void provideService() {
+		String serviceName = "aggregating";
+
+		// Register the service
+		System.out.println("Agent " + getLocalName()
+				+ " registering service \"" + serviceName
+				+ "\" of type \"aggregate-articles\"");
+		try {
+			DFAgentDescription dfd = new DFAgentDescription();
+			dfd.setName(getAID());
+
+			ServiceDescription sd = new ServiceDescription();
+			sd.setName(serviceName);
+			sd.setType("aggregate-articles");
+
+			dfd.addServices(sd);
+
+			DFService.register(this, dfd);
+		} catch (FIPAException fe) {
+			fe.printStackTrace();
+		}
+	}
+
+	public void addMsgToQueueOfSearchersMSGs(ACLMessage msg) {
+		ACLMessage newMSG = new ACLMessage(msg.getPerformative());
+		newMSG.setSender(this.getAID());
+		newMSG.setContent(msg.getContent());
+		newMSG.setLanguage("Plain English");
+		queueOfSearchersMSGs.addLast(newMSG);
+	}
+
+	public void sendMsgFromQueueToAgent(AID aid) {
+		ACLMessage newMSG = queueOfSearchersMSGs.getFirst();
+		newMSG.addReceiver(aid);
+		this.send(newMSG);
+	}
+
 	public AID getUserAgentAID() {
 		return userAgentAID;
 	}
 
-	public void setUserAID(AID aid) {
+	public void setUserAgentAID(AID aid) {
 		userAgentAID = aid;
 	}
 
@@ -110,17 +161,26 @@ public class AggregatorAgent extends Agent {
 	// }
 
 	public void sendArticle(Article page) {
-		ACLMessage responseMSG = new ACLMessage(ACLMessage.INFORM);
+		ACLMessage responseMSG = new ACLMessage(ACLMessage.PROPOSE);
 		responseMSG.setSender(this.getAID());
 		Random random = new Random();
 		page.setRank(page.getRank() + random.nextInt(20) % 20);
 		responseMSG.setContent(page.toString());
 		// responseMSG.addReceiver(this.getUserAgentAID());
-		responseMSG.addReceiver(userAgentAID);
+		responseMSG.addReceiver(orchestratorAgentAID);
 		this.send(responseMSG);
 	}
 
-	public Set<AID> getSearchersAID() {
+	public Set<AID> getSearcherAgentsAID() {
 		return searchersAID;
 	}
+
+	public void setOrchestratorAgentAID(AID sender) {
+		orchestratorAgentAID = sender;
+	}
+
+	public AID getOrchestratorAgentAID() {
+		return orchestratorAgentAID;
+	}
+
 }

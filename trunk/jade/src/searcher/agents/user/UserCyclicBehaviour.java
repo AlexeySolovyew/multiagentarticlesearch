@@ -21,7 +21,7 @@ public class UserCyclicBehaviour extends CyclicBehaviour {
 	@Override
 	public void action() {
 		ACLMessage msg = agent.receive(MessageTemplate
-				.MatchPerformative(ACLMessage.INFORM));
+				.MatchPerformative(ACLMessage.PROPOSE));
 		if (msg != null) {
 
 			/*if (msg.getSender().equals(agent.getAID())) {
@@ -35,7 +35,7 @@ public class UserCyclicBehaviour extends CyclicBehaviour {
 		
 			//жесткое палево, убрать срочно, сразу как появится реализация новой схемы взаимодействия агентов
 			
-			if (agent.getAggregatorAID().equals(msg.getSender())) {
+			if (agent.getOrchestratorAID().equals(msg.getSender())) {
 				agent.addPageToFrame(/*msg.getSender()+" - "+*/new Article(msg.getContent()));
 			}
 			
