@@ -20,12 +20,10 @@ public abstract class DummySearcherAgent extends SearcherAgent {
 	}
 	
 	@Override
-	public List<Article> search(ACLMessage msg) {
-		List<Article> result = new ArrayList<Article>();
-		for (Article page : getPages()) {
-			result.add(page);
+	public void searchAndSendResults(ACLMessage msg) {
+		for (Article article : getPages()) {
+			this.sendArticle(article);
 		}
-		return result;
 	}
 	
 
