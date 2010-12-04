@@ -27,11 +27,7 @@ public class SearcherCyclicBehaviour extends CyclicBehaviour {
 					agent.setUserAID(msgINIT.getSender());
 					System.out.println(agent.getName()
 							+ " receive msg: INIT_USER");
-				} /*else if (msgINIT.getSender().equals(agent.getUserAgentAID())) {
-					agent.setOrchestratorAID(msgINIT.getContent());
-					System.out.println(agent.getName() + " receives msg: "
-							+ msgINIT.getContent());
-				} */else {
+				} else {
 					throw new InitAgentException();
 				}
 			}
@@ -52,15 +48,28 @@ public class SearcherCyclicBehaviour extends CyclicBehaviour {
 		ACLMessage msg = agent.receive(MessageTemplate
 				.MatchPerformative(ACLMessage.REQUEST));
 		if (msg != null) {
+		//	>>>>>>> .r29
+			agent.setAggregatorAgentAID(msg.getSender());
+			agent.searchAndSendResults(msg);
+			System.out.println(agent.getName() + " receives search msg: "
+					+ msg.getContent());
+/*=======
 			agent.setAggregatorAgentAID(msg.getSender());
 			agent.sendSearchResult(agent.search(msg));
 			System.out.println(agent.getName() + " receives search msg: "
 					+ msg.getContent());
 
+//<<<<<<< .mine
+			if (msg.getSender().equals(agent.getOrchestratorAgentAID())) { 
+				agent.searchAndSendResults(msg);
+				System.out.println(agent.getName() + " receives search msg: "
+						+ msg.getContent());
+			}
+
+ */
 		} else {
 			this.block();
 		}
-
 	}
-
+	
 }
