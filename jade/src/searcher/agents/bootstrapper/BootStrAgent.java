@@ -9,16 +9,19 @@ import jade.wrapper.ControllerException;
 import jade.wrapper.PlatformController;
 
 public class BootStrAgent extends Agent {
-	private static final String SEARCHER_AGENT_NAME = "searcherAgent";
-
-	private static final String AGGREGATOR_AGENT_NAME = "aggregatorAgent";
-
 	private static final String AGGREGATOR_CLASS_NAME = "searcher.agents.aggregator.AggregatorAgent";
+	private static final String User_CLASS_NAME = "searcher.agents.user.UserAgent";
+
+	private static final String SEARCHER_AGENT_NAME = "searcherAgent";
+	private static final String AGGREGATOR_AGENT_NAME = "aggregatorAgent";
+	private static final String USER_AGENT_NAME = "userAgent";
+
 
 	private BootStrAgentFrame itsFrame;
 	private int amountOfAggregators = 2;
 	private Map<Integer, String> dbsNumber2AgentClassName = new HashMap<Integer, String>();
-	private int amountOfSearchersForEachDBS = 2; // DBS - DataBase of Searcher
+	private int amountOfSearchersForEachDBS = 1; // DBS - DataBase of Searcher
+	private int amountOfUsers = 1;
 
 	public BootStrAgent() {
 		dbsNumber2AgentClassName.put(1,
@@ -27,6 +30,8 @@ public class BootStrAgent extends Agent {
 				"searcher.agents.searcher.DummySearcherAgent2");
 		dbsNumber2AgentClassName.put(3,
 				"searcher.agents.searcher.GoogleSearcherAgent");
+		dbsNumber2AgentClassName.put(4,
+		"searcher.agents.searcher.ArxivSearcherAgent");
 
 	}
 
@@ -54,6 +59,9 @@ public class BootStrAgent extends Agent {
 		for (int i = 0; i < amountOfAggregators; i++) {
 			createAgent(AGGREGATOR_AGENT_NAME + i, AGGREGATOR_CLASS_NAME);
 		}
+		for (int i = 0; i < amountOfUsers; i++) {
+			createAgent(USER_AGENT_NAME + i, User_CLASS_NAME);
+		}
 		for (Integer dbsNumber : dbsNumber2AgentClassName.keySet()) {
 			for (int searcherNumber = 0; searcherNumber < amountOfSearchersForEachDBS; searcherNumber++) {
 				createAgent(SEARCHER_AGENT_NAME + dbsNumber + "."
@@ -61,7 +69,6 @@ public class BootStrAgent extends Agent {
 						dbsNumber2AgentClassName.get(dbsNumber));
 			}
 		}
-
 	}
 
 }

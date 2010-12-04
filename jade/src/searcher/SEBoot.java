@@ -12,8 +12,9 @@ public class SEBoot {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String argsv[] = {"-agents", UserAgent.getAddressName()+":searcher.agents.user.UserAgent"};
-	    jade.Boot.main(argsv);
+		String argsv[] = {"-agents"
+				, "bootStr" +":searcher.agents.bootstrapper.BootStrAgent"};
+		jade.Boot.main(argsv);
 
 	}
 
