@@ -20,38 +20,36 @@ import searcher.Article;
 public class GoogleSearcherAgent extends SearcherAgent {
 
 	@Override
-	public List<Article> search(ACLMessage msg) {
+	public void searchAndSendResults(ACLMessage msg) {
 		String query = msg.getContent();
-		
-		JSONObject json =   request(query);
+
+		JSONObject json = request(query);
 
 		JSONObject contResponseData;
 		try {
 			contResponseData = json.getJSONObject("responseData");
 			JSONArray arrayRes = contResponseData.getJSONArray("results");
-			List<Article> result = new ArrayList<Article>();
-			for(int i = 0; i < arrayRes.length(); i++){
+			for (int i = 0; i < arrayRes.length(); i++) {
 				String url = arrayRes.getJSONObject(i).getString("url");
-				result.add(new Article(url,0));
+				this.sendArticle(new Article(url, 0));
 			}
-			return result;
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Проблемки'c c Googl'ом :(");
 			e.printStackTrace();
 		}
-		return null;
 	}
-	
+
 	private static JSONObject request(String query) {
 		URL url;
 		JSONObject json = null;
 		try {
 			url = new URL(
-					"http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=" + query);
+					"http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q="
+							+ query);// %20
 			URLConnection connection = url.openConnection();
-			//connection.addRequestProperty("Referer",
-			//		"http://www.mysite.com/index.html");
+			// connection.addRequestProperty("Referer",
+			// "http://www.mysite.com/index.html");
 
 			String line;
 			StringBuilder builder = new StringBuilder();
@@ -63,7 +61,6 @@ public class GoogleSearcherAgent extends SearcherAgent {
 
 			json = new JSONObject(builder.toString());
 			// now have some fun with the results...
-			
 
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
@@ -77,6 +74,5 @@ public class GoogleSearcherAgent extends SearcherAgent {
 		}
 		return json;
 	}
-
 
 }

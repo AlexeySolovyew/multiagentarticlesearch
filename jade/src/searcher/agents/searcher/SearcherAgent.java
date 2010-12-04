@@ -66,7 +66,7 @@ public abstract class SearcherAgent extends Agent {
 		addBehaviour(new SearcherCyclicBehaviour(this));
 	}
 
-	public abstract List<Article> search(ACLMessage msg);
+	public abstract void searchAndSendResults(ACLMessage msg);
 
 	public AID getOrchestratorAgentAID() {
 		return orchestratorAgentAID;
@@ -88,15 +88,26 @@ public abstract class SearcherAgent extends Agent {
 		aggregatorAgentAID = aid;
 	}
 
+	public void sendArticle(Article article) {
+		ACLMessage responseMSG = new ACLMessage(ACLMessage.INFORM);
+		responseMSG.setSender(this.getAID());
+		responseMSG.setContent(article.toString());
+		// responseMSG.addReceiver(this.getUserAgentAID());
+		responseMSG.addReceiver(aggregatorAgentAID);
+		this.send(responseMSG);
+/*
+=======
 	public void sendSearchResult(List<Article> search) {
 		for (Article page : search) {
 			ACLMessage responseMSG = new ACLMessage(ACLMessage.PROPOSE);
 			responseMSG.setSender(this.getAID());
-			responseMSG.setContent(/* this.getName() + " - " + */page
+			responseMSG.setContent(page
 					.toString());
 			// responseMSG.addReceiver(this.getUserAgentAID());
 			responseMSG.addReceiver(aggregatorAgentAID);
 			this.send(responseMSG);
 		}
+>>>>>>> .r29
+*/
 	}
 }
