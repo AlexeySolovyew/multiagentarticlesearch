@@ -37,6 +37,8 @@ public class UserAgent extends Agent {
 
 	private static final String ORCHESTRATOR_AGENT_NAME = "orchestratorAgent";
 	
+	private static final String User_DATABASE_AGENT_NAME = "userDataBaseAgent";
+	
 	//private static final String AGGREGATOR_AGENT_NAME = "aggregatorAgent";
 
 
@@ -65,7 +67,7 @@ public class UserAgent extends Agent {
 		try {
 		//	searchers = new HashSet<AID>();
 			createOrchestratorAgent(container);
-	//	createAggregatorAgent(container);
+	    	createUserDataBaseAgent(container);
 	//	createDummySA1(container);	
 	//	createDummySA2(container);
 	//	createGoogleSA(container);
@@ -93,6 +95,15 @@ public class UserAgent extends Agent {
 		
 	}*/
 	
+
+	private void createUserDataBaseAgent(PlatformController container) throws ControllerException {
+		AgentController cour = container.createNewAgent(this.User_DATABASE_AGENT_NAME,
+				"searcher.agents.udbagent.UserDataBaseAgent", null);
+		cour.start();
+		orchestratorAgentAID = new AID(this.User_DATABASE_AGENT_NAME, AID.ISLOCALNAME);
+		
+	}
+
 
 	private void sendInitMSGs() {
 		sendInitMSG(OrchestratorAgent.INIT_USER, this.getOrchestratorAID());
