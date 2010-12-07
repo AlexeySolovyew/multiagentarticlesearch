@@ -58,7 +58,7 @@ public class OrchestratorCyclicBehavior extends CyclicBehaviour {
 		if (msgPropose != null) {
 			if (agent.getAggregatorAgentAID().equals(msgPropose.getSender())) {
 				agent.sendArticle(new Article(msgPropose.getContent()));
-				System.out.println("OrchestratorAgent receives"
+				System.out.println("OrchestratorAgent receives response message"
 						+ msgPropose.getContent());
 
 			}

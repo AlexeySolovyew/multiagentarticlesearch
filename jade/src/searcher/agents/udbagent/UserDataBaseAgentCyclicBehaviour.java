@@ -6,18 +6,50 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import searcher.agents.orchestrator.OrchestratorAgent;
+import searcher.agents.user.UserAgent;
+import searcher.exceptions.InitAgentException;
+
 import jade.core.behaviours.CyclicBehaviour;
+import jade.lang.acl.ACLMessage;
+import jade.lang.acl.MessageTemplate;
 
 public class UserDataBaseAgentCyclicBehaviour extends CyclicBehaviour {
 
+	UserDataBaseAgent agent; 
+	
 	@Override
 	public void action() {
+				
+		ACLMessage msgINIT = agent.receive(MessageTemplate
+				.MatchPerformative(UserAgent.INIT));
+		try {
+
+			if (msgINIT != null) {
+				if (msgINIT.getContent().equals(OrchestratorAgent.INIT_USER)) {
+					agent.setUserAID(msgINIT.getSender());
+					System.out.println("UserDataBaseAgent receives msg1");
+				}/*
+				 * else if (msgINIT.getSender().equals(agent.getUserAgentAID()))
+				 * { agent.setSearchers(msgINIT.getContent());
+				 * System.out.println("OrchestratorAgent receives msg2"); }
+				 */else {
+					throw new InitAgentException();
+				}
+			}
+		} catch (InitAgentException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		
 		/**
 		 * 
 		 * Now this is just a working example how JAVA can communicate with MySQL Server Databases.
 		 * 
 		 * TODO: We must create a public DataBase for our User in the Internet
 		 */
+		
 		
 		/*
 		try {

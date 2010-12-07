@@ -37,30 +37,18 @@ public class UserAgentFrame extends JFrame {
 	private JPanel p;
 	private JTextField inputField;
 	private JTextPane outputField;
-	private List<Article> resultPages;
-
+	
 	public UserAgentFrame(UserAgent agent) {
 		super();
-		this.resultPages = new ArrayList<Article>();
 		this.agent = agent;
 		jfInit();
-		this.setSize(600, 600);
-		this.setTitle("UserAgent - " + agent.getName());
-		this.setVisible(true);
-
 	}
 
-	public void addArticleToFrame(Article a) {
-		resultPages.add(a);
-		try {
-			sortAndShow();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	private void jfInit() {
+	
+		
+		// TODO: сделать обновление через каждые 10-15 секунд, а не после каждой новой статьи
+		
+		private void jfInit() {
 		// aclTreePanel = new ACLTracePanel(agent);
 		// this.setFrameIcon("images/dummy.gif");
 		Container container = this.getContentPane();
@@ -92,11 +80,14 @@ public class UserAgentFrame extends JFrame {
 		p.add(searchButton);
 		// container.add(searchButton, BorderLayout.SOUTH);
 		container.add(p, BorderLayout.NORTH);
+		this.setSize(600, 600);
+		this.setTitle("UserAgent - " + agent.getName());
+		this.setVisible(true);
 	}
 
 	private void searchButton_actionPerformed() {
 		outputField.setText("");
-		resultPages.clear();
+		agent.clearPages();
 		agent.addBehaviour(new OneShotBehaviour() {
 			public void action() {
 				ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
@@ -109,16 +100,17 @@ public class UserAgentFrame extends JFrame {
 		});
 	}
 
-	public void sortAndShow() throws InterruptedException {
+	public void showPages() throws InterruptedException {
 		// wait(2000);
 		outputField.setText("");
-		Collections.sort(resultPages, new Comparator<Article>() {
+		/*Collections.sort(agent.getPages(), new Comparator<Article>() {
 
 			public int compare(Article o1, Article o2) {
 				return o1.getRank() - o2.getRank();
 			}
-		});
-
+		});*/
+		
+		List<Article> resultPages=agent.getPages();
 		String s = "";
 		for (int i = 0; i < resultPages.size(); i++) {
 			s += "<TABLE BORDER=3 WIDTH=100%>"
