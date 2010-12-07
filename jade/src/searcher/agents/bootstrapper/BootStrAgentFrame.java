@@ -50,6 +50,7 @@ public class BootStrAgentFrame extends JFrame {
 				((BootStrAgent) myAgent).createAllAgents();
 			}
 		});
+		this.setVisible(false);
 
 	}
 
