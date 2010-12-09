@@ -96,7 +96,7 @@ public class AggregatorAgent extends Agent {
 				} catch (FIPAException fe) {
 					fe.printStackTrace();
 				}
-				if (searchersAID.size() == 6) {
+				if (searchersAID.size() == 4) {
 					myAgent.addBehaviour(new AggregatorCyclicBehaviour(
 							(AggregatorAgent) myAgent));
 				}
