@@ -45,9 +45,10 @@ public class OrchestratorCyclicBehavior extends CyclicBehaviour {
 		if (msgRequest != null) {
 			if (msgRequest.getSender().equals(agent.getUserAgentAID())) {
 				agent.addMsgToQueueOfAggregatorsMSGs(msgRequest);
-				if (agent.getAggregatorAgentAID() != null) {
-					agent.sendMsgFromQueueToAggregator();
-				}
+				agent.findAggregator();
+				//if (agent.getAggregatorAgentAID() != null) {
+					//agent.sendMsgFromQueueToAggregator();
+				//}
 				System.out.println("OrchestratorAgent receives msgSearch = "
 						+ msgRequest.getContent());
 

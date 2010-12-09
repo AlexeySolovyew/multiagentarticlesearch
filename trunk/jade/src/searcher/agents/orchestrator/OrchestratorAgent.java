@@ -46,61 +46,7 @@ public class OrchestratorAgent extends Agent {
 	@Override
 	protected void setup() {
 		super.setup();
-		subscribeOnService();
 		addBehaviour(new OrchestratorCyclicBehavior(this));
-	}
-
-	private void subscribeOnService() {
-		DFAgentDescription template = new DFAgentDescription();
-		ServiceDescription templateSd = new ServiceDescription();
-		templateSd.setType("aggregate-articles");
-		template.addServices(templateSd);
-
-		SearchConstraints sc = new SearchConstraints();
-		sc.setMaxResults(new Long(10));
-
-		addBehaviour(new SubscriptionInitiator(this,
-				DFService.createSubscriptionMessage(this, getDefaultDF(),
-						template, sc)) {
-			protected void handleInform(ACLMessage inform) {
-				System.out.println("Agent " + getLocalName()
-						+ ": Notification received from DF");
-				try {
-					DFAgentDescription[] results = DFService
-							.decodeNotification(inform.getContent());
-					if (results.length > 0) {
-						for (int i = 0; i < results.length; ++i) {
-							DFAgentDescription dfd = results[i];
-							AID provider = dfd.getName();
-
-							// Агенты могут обладать не одним сервисом, нужно
-							// найти наш
-							Iterator it = dfd.getAllServices();
-							while (it.hasNext()) {
-								ServiceDescription sd = (ServiceDescription) it
-										.next();
-								if (sd.getType().equals("aggregate-articles")) {
-									System.out
-											.println("Aggregate-articles service found:");
-									System.out.println("- Service \""
-											+ sd.getName()
-											+ "\" provided by agent "
-											+ provider.getName());
-									aggregatorAgentAID = provider;
-									// sendInitMSG(aggregatorAgentAID);
-									if (!queueOfAggregatorsMSGs.isEmpty()) {
-										sendMsgFromQueueToAggregator();
-									}
-								}
-							}
-						}
-					}
-					System.out.println();
-				} catch (FIPAException fe) {
-					fe.printStackTrace();
-				}
-			}
-		});
 	}
 
 	public AID getUserAgentAID() {
@@ -121,7 +67,7 @@ public class OrchestratorAgent extends Agent {
 
 	public void sendMsgFromQueueToAggregator() {
 		ACLMessage newMSG = queueOfAggregatorsMSGs.removeFirst();
-		newMSG.addReceiver(aggregatorAgentAID);
+		newMSG.addReceiver(getAggregatorAgentAID());
 		this.send(newMSG);
 	}
 
@@ -143,6 +89,14 @@ public class OrchestratorAgent extends Agent {
 
 	public void setUserAID(AID aid) {
 		userAgentAID = aid;
+	}
+
+	public void findAggregator() {
+		addBehaviour(new OrchestratorOneShotBehavior(this));
+	}
+
+	public void setAggregatorAgentAID(AID aggregatorAgentAID) {
+		this.aggregatorAgentAID = aggregatorAgentAID;
 	}
 
 	/*
