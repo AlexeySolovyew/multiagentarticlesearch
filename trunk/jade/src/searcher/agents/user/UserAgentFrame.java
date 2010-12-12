@@ -14,45 +14,49 @@ import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.event.HyperlinkEvent;
+import javax.swing.event.HyperlinkListener;
 
 import searcher.Article;
 
-public class UserAgentFrame extends JFrame {
+public class UserAgentFrame extends JFrame implements HyperlinkListener {
 
 	private UserAgent agent;
 
 	private JButton searchButton;
+	private JButton backButton;
 	private JPanel p;
 	private JTextField inputField;
-	private JTextPane outputField;
-	
+	private JEditorPane outputField;
+
+	private String resultString;
+
 	public UserAgentFrame(UserAgent agent) {
 		super();
 		this.agent = agent;
 		jfInit();
 	}
 
-	
-		
-			private void jfInit() {
+	private void jfInit() {
 		Container container = this.getContentPane();
 		container.setLayout(new BorderLayout());
 		p = new JPanel();
-		outputField = new JTextPane();
+		outputField = new JEditorPane();
+		outputField.addHyperlinkListener(this);
 		outputField.setContentType("text/html");
 		outputField.setEditable(false);
 		JScrollPane paneScrollPane = new JScrollPane(outputField);
-	    paneScrollPane.setVerticalScrollBarPolicy(
-	                        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-	    paneScrollPane.setPreferredSize(new Dimension(250, 155));
-	    paneScrollPane.setMinimumSize(new Dimension(10, 10));
-	    
+		paneScrollPane
+				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		paneScrollPane.setPreferredSize(new Dimension(250, 155));
+		paneScrollPane.setMinimumSize(new Dimension(10, 10));
+
 		inputField = new JTextField();
 		searchButton = new JButton("search");
 		searchButton.addActionListener(new ActionListener() {
@@ -63,15 +67,26 @@ public class UserAgentFrame extends JFrame {
 			}
 
 		});
+		backButton = new JButton("<--- go to results");
+		backButton.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				outputField.setText(resultString);
+			}
+
+		});
+		
 		container.add(paneScrollPane, BorderLayout.CENTER);
 		p.setLayout(new BoxLayout(p, BoxLayout.X_AXIS));
+		p.add(backButton);
 		p.add(inputField);
 		p.add(searchButton);
 		container.add(p, BorderLayout.NORTH);
 		this.setSize(600, 600);
 		this.setTitle("UserAgent - " + agent.getName());
 		this.setVisible(true);
+		resultString="";
 	}
 
 	private void searchButton_actionPerformed() {
@@ -88,39 +103,41 @@ public class UserAgentFrame extends JFrame {
 			}
 		});
 	}
-	
+
 	public void hyperlinkUpdate(HyperlinkEvent event) {
-	    if (event.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-	    	
-	    	final URL url=event.getURL();
-	      try {
-	    	  
-	        outputField.setPage(url);
-	      } catch(IOException ioe) {
-	        ioe.printStackTrace();
-	      }
-	      //отправляем статью для записи в базу данных статистики
-	      
-	      agent.addBehaviour(new OneShotBehaviour() {
+		if (event.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+
+			final URL url = event.getURL();
+			try {
+
+				outputField.setPage(url);
+			} catch (IOException ioe) {
+				ioe.printStackTrace();
+			}
+			// отправляем статью для записи в базу данных статистики
+
+			agent.addBehaviour(new OneShotBehaviour() {
 				public void action() {
 					ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
 					msg.setSender(agent.getAID());
 					msg.addReceiver(agent.getUserDataBaseAID());
-				//тут надо как-то отправить статью
-					msg.setContent(agent.findByURL(url.toString()).toString());
+					// тут надо как-то отправить статью
+					msg.setContent(agent.findByURL(url.toExternalForm())
+							.toString());
 					agent.send(msg);
+					System.out.println("Sending page to UserDataBaseAgent for rating");
 				}
 			});
-	      
-	    }
-	  }
+
+		}
+	}
 
 	public void showPages() throws InterruptedException {
 		outputField.setText("");
-		List<Article> resultPages=agent.getPages();
-		String s = "";
+		List<Article> resultPages = agent.getPages();
+		resultString = "";
 		for (int i = 0; i < resultPages.size(); i++) {
-			s += "<TABLE BORDER=3 WIDTH=100%>"
+			resultString += "<TABLE BORDER=3 WIDTH=100%>"
 					+ "<TR><TD WIDTH=200><B>Title</B></TD><TD>"
 					+ resultPages.get(i).getTitle() + "</TD></TR>"
 					+ "<TR><TD WIDTH=200><B>Author</B></TD><TD>"
@@ -131,7 +148,7 @@ public class UserAgentFrame extends JFrame {
 					+ "</TABLE><BR>";
 
 		}
-		outputField.setText(s);
+		outputField.setText(resultString);
 
 	}
 
