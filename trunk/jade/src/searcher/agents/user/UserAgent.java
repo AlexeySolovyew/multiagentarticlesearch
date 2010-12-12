@@ -72,6 +72,7 @@ public class UserAgent extends Agent {
 		sendInitMSG(OrchestratorAgent.INIT_USER, this.getOrchestratorAID());
 		sendInitMSG(UserDataBaseAgent.INIT_USER, this.getUserDataBaseAID());
 		sendInitMSG(this.ORCHESTRATOR_AGENT_NAME, this.getUserDataBaseAID());
+		sendInitMSG(this.User_DATABASE_AGENT_NAME, this.getOrchestratorAID());
 	}
 
 	private void sendInitMSG(String content, AID recieverAID) {
@@ -151,7 +152,7 @@ public class UserAgent extends Agent {
 	
 	public Article findByURL(String url){
 		for (Article a:resultPages){
-			if (a.getURL()==url)
+			if (a.getURL().equals(url))
 				return a;
 		}
 		return null;
