@@ -34,31 +34,12 @@ public class UserAgent extends Agent {
 
 	public static final int INIT = ACLMessage.PROXY;
 
-	// private static final String SEARCHER_AGENT_NAME = "searcherAgent";
-
 	private static final String ORCHESTRATOR_AGENT_NAME = "orchestratorAgent";
 
 	private static final String User_DATABASE_AGENT_NAME = "userDataBaseAgent";
-
-	// private static final String AGGREGATOR_AGENT_NAME = "aggregatorAgent";
-
-	// private static final int DummySearchAgent1 = 1;
-
-	// private static final int DummySearchAgent2 = 2;
-
-	// private static final int GOOGLE_SearchAgent = 3;
-
 	private static String ADDRESS_NAME = "useragent";
 	private AID orchestratorAgentAID;
 	private AID userDataBaseAgentAID;
-
-	// private AID aggregatorAgentAID;
-	// private Set<AID> searchers;
-	// private AID AID_searcherAgent1;
-	// private AID AID_searcherAgent2;
-
-	// public UserAgent() {
-	// }
 
 	private void initRelatedAgents() {
 		PlatformController container = getContainerController();
@@ -76,19 +57,6 @@ public class UserAgent extends Agent {
 		}
 	}
 
-	/*
-	 * private void createGoogleSA(PlatformController container) { String
-	 * searchAgent = this.SEARCHER_AGENT_NAME + GOOGLE_SearchAgent;
-	 * AgentController search; try { search =
-	 * container.createNewAgent(searchAgent,
-	 * "searcher.agents.searcher.GoogleSearcherAgent", null); search.start(); }
-	 * catch (ControllerException e) { // TODO Auto-generated catch block
-	 * e.printStackTrace(); } AID AID_searcherAgent = new AID(searchAgent,
-	 * AID.ISLOCALNAME); searchers.add(AID_searcherAgent);
-	 * 
-	 * }
-	 */
-
 	private void createUserDataBaseAgent(PlatformController container)
 			throws ControllerException {
 		AgentController cour = container.createNewAgent(
@@ -103,16 +71,7 @@ public class UserAgent extends Agent {
 	private void sendInitMSGs() {
 		sendInitMSG(OrchestratorAgent.INIT_USER, this.getOrchestratorAID());
 		sendInitMSG(UserDataBaseAgent.INIT_USER, this.getUserDataBaseAID());
-		// sendInitMSG(this.getSearchAgentsName(), this.getOrchestratorAID());
-		// sendInitMSG(AggregatorAgent.INIT_USER, this.getAggregatorAID());
-		// sendInitMSG(this.getSearchAgentsName(), this.getAggregatorAID());
-
-		// for (AID searchAID : searchers) {
-		// sendInitMSG(OrchestratorAgent.INIT_USER, searchAID);
-		// sendInitMSG(this.ORCHESTRATOR_AGENT_NAME, searchAID);
-		// sendFinishingInitMSG(this.AGGREGATOR_AGENT_NAME,searchAID);
-		// }
-
+		sendInitMSG(this.ORCHESTRATOR_AGENT_NAME, this.getUserDataBaseAID());
 	}
 
 	private void sendInitMSG(String content, AID recieverAID) {
@@ -137,39 +96,6 @@ public class UserAgent extends Agent {
 		orchestratorAgentAID = new AID(this.ORCHESTRATOR_AGENT_NAME,
 				AID.ISLOCALNAME);
 	}
-
-	/*
-	 * private void createAggregatorAgent(PlatformController container) throws
-	 * ControllerException, StaleProxyException { AgentController cour =
-	 * container.createNewAgent(this.AGGREGATOR_AGENT_NAME,
-	 * "searcher.agents.aggregator.AggregatorAgent", null); cour.start();
-	 * aggregatorAgentAID = new AID(this.AGGREGATOR_AGENT_NAME,
-	 * AID.ISLOCALNAME); }
-	 */
-
-	/*
-	 * private void createDummySA1(PlatformController container) {
-	 * createDummySA(this.DummySearchAgent1, container);
-	 * 
-	 * }
-	 */
-	/*
-	 * private void createDummySA2(PlatformController container) {
-	 * createDummySA(this.DummySearchAgent2, container);
-	 * 
-	 * }
-	 */
-	/*
-	 * private void createDummySA(int numberSA,PlatformController container) {
-	 * //SearcherAgent test_searcherAgent = new DummySearcherAgent(); //
-	 * Object[] argsSearch = {AID_courierAgent,this, pages}; String searchAgent
-	 * = this.SEARCHER_AGENT_NAME + numberSA; AgentController search; try {
-	 * search = container.createNewAgent(searchAgent,
-	 * "searcher.agents.searcher.DummySearcherAgent"+numberSA, null);
-	 * search.start(); } catch (ControllerException e) { // TODO Auto-generated
-	 * catch block e.printStackTrace(); } AID AID_searcherAgent = new
-	 * AID(searchAgent, AID.ISLOCALNAME); searchers.add(AID_searcherAgent); }
-	 */
 
 	protected void setup() {
 		super.setup();
@@ -199,13 +125,16 @@ public class UserAgent extends Agent {
 	}
 
 	public void addPageToList(Article a) {
+		
 		if (resultPages != null) {
-			if (resultPages.size() == 0)
+			int size=resultPages.size();
+			if (size == 0){
 				resultPages.add(a);
+			}
 			else {
 				int place = a.getRank();
 				int i = 0;
-				for (; resultPages.get(i).getRank() <= place; i++)
+				for (; i<size && resultPages.get(i).getRank() <= place; i++)
 					;
 				resultPages.add(i, a);
 			}
@@ -219,17 +148,14 @@ public class UserAgent extends Agent {
 	public void clearPages() {
 		resultPages.clear();
 	}
-	/*
-	 * public void processIncomingMessage(ACLMessage msg) {
-	 * itsFrame.addMessageNode("in", msg); if (pingBehaviour) { if
-	 * (msg.getContent() == null) { return; }
-	 * 
-	 * if ((msg.getPerformative() == ACLMessage.QUERY_REF) &&
-	 * (msg.getContent().equalsIgnoreCase("ping") ||
-	 * (msg.getContent().equalsIgnoreCase("(ping)")) )) { ACLMessage alive =
-	 * msg.createReply(); alive.setPerformative(ACLMessage.INFORM);
-	 * alive.setSender(this.getAID()); alive.setContent("alive");
-	 * this.send(alive); itsFrame.addMessageNode("out", alive); } } }
-	 */
+	
+	public Article findByURL(String url){
+		for (Article a:resultPages){
+			if (a.getURL()==url)
+				return a;
+		}
+		return null;
+		
+	}
 
 }

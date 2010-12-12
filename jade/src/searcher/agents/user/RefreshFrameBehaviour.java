@@ -20,6 +20,7 @@ public class RefreshFrameBehaviour extends CyclicBehaviour {
 		
 		timeCurr=System.currentTimeMillis();
 		if (timeCurr-timeLastUpdate>15000){
+			timeLastUpdate=timeCurr;
 			try {
 				uf.showPages();
 			} catch (InterruptedException e) {

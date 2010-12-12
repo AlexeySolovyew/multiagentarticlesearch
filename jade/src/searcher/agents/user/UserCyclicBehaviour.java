@@ -27,13 +27,12 @@ public class UserCyclicBehaviour extends CyclicBehaviour {
 		if (msg != null) {
 
 			if (agent.getOrchestratorAID().equals(msg.getSender())) {
-				agent.addPageToList(/*msg.getSender()+" - "+*/new Article(msg.getContent()));
+				agent.addPageToList(new Article(msg.getContent()));
 			}
 			
 		}
 
 			else {
-			// agent.blockingReceive();
 			this.block();
 		}
 
