@@ -18,10 +18,8 @@ import jade.lang.acl.ACLMessage;
 
 public abstract class SearcherAgent extends Agent {
 
-	public static final String INIT_USER = "INIT_USER";
-	private AID orchestratorAgentAID;
 	private AID aggregatorAgentAID;
-	private AID userAgentAID;
+	protected String sourseValue;
 
 	public SearcherAgent() {
 
@@ -36,13 +34,21 @@ public abstract class SearcherAgent extends Agent {
 	protected void setup() {
 		super.setup();
 
-		// это поле должно отличаться у конкретных сёчеров
-		String serviceName = "common search";
+		setSourceValue();
+
+		provideService();
+
+		addBehaviour(new SearcherCyclicBehaviour(this));
+	}
+
+	private void provideService() {
+		String serviceName = "search";
 
 		// Register the service
 		System.out.println("Agent " + getLocalName()
 				+ " registering service \"" + serviceName
-				+ "\" of type \"search-articles\"");
+				+ "\" of type \"search-articles\"" + "\" with property value "
+				+ sourseValue);
 		try {
 			DFAgentDescription dfd = new DFAgentDescription();
 			dfd.setName(getAID());
@@ -51,63 +57,42 @@ public abstract class SearcherAgent extends Agent {
 			sd.setType("search-articles");
 			// Agents that want to use this service need to "know" the
 			// search-articles-ontology
-			sd.addOntologies("search-articles-ontology");
+			// sd.addOntologies("search-articles-ontology");
 			// Agents that want to use this service need to "speak" the FIPA-SL
 			// language
 			sd.addLanguages(FIPANames.ContentLanguage.FIPA_SL);
-			// sd.addProperties(new Property("country", "Italy"));
+			sd.addProperties(new Property("source", sourseValue));
 			dfd.addServices(sd);
 
 			DFService.register(this, dfd);
 		} catch (FIPAException fe) {
 			fe.printStackTrace();
 		}
-
-		addBehaviour(new SearcherCyclicBehaviour(this));
 	}
+
+	public abstract void setSourceValue();
 
 	public abstract void searchAndSendResults(ACLMessage msg);
-
-	public AID getOrchestratorAgentAID() {
-		return orchestratorAgentAID;
-	}
-
-	public AID getUserAgentAID() {
-		return userAgentAID;
-	}
-
-	public void setUserAID(AID aid) {
-		userAgentAID = aid;
-	}
-
-	public void setOrchestratorAID(String nameAID) {
-		orchestratorAgentAID = new AID(nameAID, AID.ISLOCALNAME);
-	}
 
 	public void setAggregatorAgentAID(AID aid) {
 		aggregatorAgentAID = aid;
 	}
 
 	public void sendArticle(Article article) {
-		ACLMessage responseMSG = new ACLMessage(ACLMessage.INFORM);
+		ACLMessage responseMSG = new ACLMessage(ACLMessage.PROPOSE);
 		responseMSG.setSender(this.getAID());
 		responseMSG.setContent(article.toString());
 		// responseMSG.addReceiver(this.getUserAgentAID());
 		responseMSG.addReceiver(aggregatorAgentAID);
 		this.send(responseMSG);
-/*
-=======
-	public void sendSearchResult(List<Article> search) {
-		for (Article page : search) {
-			ACLMessage responseMSG = new ACLMessage(ACLMessage.PROPOSE);
-			responseMSG.setSender(this.getAID());
-			responseMSG.setContent(page
-					.toString());
-			// responseMSG.addReceiver(this.getUserAgentAID());
-			responseMSG.addReceiver(aggregatorAgentAID);
-			this.send(responseMSG);
-		}
->>>>>>> .r29
-*/
+		/*
+		 * ======= public void sendSearchResult(List<Article> search) { for
+		 * (Article page : search) { ACLMessage responseMSG = new
+		 * ACLMessage(ACLMessage.PROPOSE); responseMSG.setSender(this.getAID());
+		 * responseMSG.setContent(page .toString()); //
+		 * responseMSG.addReceiver(this.getUserAgentAID());
+		 * responseMSG.addReceiver(aggregatorAgentAID); this.send(responseMSG);
+		 * } >>>>>>> .r29
+		 */
 	}
 }

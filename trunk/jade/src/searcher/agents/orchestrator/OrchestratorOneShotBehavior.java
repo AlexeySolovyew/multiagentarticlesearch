@@ -42,7 +42,7 @@ public class OrchestratorOneShotBehavior extends OneShotBehaviour {
 					AID provider = dfd.getName();
 					// The same agent may provide several services; we are only
 					// interested
-					// in the weather-forcast one
+					// in the aggregate-articles one
 					Iterator it = dfd.getAllServices();
 					while (it.hasNext()) {
 						ServiceDescription sd = (ServiceDescription) it.next();

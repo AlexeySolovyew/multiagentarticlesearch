@@ -74,5 +74,9 @@ public class GoogleSearcherAgent extends SearcherAgent {
 		}
 		return json;
 	}
+	
+	public void setSourceValue() {
+		sourseValue = "Google";
+	}
 
 }
