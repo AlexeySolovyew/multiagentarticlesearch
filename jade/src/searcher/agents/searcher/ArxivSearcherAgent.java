@@ -134,4 +134,9 @@ public class ArxivSearcherAgent extends SearcherAgent {
 		return document;
 	}
 
+	@Override
+	public void setSourceValue() {
+		sourseValue = "Arxiv";
+	}
+
 }

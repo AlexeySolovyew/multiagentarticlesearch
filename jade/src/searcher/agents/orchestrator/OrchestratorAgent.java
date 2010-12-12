@@ -27,21 +27,13 @@ import jade.proto.SubscriptionInitiator;
 public class OrchestratorAgent extends Agent {
 
 	public static final String INIT_USER = "INIT_USER";
-	// public static final String NOTICE_AGGREGATOR = "I_NEED_YOUR_SERVICE";
 	private AID userAgentAID;
 	private AID aggregatorAgentAID;
 	private LinkedList<ACLMessage> queueOfAggregatorsMSGs = new LinkedList<ACLMessage>();
 
-	// private Set<AID> searchersAID = new HashSet<AID>();
-
 	public OrchestratorAgent() {
 
 	}
-
-	/*
-	 * public CourierAgent(UserAgent userAgent, Set<AID> AID_seachers) {
-	 * this.userAgent = userAgent; this.AID_seachers = AID_seachers; }
-	 */
 
 	@Override
 	protected void setup() {
@@ -52,7 +44,7 @@ public class OrchestratorAgent extends Agent {
 	public AID getUserAgentAID() {
 		return userAgentAID;
 	}
-	
+
 	public AID getAggregatorAgentAID() {
 		return aggregatorAgentAID;
 	}
@@ -79,19 +71,12 @@ public class OrchestratorAgent extends Agent {
 		responseMSG.addReceiver(userAgentAID);
 		this.send(responseMSG);
 	}
-	
-	/*
-	 * private void sendInitMSG(AID aid){ ACLMessage initMSG = new
-	 * ACLMessage(UserAgent.INIT); initMSG.setSender(this.getAID());
-	 * initMSG.setContent(NOTICE_AGGREGATOR); initMSG.addReceiver(aid);
-	 * send(initMSG); }
-	 */
 
 	public void setUserAID(AID aid) {
 		userAgentAID = aid;
 	}
 
-	public void findAggregator() {
+	public void findAndLoadAggregator() {
 		addBehaviour(new OrchestratorOneShotBehavior(this));
 	}
 
@@ -99,12 +84,4 @@ public class OrchestratorAgent extends Agent {
 		this.aggregatorAgentAID = aggregatorAgentAID;
 	}
 
-	/*
-	 * public void setSearchers(String content) { for (StringTokenizer tz = new
-	 * StringTokenizer(content); tz .hasMoreTokens();) { String searcherName =
-	 * tz.nextToken(); searchersAID.add(new AID(searcherName, AID.ISLOCALNAME));
-	 * }
-	 * 
-	 * }
-	 */
 }

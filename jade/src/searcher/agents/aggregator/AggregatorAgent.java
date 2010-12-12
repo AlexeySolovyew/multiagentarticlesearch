@@ -9,6 +9,8 @@ import java.util.StringTokenizer;
 
 import searcher.Article;
 import searcher.agents.aggregator.AggregatorCyclicBehaviour;
+import searcher.agents.orchestrator.OrchestratorCyclicBehavior;
+import searcher.agents.orchestrator.OrchestratorOneShotBehavior;
 
 import jade.core.AID;
 import jade.core.Agent;
@@ -21,87 +23,22 @@ import jade.domain.FIPAAgentManagement.SearchConstraints;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
 import jade.proto.SubscriptionInitiator;
+import jade.util.leap.ArrayList;
 import jade.util.leap.Iterator;
 
 public class AggregatorAgent extends Agent {
-	public static final String INIT_USER = "INIT_USER";
-	public static final String INCOMING_NOTICE = "I_NEED_YOUR_SERVICE";
-	private AID userAgentAID;
 	private AID orchestratorAgentAID;
-	private LinkedList<ACLMessage> queueOfSearchersMSGs = new LinkedList<ACLMessage>();
 	private Set<AID> searchersAID = new HashSet<AID>();
+	private LinkedList<ACLMessage> queueOfSearchersMSGs = new LinkedList<ACLMessage>();
 	private Set<String> pages = new HashSet<String>();
+	private Set<String> searchersPropertyValues = new HashSet<String>();
 
 	protected void setup() {
 		super.setup();
 
 		provideService();
 
-		subscribeOnService();
-	}
-
-	private void subscribeOnService() {
-		DFAgentDescription template = new DFAgentDescription();
-		ServiceDescription templateSd = new ServiceDescription();
-		templateSd.setType("search-articles");
-
-		// тут можно будет указывать источники, по которым нужно осуществлять
-		// поиск
-		// templateSd.addProperties(new Property("country", "Italy"));
-
-		template.addServices(templateSd);
-
-		SearchConstraints sc = new SearchConstraints();
-		// We want to receive 10 results at most количество агентов,
-		// предоставляющих данный сервис, пока оставил 10
-		sc.setMaxResults(new Long(10));
-
-		addBehaviour(new SubscriptionInitiator(this,
-				DFService.createSubscriptionMessage(this, getDefaultDF(),
-						template, sc)) {
-			protected void handleInform(ACLMessage inform) {
-				System.out.println("Agent " + getLocalName()
-						+ ": Notification received from DF");
-				try {
-					DFAgentDescription[] results = DFService
-							.decodeNotification(inform.getContent());
-					if (results.length > 0) {
-						for (int i = 0; i < results.length; ++i) {
-							DFAgentDescription dfd = results[i];
-							AID provider = dfd.getName();
-							// The same agent may provide several services; we
-							// are only interested
-							// in the search-articles one
-							// не правда, конечно, но опять же пока оставил
-							Iterator it = dfd.getAllServices();
-							while (it.hasNext()) {
-								ServiceDescription sd = (ServiceDescription) it
-										.next();
-								if (sd.getType().equals("search-articles")) {
-									System.out
-											.println("Search-articles service found:");
-									System.out.println("- Service \""
-											+ sd.getName()
-											+ "\" provided by agent "
-											+ provider.getName());
-									searchersAID.add(provider);
-									if (!queueOfSearchersMSGs.isEmpty()) {
-										sendMsgFromQueueToAgent(provider);
-									}
-								}
-							}
-						}
-					}
-					System.out.println();
-				} catch (FIPAException fe) {
-					fe.printStackTrace();
-				}
-				if (searchersAID.size() == 4) {
-					myAgent.addBehaviour(new AggregatorCyclicBehaviour(
-							(AggregatorAgent) myAgent));
-				}
-			}
-		});
+		addBehaviour(new AggregatorCyclicBehaviour(this));
 	}
 
 	private void provideService() {
@@ -141,25 +78,6 @@ public class AggregatorAgent extends Agent {
 		this.send(newMSG);
 	}
 
-	public AID getUserAgentAID() {
-		return userAgentAID;
-	}
-
-	public void setUserAgentAID(AID aid) {
-		userAgentAID = aid;
-	}
-
-	/*
-	 * public void setSearchers(String content) { for (StringTokenizer tz = new
-	 * StringTokenizer(content); tz .hasMoreTokens();) { String searcherName =
-	 * tz.nextToken(); searchersAID.add(new AID(searcherName, AID.ISLOCALNAME));
-	 * } }
-	 */
-
-	// public AID getNextSearcherAID() {
-	// return searchersAID.iterator().next();
-	// }
-
 	public void sendArticle(Article page) {
 		ACLMessage responseMSG = new ACLMessage(ACLMessage.PROPOSE);
 		responseMSG.setSender(this.getAID());
@@ -181,6 +99,38 @@ public class AggregatorAgent extends Agent {
 
 	public AID getOrchestratorAgentAID() {
 		return orchestratorAgentAID;
+	}
+
+	public void findAndLoadSearchers() {
+		addBehaviour(new AggregatorOneShotBehavior(this));
+
+	}
+
+	public boolean hasSearcherWithThisPropertyValue(String value) {
+		java.util.Iterator<String> it = searchersPropertyValues.iterator();
+		while (it.hasNext()) {
+			if (it.next().equals(value)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void addSearcherPropertyValue(String value) {
+		searchersPropertyValues.add(value);
+	}
+
+	public void addSearcherAgentAID(AID provider) {
+		searchersAID.add(provider);
+	}
+
+	public void sendMsgFromQueueToSearchers() {
+		ACLMessage newMSG = queueOfSearchersMSGs.removeFirst();
+		java.util.Iterator<AID> it = searchersAID.iterator();
+		while (it.hasNext()) {
+			newMSG.addReceiver(it.next());
+		}
+		this.send(newMSG);
 	}
 
 }

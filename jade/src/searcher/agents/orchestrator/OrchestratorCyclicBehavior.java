@@ -27,12 +27,8 @@ public class OrchestratorCyclicBehavior extends CyclicBehaviour {
 			if (msgINIT != null) {
 				if (msgINIT.getContent().equals(OrchestratorAgent.INIT_USER)) {
 					agent.setUserAID(msgINIT.getSender());
-					System.out.println("OrchestratorAgent receives msg1");
-				}/*
-				 * else if (msgINIT.getSender().equals(agent.getUserAgentAID()))
-				 * { agent.setSearchers(msgINIT.getContent());
-				 * System.out.println("OrchestratorAgent receives msg2"); }
-				 */else {
+					System.out.println("OrchestratorAgent receives init msg");
+				} else {
 					throw new InitAgentException();
 				}
 			}
@@ -45,10 +41,7 @@ public class OrchestratorCyclicBehavior extends CyclicBehaviour {
 		if (msgRequest != null) {
 			if (msgRequest.getSender().equals(agent.getUserAgentAID())) {
 				agent.addMsgToQueueOfAggregatorsMSGs(msgRequest);
-				agent.findAggregator();
-				//if (agent.getAggregatorAgentAID() != null) {
-					//agent.sendMsgFromQueueToAggregator();
-				//}
+				agent.findAndLoadAggregator();
 				System.out.println("OrchestratorAgent receives msgSearch = "
 						+ msgRequest.getContent());
 
@@ -59,8 +52,9 @@ public class OrchestratorCyclicBehavior extends CyclicBehaviour {
 		if (msgPropose != null) {
 			if (agent.getAggregatorAgentAID().equals(msgPropose.getSender())) {
 				agent.sendArticle(new Article(msgPropose.getContent()));
-				System.out.println("OrchestratorAgent receives response message"
-						+ msgPropose.getContent());
+				System.out
+						.println("OrchestratorAgent receives response message"
+								+ msgPropose.getContent());
 
 			}
 		}

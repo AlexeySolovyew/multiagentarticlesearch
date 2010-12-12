@@ -24,4 +24,8 @@ public class DummySearcherAgent2 extends DummySearcherAgent {
 		return pages;
 	}
 
+	public void setSourceValue() {
+		sourseValue = "Dummy2";
+	}
+	
 }
