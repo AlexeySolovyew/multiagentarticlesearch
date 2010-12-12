@@ -38,7 +38,9 @@ public class AggregatorCyclicBehaviour extends CyclicBehaviour {
 				.MatchPerformative(ACLMessage.PROPOSE));
 		if (msgPropose != null) {
 			if (agent.getSearcherAgentsAID().contains(msgPropose.getSender())) {
-				agent.sendArticle(new Article(msgPropose.getContent()));
+				Article cur = new Article(msgPropose.getContent());
+				agent.sendArticle(cur);
+				agent.addArticle(cur);
 			}
 			System.out.println("AggregatorAgent receives response message"
 					+ msgPropose.getContent());

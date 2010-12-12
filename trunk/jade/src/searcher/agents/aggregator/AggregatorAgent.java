@@ -32,6 +32,7 @@ public class AggregatorAgent extends Agent {
 	private LinkedList<ACLMessage> queueOfSearchersMSGs = new LinkedList<ACLMessage>();
 	private Set<String> pages = new HashSet<String>();
 	private Set<String> searchersPropertyValues = new HashSet<String>();
+	private Set<Article> derivedArticles = new HashSet<Article>();
 
 	protected void setup() {
 		super.setup();
@@ -79,6 +80,14 @@ public class AggregatorAgent extends Agent {
 	}
 
 	public void sendArticle(Article page) {
+		java.util.Iterator<Article> it = derivedArticles.iterator();
+		while (it.hasNext()){
+			Article cur = it.next(); 
+			if (cur.equals(page)){
+				page = cur.merge(page);
+			}
+		}
+		
 		ACLMessage responseMSG = new ACLMessage(ACLMessage.PROPOSE);
 		responseMSG.setSender(this.getAID());
 		Random random = new Random();
@@ -131,6 +140,10 @@ public class AggregatorAgent extends Agent {
 			newMSG.addReceiver(it.next());
 		}
 		this.send(newMSG);
+	}
+
+	public void addArticle(Article cur) {
+		derivedArticles.add(cur);
 	}
 
 }

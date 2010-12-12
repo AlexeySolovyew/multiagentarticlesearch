@@ -61,6 +61,22 @@ public class UserDataBaseAgentCyclicBehaviour extends CyclicBehaviour {
 					e.printStackTrace();
 				}
 			}
+		
+		ACLMessage msgRequest = agent.receive(MessageTemplate
+				.MatchPerformative(ACLMessage.REQUEST));
+		if (msgRequest != null) {
+			if (agent.getOrchestratorAID().equals(msgRequest.getSender())) {
+				ACLMessage responseMSG = new ACLMessage(ACLMessage.INFORM);
+				responseMSG.setSender(agent.getAID());
+				responseMSG.setContent(msgRequest.getContent());
+				responseMSG.addReceiver(agent.getOrchestratorAID());
+				agent.send(responseMSG);
+				System.out
+						.println("UserDataBaseAgent receives request message"
+								+ msgRequest.getContent());
+
+			}
+		}
 
 	}
 

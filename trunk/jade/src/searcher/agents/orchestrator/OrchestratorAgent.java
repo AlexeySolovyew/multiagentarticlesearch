@@ -28,6 +28,7 @@ public class OrchestratorAgent extends Agent {
 
 	public static final String INIT_USER = "INIT_USER";
 	private AID userAgentAID;
+	private AID userDataBaseAgentAID;
 	private AID aggregatorAgentAID;
 	private LinkedList<ACLMessage> queueOfAggregatorsMSGs = new LinkedList<ACLMessage>();
 
@@ -63,12 +64,12 @@ public class OrchestratorAgent extends Agent {
 		this.send(newMSG);
 	}
 
-	public void sendArticle(Article page) {
-		ACLMessage responseMSG = new ACLMessage(ACLMessage.PROPOSE);
+	public void sendArticle(Article page,AID receiver,int perf) {
+		ACLMessage responseMSG = new ACLMessage(perf);
 		responseMSG.setSender(this.getAID());
 		page.setRank(page.getRank());
 		responseMSG.setContent(page.toString());
-		responseMSG.addReceiver(userAgentAID);
+		responseMSG.addReceiver(receiver);
 		this.send(responseMSG);
 	}
 
@@ -82,6 +83,14 @@ public class OrchestratorAgent extends Agent {
 
 	public void setAggregatorAgentAID(AID aggregatorAgentAID) {
 		this.aggregatorAgentAID = aggregatorAgentAID;
+	}
+
+	public void setUserDataBaseAgentAID(AID aid) {
+		userDataBaseAgentAID = aid;
+	}
+
+	public AID getUserDataBaseAgentAID() {
+		return userDataBaseAgentAID;
 	}
 
 }
