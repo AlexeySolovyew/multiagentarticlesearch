@@ -1,19 +1,15 @@
 package searcher.agents.user;
 
-import jade.core.AID;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.ACLMessage;
-import jade.tools.testagent.TestAgent;
-import jade.util.leap.Collection;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -21,13 +17,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import javax.swing.event.HyperlinkEvent;
 
 import searcher.Article;
-
-import examples.party.HostAgent;
 
 public class UserAgentFrame extends JFrame {
 
@@ -46,11 +40,7 @@ public class UserAgentFrame extends JFrame {
 
 	
 		
-		// TODO: сделать обновление через каждые 10-15 секунд, а не после каждой новой статьи
-		
-		private void jfInit() {
-		// aclTreePanel = new ACLTracePanel(agent);
-		// this.setFrameIcon("images/dummy.gif");
+			private void jfInit() {
 		Container container = this.getContentPane();
 		container.setLayout(new BorderLayout());
 		p = new JPanel();
@@ -78,7 +68,6 @@ public class UserAgentFrame extends JFrame {
 		p.setLayout(new BoxLayout(p, BoxLayout.X_AXIS));
 		p.add(inputField);
 		p.add(searchButton);
-		// container.add(searchButton, BorderLayout.SOUTH);
 		container.add(p, BorderLayout.NORTH);
 		this.setSize(600, 600);
 		this.setTitle("UserAgent - " + agent.getName());
@@ -99,17 +88,35 @@ public class UserAgentFrame extends JFrame {
 			}
 		});
 	}
+	
+	public void hyperlinkUpdate(HyperlinkEvent event) {
+	    if (event.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+	    	
+	    	final URL url=event.getURL();
+	      try {
+	    	  
+	        outputField.setPage(url);
+	      } catch(IOException ioe) {
+	        ioe.printStackTrace();
+	      }
+	      //отправляем статью для записи в базу данных статистики
+	      
+	      agent.addBehaviour(new OneShotBehaviour() {
+				public void action() {
+					ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+					msg.setSender(agent.getAID());
+					msg.addReceiver(agent.getUserDataBaseAID());
+				//тут надо как-то отправить статью
+					msg.setContent(agent.findByURL(url.toString()).toString());
+					agent.send(msg);
+				}
+			});
+	      
+	    }
+	  }
 
 	public void showPages() throws InterruptedException {
-		// wait(2000);
 		outputField.setText("");
-		/*Collections.sort(agent.getPages(), new Comparator<Article>() {
-
-			public int compare(Article o1, Article o2) {
-				return o1.getRank() - o2.getRank();
-			}
-		});*/
-		
 		List<Article> resultPages=agent.getPages();
 		String s = "";
 		for (int i = 0; i < resultPages.size(); i++) {
