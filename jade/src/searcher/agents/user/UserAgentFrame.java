@@ -4,6 +4,7 @@ import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.ACLMessage;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -34,8 +35,10 @@ public class UserAgentFrame extends JFrame implements HyperlinkListener {
 	private JPanel p;
 	private JTextField inputField;
 	private JEditorPane outputField;
+	private boolean weAreInResults;
 
 	private String resultString;
+
 
 	public UserAgentFrame(UserAgent agent) {
 		super();
@@ -72,11 +75,16 @@ public class UserAgentFrame extends JFrame implements HyperlinkListener {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				
+				weAreInResults=true;
 				outputField.setText(resultString);
+				outputField.setBackground(Color.white);
+				outputField.setForeground(Color.white);
+						
 			}
 
 		});
-		
+
 		container.add(paneScrollPane, BorderLayout.CENTER);
 		p.setLayout(new BoxLayout(p, BoxLayout.X_AXIS));
 		p.add(backButton);
@@ -86,7 +94,9 @@ public class UserAgentFrame extends JFrame implements HyperlinkListener {
 		this.setSize(600, 600);
 		this.setTitle("UserAgent - " + agent.getName());
 		this.setVisible(true);
-		resultString="";
+		resultString = "";
+		weAreInResults=true;
+
 	}
 
 	private void searchButton_actionPerformed() {
@@ -111,6 +121,7 @@ public class UserAgentFrame extends JFrame implements HyperlinkListener {
 			try {
 
 				outputField.setPage(url);
+				weAreInResults=false;
 			} catch (IOException ioe) {
 				ioe.printStackTrace();
 			}
@@ -125,7 +136,8 @@ public class UserAgentFrame extends JFrame implements HyperlinkListener {
 					msg.setContent(agent.findByURL(url.toExternalForm())
 							.toString());
 					agent.send(msg);
-					System.out.println("Sending page to UserDataBaseAgent for rating");
+					System.out
+							.println("Sending page to UserDataBaseAgent for rating");
 				}
 			});
 
@@ -133,22 +145,26 @@ public class UserAgentFrame extends JFrame implements HyperlinkListener {
 	}
 
 	public void showPages() throws InterruptedException {
-		outputField.setText("");
-		List<Article> resultPages = agent.getPages();
-		resultString = "";
-		for (int i = 0; i < resultPages.size(); i++) {
-			resultString += "<TABLE BORDER=3 WIDTH=100%>"
-					+ "<TR><TD WIDTH=200><B>Title</B></TD><TD>"
-					+ resultPages.get(i).getTitle() + "</TD></TR>"
-					+ "<TR><TD WIDTH=200><B>Author</B></TD><TD>"
-					+ resultPages.get(i).getAuthor() + "</TD></TR>"
-					+ "<TR><TD WIDTH=200><B>URL</B></TD><TD><A HREF="
-					+ resultPages.get(i).getURL() + ">"
-					+ resultPages.get(i).getURL() + "</A></TD></TR>"
-					+ "</TABLE><BR>";
+		if (weAreInResults) {
+			List<Article> resultPages = agent.getPages();
+			resultString = "";
+			for (int i = 0; i < resultPages.size(); i++) {
+				resultString += "<TABLE BORDER=3 WIDTH=100%>"
+						+ "<TR><TD WIDTH=200><B>Title</B></TD><TD>"
+						+ resultPages.get(i).getTitle() + "</TD></TR>"
+						+ "<TR><TD WIDTH=200><B>Author</B></TD><TD>"
+						+ resultPages.get(i).getAuthor() + "</TD></TR>"
+						+ "<TR><TD WIDTH=200><B>URL</B></TD><TD><A HREF="
+						+ resultPages.get(i).getURL() + ">"
+						+ resultPages.get(i).getURL() + "</A></TD></TR>"
+						+ "</TABLE><BR>";
 
+			}
+			outputField.setText(resultString);
 		}
-		outputField.setText(resultString);
+		else{
+			System.out.println("Извините, тут какая-то страничка открыта, хуле обновлять :\n");
+		}
 
 	}
 

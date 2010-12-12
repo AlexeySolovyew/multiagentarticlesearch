@@ -50,7 +50,7 @@ public class UserDataBaseAgentCyclicBehaviour extends CyclicBehaviour {
 				.MatchPerformative(ACLMessage.INFORM));
 		
 		if (msgInform != null)
-			if (msgINIT.getSender().equals(agent.getUserAgentAID())){
+			if (msgInform.getSender().equals(agent.getUserAgentAID())){
 				try {
 					agent.addRatings(new Article(msgInform.getContent()));
 				} catch (DOMException e) {
