@@ -79,19 +79,17 @@ public class AggregatorAgent extends Agent {
 		this.send(newMSG);
 	}
 
-	public void sendArticle(Article page) {
-		java.util.Iterator<Article> it = derivedArticles.iterator();
-		while (it.hasNext()){
-			Article cur = it.next(); 
-			if (cur.equals(page)){
-				page = cur.merge(page);
+	public void sendArticle(Article page) {		
+		for (Article curArticle : derivedArticles) {
+			if (curArticle.equals(page)){
+				page = curArticle.merge(page);
 			}
 		}
 		
 		ACLMessage responseMSG = new ACLMessage(ACLMessage.PROPOSE);
 		responseMSG.setSender(this.getAID());
-		Random random = new Random();
-		page.setRank(page.getRank() + random.nextInt(20) % 20);
+		//Random random = new Random();
+		//page.setRank(page.getRank() + random.nextInt(20) % 20);
 		responseMSG.setContent(page.toString());
 		// responseMSG.addReceiver(this.getUserAgentAID());
 		responseMSG.addReceiver(orchestratorAgentAID);

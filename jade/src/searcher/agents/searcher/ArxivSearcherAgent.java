@@ -29,9 +29,8 @@ import org.xml.sax.SAXException;
 import searcher.Article;
 
 public class ArxivSearcherAgent extends SearcherAgent {
+	private static final int AMOUNT_OF_RESULTS_ON_EACH_REQUEST = 5;
 	
-	private static final int AMOUNT_OF_RESULTS = 20;
-
 	private static String getIdPDF(Node entryNode) {
 		NodeList nodeList = ((Element)entryNode).getElementsByTagName("link");
 		for (int i = 0; i < nodeList.getLength(); i++) {
@@ -55,42 +54,50 @@ public class ArxivSearcherAgent extends SearcherAgent {
 		return nodeList.item(0).getTextContent();
 	}
 
+	public static void main(String[] args) {
+		String query = "indexing";// msg.getContent();
+
+		Document document = request(query,0);
+
+	}
 	@Override
 	public void searchAndSendResults(ACLMessage msg) {
 		String query = msg.getContent();
-		
-		Document document = request(query);
-		Element root = document.getDocumentElement();
-		NodeList nodeListEntry = root.getElementsByTagName("entry");
-		List<Article> result = new ArrayList<Article>();
-		for (int i = 0; i < nodeListEntry.getLength(); i++) {
-			Node entryNode = nodeListEntry.item(i);
-			
-			String id = getTextByTagName(entryNode,"id");			
-			String published = getTextByTagName(entryNode,"published");
-			String updated = getTextByTagName(entryNode,"updated");
-			String title = getTextByTagName(entryNode,"title");
-			String summary = getTextByTagName(entryNode,"summary");
-			String author = getAuthor(entryNode);
-			String idPDF = getIdPDF(entryNode);
-			
-			this.sendArticle(new Article(id,idPDF,title,summary,author,published,updated));
-		}
-	}
-
-	private static Document request(String query) {
-		Document doc = null;
-		String arxivQuery = "";
-		for(StringTokenizer st = new StringTokenizer(query); st.hasMoreTokens();){
-			arxivQuery += "all:" + st.nextToken();
-			if(st.hasMoreTokens()){
-				arxivQuery += "+AND+";
+		for (int numberStart = 0; numberStart < MAX_AMOUNT_OF_RESULTS_ON_ONE_REQUEST; numberStart += AMOUNT_OF_RESULTS_ON_EACH_REQUEST) {
+			System.out.println("NUMBER_START = " + numberStart);
+			Document document = request(query,numberStart );
+			Element root = document.getDocumentElement();
+			NodeList nodeListEntry = root.getElementsByTagName("entry");
+			System.out.println("кол-ыо результатов за раз = " + nodeListEntry.getLength());
+			for (int i = 0; i < nodeListEntry.getLength(); i++) {
+				assert i < AMOUNT_OF_RESULTS_ON_EACH_REQUEST;
+				Node entryNode = nodeListEntry.item(i);
+				
+				String id = getTextByTagName(entryNode,"id");			
+				String published = getTextByTagName(entryNode,"published");
+				String updated = getTextByTagName(entryNode,"updated");
+				String title = getTextByTagName(entryNode,"title");
+				String summary = getTextByTagName(entryNode,"summary");
+				String author = getAuthor(entryNode);
+				String idPDF = getIdPDF(entryNode);
+				
+				Article	article = new Article(id,idPDF,title,summary,author,published,updated);
+				article.addSearcherSenderAndRank(this.getName(), getCurRankArticle(numberStart + i));
+				this.sendArticle(article);
 			}
 		}
+		
+		
+	}
+
+	private static Document request(String query, int numberStart) {
+		Document doc = null;
+		String arxivQuery = createArxivQueryURL(query, numberStart);
+		
 		try {
 			URL url;
-			url = new URL(
-					"http://export.arxiv.org/api/query?search_query=" + arxivQuery + "&start=0&max_results=" + AMOUNT_OF_RESULTS);
+			url = new URL(arxivQuery);
+					//"http://export.arxiv.org/api/query?search_query=" + arxivQuery + "&start="+numberStart+"&max_results=" + (numberStart+AMOUNT_OF_RESULTS_ON_EACH_REQUEST));
 			URLConnection connection = url.openConnection();
 
 			String line;
@@ -111,6 +118,18 @@ public class ArxivSearcherAgent extends SearcherAgent {
 		return doc;
 
 	}
+	private static String createArxivQueryURL(String query, int numberStart) {
+		String arxivQuery = "http://export.arxiv.org/api/query?search_query=";
+		for(StringTokenizer st = new StringTokenizer(query); st.hasMoreTokens();){
+			arxivQuery += "all:" + st.nextToken();
+			if(st.hasMoreTokens()){
+				arxivQuery += "+AND+";
+			}
+		}
+		arxivQuery+="&start="+numberStart+"&max_results=" + AMOUNT_OF_RESULTS_ON_EACH_REQUEST;
+		return arxivQuery;
+	}
+
 	private static Document parseXML(String content) {
 		Document document = null;
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

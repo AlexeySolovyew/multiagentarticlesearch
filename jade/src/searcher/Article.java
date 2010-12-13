@@ -35,27 +35,30 @@ public class Article {
 	private static final String SEARCHER_RANK = "SEARCHER_RANK";
 
 	private String title = "no title";
-	private int rank = 0;
+	//private int rank = 0;
 	private String url = "no url";
 	private String author = "no author";
-	private String urlPDF;
-	private String summary;
-	private String publishedDate;
-	private String updatedDate;
-	private Map<String, Integer> searchersNames2Rank = new HashMap<String, Integer>();
-	private Set<AID> searchersSenders = new HashSet<AID>();
+	private String urlPDF = "no urlPDF";
+	private String summary = "no summary";
+	private String publishedDate = "no date Publ";
+	private String updatedDate = "no date update";
+	private Map<String, Integer> searchersSenders2Rank = new HashMap<String, Integer>();
+	//private Set<AID> searchersSenders = new HashSet<AID>();
 
-	public Article(String url, int rank) {
-		this.rank = rank;
+	/*
+	 * Constructor for DummySearchAgents and GoogleSearcherAgent
+	 */
+	public Article(String searcherName,String url, int rank) {
+		this.addSearcherSenderAndRank(searcherName, rank);
 		this.url = url;
 	}
 
-	public Article(String url, int rank, String title, String author) {
+	/*public Article(String url, int rank, String title, String author) {
 		this.rank = rank;
 		this.url = url;
 		this.author = author;
 		this.title = title;
-	}
+	}*/
 
 	/**
 	 * 
@@ -76,6 +79,7 @@ public class Article {
 			e.printStackTrace();
 		} catch (SAXException e) {
 			// TODO Auto-generated catch block
+			System.out.println(articleAsString);
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -84,8 +88,8 @@ public class Article {
 		Element root = document.getDocumentElement();
 
 		this.title = root.getElementsByTagName(TITLE).item(0).getTextContent();
-		this.rank = new Integer(root.getElementsByTagName(RANK).item(0)
-				.getTextContent());
+		//this.rank = new Integer(root.getElementsByTagName(RANK).item(0)
+		//		.getTextContent());
 		this.url = root.getElementsByTagName(URL).item(0).getTextContent();
 		this.author = root.getElementsByTagName(AUTHOR).item(0)
 				.getTextContent();
@@ -108,21 +112,30 @@ public class Article {
 					.getElementsByTagName(SEARCHER_NAME).item(0)
 					.getTextContent();
 			String rank = ((Element) nodeListSE2R.item(i))
-					.getElementsByTagName(RANK).item(0).getTextContent();
-			searchersNames2Rank.put(searcherName, new Integer(rank));
+					.getElementsByTagName(SEARCHER_RANK).item(0).getTextContent();
+			searchersSenders2Rank.put(searcherName, new Integer(rank));
 		}
 	}
 
 	public Article(String id, String idPDF, String title, String summary,
 			String author, String publishedDate, String updatedDate) {
-		this.url = id;
-		this.urlPDF = idPDF;
-		this.title = title;
-		this.summary = summary;
-		this.author = author;
-		this.publishedDate = publishedDate;
-		this.updatedDate = updatedDate;
+		this.url = deleteIllegalSymbolsForXML(id);
+		this.urlPDF = deleteIllegalSymbolsForXML(idPDF);
+		this.title = deleteIllegalSymbolsForXML(title);
+		this.summary = deleteIllegalSymbolsForXML(summary);
+		this.author = deleteIllegalSymbolsForXML(author);
+		this.publishedDate = deleteIllegalSymbolsForXML(publishedDate);
+		this.updatedDate = deleteIllegalSymbolsForXML(updatedDate);
 
+	}
+
+	private String deleteIllegalSymbolsForXML(String st) {
+		for (int i = 0; i < st.length(); i++) {
+			if(st.charAt(i)=='<' || st.charAt(i)=='>'){
+				st = st.substring(0, i) + st.substring(i+1);
+			}
+		}
+		return st;
 	}
 
 	public boolean equals(Article cur) {
@@ -130,7 +143,7 @@ public class Article {
 	}
 
 	public void addRank(String searcherName, int rank) {
-		searchersNames2Rank.put(searcherName, rank);
+		searchersSenders2Rank.put(searcherName, rank);
 	}
 
 	public String getTitle() {
@@ -142,11 +155,11 @@ public class Article {
 	}
 
 	public int getRank() {
+		int rank = 0;
+		for (String searcherName : searchersSenders2Rank.keySet()) {
+			rank += searchersSenders2Rank.get(searcherName);
+		}
 		return rank;
-	}
-
-	public void setRank(int rank) {
-		this.rank = rank;
 	}
 
 	public String getAuthor() {
@@ -155,39 +168,51 @@ public class Article {
 
 	public String toString() {
 		String searchersNamesInfo = getSearchersNamesInfo();
-		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + "<article>" + "<"
-				+ TITLE + ">" + title + "</" + TITLE + ">" + "<" + RANK + ">"
-				+ rank + "</" + RANK + ">" + "<" + URL + ">" + url + "</" + URL
-				+ ">" + "<" + AUTHOR + ">" + author + "</" + AUTHOR + ">" + "<"
-				+ URL_PDF + ">" + urlPDF + "</" + URL_PDF + ">" + "<" + SUMMARY
-				+ ">" + summary + "</" + SUMMARY + ">" + "<" + PUBLISHED_DATE
-				+ ">" + publishedDate + "</" + PUBLISHED_DATE + ">" + "<"
-				+ UPDATED_DATE + ">" + updatedDate + "</" + UPDATED_DATE + ">"
-				+ searchersNamesInfo + "</article>";
+		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" 
+		+ "<article>" + 
+			"<"+ TITLE + ">" + title + "</" + TITLE + ">" + 
+			//"<" + RANK + ">" + rank + "</" + RANK + ">" + 
+			"<" + URL + ">" + url + "</" + URL + ">" + 
+			"<" + AUTHOR + ">" + author + "</" + AUTHOR + ">" + 
+			"<" + URL_PDF + ">" + urlPDF + "</" + URL_PDF + ">" + 
+			"<" + SUMMARY + ">" + summary + "</" + SUMMARY + ">" + 
+			"<" + PUBLISHED_DATE + ">" + publishedDate + "</" + PUBLISHED_DATE + ">" + 
+			"<" + UPDATED_DATE + ">" + updatedDate + "</" + UPDATED_DATE + ">" +
+				 searchersNamesInfo + 
+		 "</article>";
 	}
 
 	private String getSearchersNamesInfo() {
 		String st = "";
-		for (String searcherName : searchersNames2Rank.keySet()) {
+		for (String searcherName : searchersSenders2Rank.keySet()) {
 			st += "<" + SEARCHER_NAME_2_RANK + ">" + "<" + SEARCHER_NAME + ">"
 					+ searcherName + "</" + SEARCHER_NAME + ">" + "<"
 					+ SEARCHER_RANK + ">"
-					+ searchersNames2Rank.get(searcherName) + "</"
+					+ searchersSenders2Rank.get(searcherName) + "</"
 					+ SEARCHER_RANK + ">" + "</" + SEARCHER_NAME_2_RANK + ">";
 		}
 		return st;
 	}
 
+	/**
+	 * @param page
+	 * @return
+	 */
 	public Article merge(Article page) {
-		Iterator<AID> it = searchersSenders.iterator();
+		Iterator<String> it = searchersSenders2Rank.keySet().iterator();
 		while (it.hasNext()) {
-			page.addSearcherSender(it.next());
+			String searcherSender = it.next();
+			page.addSearcherSenderAndRank(searcherSender, searchersSenders2Rank.get(searcherSender) );
 		}
 		return page;
 	}
 
-	public void addSearcherSender(AID cur) {
-		searchersSenders.add(cur);
+	public void addSearcherSenderAndRank(String searcherName, int rank) {
+		//searchersSenders.add(cur);
+		if(rank<0){
+			System.out.println();
+		}
+		searchersSenders2Rank.put(searcherName, rank);
 	}
 
 }
