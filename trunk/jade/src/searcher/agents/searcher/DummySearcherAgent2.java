@@ -10,9 +10,9 @@ public class DummySearcherAgent2 extends DummySearcherAgent {
 	
 	static{
 		 pages = new ArrayList<Article>();
-		 pages.add(new Article ("page1",3)); 
-		 pages.add(new Article ("page2",4));
-		 pages.add(new Article ("page3",6));
+		 pages.add(new Article ("dsa2","page1",3)); 
+		 pages.add(new Article ("dsa2","page2",4));
+		 pages.add(new Article ("dsa2","page3",6));
 	}
 
 	public DummySearcherAgent2() {

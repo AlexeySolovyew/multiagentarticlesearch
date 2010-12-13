@@ -29,9 +29,9 @@ public class GoogleSearcherAgent extends SearcherAgent {
 		try {
 			contResponseData = json.getJSONObject("responseData");
 			JSONArray arrayRes = contResponseData.getJSONArray("results");
-			for (int i = 0; i < arrayRes.length(); i++) {
+			for (int i = 0; i < arrayRes.length()&& i < MAX_AMOUNT_OF_RESULTS_ON_ONE_REQUEST; i++) {
 				String url = arrayRes.getJSONObject(i).getString("url");
-				this.sendArticle(new Article(url, 0));
+				this.sendArticle(new Article(this.getName(),url, this.getCurRankArticle(i)));
 			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

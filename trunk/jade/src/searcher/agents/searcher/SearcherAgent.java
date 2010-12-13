@@ -18,6 +18,10 @@ import jade.lang.acl.ACLMessage;
 
 public abstract class SearcherAgent extends Agent {
 
+	public static final int MAX_RANK_ARTICLE = 1000;
+
+	public static final int MAX_AMOUNT_OF_RESULTS_ON_ONE_REQUEST = 20;
+
 	private AID aggregatorAgentAID;
 	protected String sourseValue;
 
@@ -72,10 +76,26 @@ public abstract class SearcherAgent extends Agent {
 
 	public abstract void setSourceValue();
 
+	/**
+	 * Search results by request(msg.getContent()) and send msgs, which contain
+	 * Articles. For each article need to stay rank
+	 * (Article.addSearcherSenderAndRank(String searcherName, int rank))
+	 * 
+	 * @param msg
+	 */
 	public abstract void searchAndSendResults(ACLMessage msg);
 
 	public void setAggregatorAgentAID(AID aid) {
 		aggregatorAgentAID = aid;
+	}
+	
+	/**
+	 * 
+	 * @param numberArticle - number from 0 to AMOUNT_OF_RESULTS-1
+	 * @return
+	 */
+	public int getCurRankArticle(int numberArticle) {
+		return MAX_RANK_ARTICLE - numberArticle*MAX_RANK_ARTICLE/MAX_AMOUNT_OF_RESULTS_ON_ONE_REQUEST;
 	}
 
 	public void sendArticle(Article article) {
