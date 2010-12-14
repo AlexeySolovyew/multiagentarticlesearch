@@ -39,7 +39,6 @@ public class UserAgentFrame extends JFrame implements HyperlinkListener {
 
 	private String resultString;
 
-
 	public UserAgentFrame(UserAgent agent) {
 		super();
 		this.agent = agent;
@@ -75,12 +74,12 @@ public class UserAgentFrame extends JFrame implements HyperlinkListener {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
-				weAreInResults=true;
+
+				weAreInResults = true;
 				outputField.setText(resultString);
 				outputField.setBackground(Color.white);
 				outputField.setForeground(Color.white);
-						
+
 			}
 
 		});
@@ -95,7 +94,7 @@ public class UserAgentFrame extends JFrame implements HyperlinkListener {
 		this.setTitle("UserAgent - " + agent.getName());
 		this.setVisible(true);
 		resultString = "";
-		weAreInResults=true;
+		weAreInResults = true;
 
 	}
 
@@ -121,7 +120,7 @@ public class UserAgentFrame extends JFrame implements HyperlinkListener {
 			try {
 
 				outputField.setPage(url);
-				weAreInResults=false;
+				weAreInResults = false;
 			} catch (IOException ioe) {
 				ioe.printStackTrace();
 			}
@@ -149,22 +148,38 @@ public class UserAgentFrame extends JFrame implements HyperlinkListener {
 			List<Article> resultPages = agent.getPages();
 			resultString = "";
 			for (int i = 0; i < resultPages.size(); i++) {
+				Article curr = resultPages.get(i);
 				resultString += "<TABLE BORDER=3 WIDTH=100%>"
 						+ "<TR><TD WIDTH=200><B>Title</B></TD><TD>"
-						+ resultPages.get(i).getTitle() + "</TD></TR>"
+						+ curr.getTitle()
+						+ "</TD></TR>"
 						+ "<TR><TD WIDTH=200><B>Author</B></TD><TD>"
-						+ resultPages.get(i).getAuthor() + "</TD></TR>"
+						+ curr.getAuthor()
+						+ "</TD></TR>"
 						+ "<TR><TD WIDTH=200><B>URL</B></TD><TD><A HREF="
-						+ resultPages.get(i).getURL() + ">"
-						+ resultPages.get(i).getURL() + "</A></TD></TR>"
-						+ "</TABLE><BR>";
-
+						+ curr.getURL()
+						+ ">"
+						+ curr.getURL()
+						+ "</A></TD></TR>"
+						+ "<TR><TD WIDTH=200><B>PDF</B></TD><TD><A HREF="
+						+ curr.getURLPDF()
+						+ ">"
+						+ curr.getURLPDF()
+						+ "</A></TD></TR>"
+						+ "<TR><TD WIDTH=200><B>Summary</B></TD><TD>"
+						+ curr.getSummary()
+						+ "</TD></TR>"
+						+ "<TR><TD WIDTH=200><B>Published date</B></TD><TD>"
+						+ curr.getDate()
+						+ "</TD></TR>"
+						+ "<TR><TD WIDTH=200><B>Total rank</B></TD><TD>"
+						+ curr.getRank() + "</TD></TR>" + "</TABLE><BR>";
 			}
-			agent.hasNewMessages=false;
+			agent.hasNewMessages = false;
 			outputField.setText(resultString);
-		}
-		else{
-			System.out.println("Извините, тут какая-то страничка открыта, хуле обновлять :\n");
+		} else {
+			System.out
+					.println("Извините, тут какая-то страничка открыта, хуле обновлять :\n");
 		}
 
 	}

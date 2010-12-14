@@ -23,7 +23,6 @@ import org.xml.sax.SAXException;
 
 public class Article {
 	private static final String TITLE = "title";
-	private static final String RANK = "rank";
 	private static final String URL = "url";
 	private static final String AUTHOR = "author";
 	private static final String URL_PDF = "urlPDF";
@@ -33,9 +32,10 @@ public class Article {
 	private static final String SEARCHER_NAME = "searcherName";
 	private static final String SEARCHER_NAME_2_RANK = "SEARCHER_NAME_2_RANK";
 	private static final String SEARCHER_RANK = "SEARCHER_RANK";
+	private static final String USER_RANK = "user_rank";
 
 	private String title = "no title";
-	//private int rank = 0;
+	private int user_rank = 0;
 	private String url = "no url";
 	private String author = "no author";
 	private String urlPDF = "no urlPDF";
@@ -43,7 +43,6 @@ public class Article {
 	private String publishedDate = "no date Publ";
 	private String updatedDate = "no date update";
 	private Map<String, Integer> searchersSenders2Rank = new HashMap<String, Integer>();
-	//private Set<AID> searchersSenders = new HashSet<AID>();
 
 	/*
 	 * Constructor for DummySearchAgents and GoogleSearcherAgent
@@ -63,7 +62,7 @@ public class Article {
 	/**
 	 * 
 	 * @param articleAsString
-	 *            - article as string, which return method Article.toString()
+	 *            - article as string which is opposite to method Article.toString()
 	 */
 	public Article(String articleAsString) {
 		Document document = null;
@@ -101,6 +100,9 @@ public class Article {
 				.getTextContent();
 		this.updatedDate = root.getElementsByTagName(UPDATED_DATE).item(0)
 				.getTextContent();
+		this.user_rank = new Integer(root.getElementsByTagName(USER_RANK).item(0)
+				.getTextContent()); 
+			
 		extractSearchersNames(root);
 
 	}
@@ -146,12 +148,30 @@ public class Article {
 		searchersSenders2Rank.put(searcherName, rank);
 	}
 
+	/** Getters **/
+	
 	public String getTitle() {
 		return title;
+	}
+	
+	public String getDate(){
+		return publishedDate;
 	}
 
 	public String getURL() {
 		return url;
+	}
+	
+	public String getAuthor() {
+		return author;
+	}
+	
+	public String getURLPDF(){
+		return urlPDF;
+	}
+	
+	public String getSummary(){
+		return summary;
 	}
 
 	public int getRank() {
@@ -159,11 +179,14 @@ public class Article {
 		for (String searcherName : searchersSenders2Rank.keySet()) {
 			rank += searchersSenders2Rank.get(searcherName);
 		}
+		rank+=user_rank;
 		return rank;
 	}
-
-	public String getAuthor() {
-		return author;
+	
+	/** Here getters end **/
+	
+	public void addUserRank(int r){
+		user_rank+=r;
 	}
 
 	public String toString() {
@@ -171,13 +194,13 @@ public class Article {
 		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" 
 		+ "<article>" + 
 			"<"+ TITLE + ">" + title + "</" + TITLE + ">" + 
-			//"<" + RANK + ">" + rank + "</" + RANK + ">" + 
 			"<" + URL + ">" + url + "</" + URL + ">" + 
 			"<" + AUTHOR + ">" + author + "</" + AUTHOR + ">" + 
 			"<" + URL_PDF + ">" + urlPDF + "</" + URL_PDF + ">" + 
 			"<" + SUMMARY + ">" + summary + "</" + SUMMARY + ">" + 
 			"<" + PUBLISHED_DATE + ">" + publishedDate + "</" + PUBLISHED_DATE + ">" + 
 			"<" + UPDATED_DATE + ">" + updatedDate + "</" + UPDATED_DATE + ">" +
+			"<" + USER_RANK + ">" + user_rank + "</" + USER_RANK + ">" +
 				 searchersNamesInfo + 
 		 "</article>";
 	}
@@ -208,10 +231,6 @@ public class Article {
 	}
 
 	public void addSearcherSenderAndRank(String searcherName, int rank) {
-		//searchersSenders.add(cur);
-		if(rank<0){
-			System.out.println();
-		}
 		searchersSenders2Rank.put(searcherName, rank);
 	}
 
