@@ -1,36 +1,33 @@
 package searcher.agents.udbagent;
 
+import jade.core.AID;
+import jade.core.Agent;
+
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.StringReader;
 import java.io.Writer;
-import java.util.ArrayList;
 
-import javax.imageio.metadata.IIOMetadataNode;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.*;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
+import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 
 import searcher.Article;
-import searcher.agents.orchestrator.OrchestratorCyclicBehavior;
-import searcher.agents.user.RefreshFrameBehaviour;
-import searcher.agents.user.UserAgentFrame;
-import searcher.agents.user.UserCyclicBehaviour;
-import jade.core.AID;
-import jade.core.Agent;
 
 public class UserDataBaseAgent extends Agent {
 
@@ -44,8 +41,8 @@ public class UserDataBaseAgent extends Agent {
 	protected void setup() {
 		super.setup();
 		System.out.println("DataBaseAgent: Вот щас бы файлики создать");
-		farticles=initFile("articles.xml");
-		fauthors=initFile("authors.xml");
+		farticles = initFile("articles.xml", "ARTICLES");
+		fauthors = initFile("authors.xml", "AUTHORS");
 		addBehaviour(new UserDataBaseAgentCyclicBehaviour(this));
 	}
 
@@ -67,7 +64,7 @@ public class UserDataBaseAgent extends Agent {
 
 	}
 
-	public File initFile(String s) {
+	public File initFile(String s, String type) {
 
 		File f = new File(s);
 		if (!f.exists()) {
@@ -81,33 +78,36 @@ public class UserDataBaseAgent extends Agent {
 					+ " has been created to the current directory");
 
 		}
-		System.out.println("DataBaseAgent: такой файл уже есть: "+f.getAbsolutePath());
+		System.out.println("DataBaseAgent: такой файл уже есть: "
+				+ f.getAbsolutePath());
 		try {
 			// Create filewriter
 			FileWriter fstream = new FileWriter(f);
 			BufferedWriter out = new BufferedWriter(fstream);
 
 			out.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-			
-			 out.newLine(); out.write("<ARTICLES>"); out.newLine();
-			 out.write("</ARTICLES>");
-			
+
+			out.newLine();
+			out.write("<"+type+">");
+			out.newLine();
+			out.write("</"+type+">");
 
 			// Close the output stream
 			out.close();
 		} catch (Exception e) {// Catch exception if any
 			System.err.println("Error: " + e.getMessage());
 		}
+		
 		return f;
 	}
 
 	public void addRatings(Article a) throws DOMException, IOException {
 
-		/*
-		// просто статьи по айдишникам
+		
 		Document document = null;
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder;
+		// просто статьи по айдишникам
 		try {
 			builder = factory.newDocumentBuilder();
 			document = builder.parse(farticles);
@@ -123,52 +123,159 @@ public class UserDataBaseAgent extends Agent {
 		}
 
 		Element root = document.getDocumentElement();
-		// Допустим это <ARTICLES>
-		 Node articles = root.getChildNodes().item(0);
-
 		NodeList nl = root.getElementsByTagName("ID");
 		if (nl.getLength() == 0) {
-			addArticle(a, document, root);
+			System.out
+					.println("UserDataBase: adding new article to stats, there are no articles in the file yet");
+			root.appendChild(createNode(document, "ARTICLE", "ID", a.getURL()));
 
-		} else{
-			int i=0;
-		for (; i < nl.getLength(); i++) {
-			if (nl.item(i).getTextContent() == a.getURL()) {
-				Node rankNode = nl.item(i).getParentNode().getChildNodes().item(1);
-				//тут надо изменить ранг, это блин сложно, пока пусть будет 2
-					rankNode.setTextContent("2");
+		} else {
+			int i = 0;
+			for (; i < nl.getLength(); i++) {
+				if (nl.item(i).getTextContent().equals(a.getURL())) {
+					System.out
+							.println("UserDataBase: this article already exists");
+					System.out
+					.println("UserDataBase: his parent is "+nl.item(i).getParentNode().getNodeName());
+					Node rankNode = nl.item(i).getParentNode().getChildNodes()
+							.item(1);
+					System.out
+						.println("UserDataBase: adding rank to existing article");
+						rankNode.setTextContent(((new Integer(rankNode
+								.getTextContent())).intValue() + 10) + "");
+				break;
+				}
 			}
 			if (i==nl.getLength()){
-				addArticle(a, document, root);
+				System.out.println("UserDataBase: this article doesn't exist, adding new node");
+				root.appendChild(createNode(document, "ARTICLE", "ID", a.getURL()));
 			}
 		}
+
+		StreamResult result;
+		try {
+			// Use a Transformer for output
+			TransformerFactory tFactory = TransformerFactory.newInstance();
+			Transformer transformer = tFactory.newTransformer();
+
+			DOMSource source = new DOMSource(document);
+			result = new StreamResult(farticles);
+			transformer.transform(source, result);
+		} catch (TransformerConfigurationException tce) {
+			// Error generated by the parser
+			System.out.println("* Transformer Factory error");
+			System.out.println("  " + tce.getMessage());
+
+			// Use the contained exception, if any
+			Throwable x = tce;
+			if (tce.getException() != null)
+				x = tce.getException();
+			x.printStackTrace();
+		} catch (TransformerException te) {
+			// Error generated by the parser
+			System.out.println("* Transformation error");
+			System.out.println("  " + te.getMessage());
+
+			// Use the contained exception, if any
+			Throwable x = te;
+			if (te.getException() != null)
+				x = te.getException();
+			x.printStackTrace();
+		}
+		
+		// а тут авторы
+		
+		try {
+			builder = factory.newDocumentBuilder();
+			document = builder.parse(fauthors);
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
-		Writer out = new OutputStreamWriter(new FileOutputStream(farticles));
-		try {
-			//тут надо бы записать нахимиченный DOM в файл (пишется вместо этого какая-то хуйня)
-			out.write(root.getElementsByTagName("ID").item(0).getTextContent());
-		} finally {
-			out.close();
+		root = document.getDocumentElement();
+		nl = root.getElementsByTagName("NAME");
+		if (nl.getLength() == 0) {
+			System.out
+					.println("UserDataBase: adding new author to stats, there are no authors in the file yet");
+			root.appendChild(createNode(document, "AUTHOR","NAME",a.getAuthor() ));
+
+		} else {
+			int i = 0;
+			for (; i < nl.getLength(); i++) {
+				if (nl.item(i).getTextContent().equals(a.getAuthor())) {
+					System.out
+							.println("UserDataBase: this author already exists");
+					Node rankNode = nl.item(i).getParentNode().getChildNodes()
+							.item(1);
+					System.out
+						.println("UserDataBase: adding rank to existing author");
+						rankNode.setTextContent(((new Integer(rankNode
+								.getTextContent())).intValue() + 10) + "");
+					 
+					break;
+				}
+			}
+			if (i==nl.getLength()){
+				System.out.println("UserDataBase: this author doesn't exist, adding new node");
+				root.appendChild(createNode(document, "AUTHOR","NAME",a.getAuthor() ));
+			}
 		}
-*/
+
+		try {
+			// Use a Transformer for output
+			TransformerFactory tFactory = TransformerFactory.newInstance();
+			Transformer transformer = tFactory.newTransformer();
+
+			DOMSource source = new DOMSource(document);
+			result = new StreamResult(fauthors);
+			transformer.transform(source, result);
+		} catch (TransformerConfigurationException tce) {
+			// Error generated by the parser
+			System.out.println("* Transformer Factory error");
+			System.out.println("  " + tce.getMessage());
+
+			// Use the contained exception, if any
+			Throwable x = tce;
+			if (tce.getException() != null)
+				x = tce.getException();
+			x.printStackTrace();
+		} catch (TransformerException te) {
+			// Error generated by the parser
+			System.out.println("* Transformation error");
+			System.out.println("  " + te.getMessage());
+
+			// Use the contained exception, if any
+			Throwable x = te;
+			if (te.getException() != null)
+				x = te.getException();
+			x.printStackTrace();
+		}
+
 	}
 
-	private void addArticle(Article a, Document document, Element root) {
-		Element art = document.createElement("ARTICLE");
+	private Element createNode(Document document, String s1, String s2, String content) {
+		Element art = document.createElement(s1);
 		Element elem;
 		Text elem_value;
 
-		elem = document.createElement("ID");
-		elem_value = document.createTextNode(a.getURL());
+		elem = document.createElement(s2);
+		elem_value = document.createTextNode(content);
 		elem.appendChild(elem_value);
 		art.appendChild(elem);
 
 		elem = document.createElement("RATE");
-		elem_value = document.createTextNode("1");
+		elem_value = document.createTextNode("10");
 		elem.appendChild(elem_value);
 		art.appendChild(elem);
 
-		root.appendChild(art);
+		return art;
+
 	}
 }
