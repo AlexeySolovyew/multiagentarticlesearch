@@ -79,23 +79,26 @@ public class AggregatorAgent extends Agent {
 		this.send(newMSG);
 	}
 
-	public void sendArticle(Article page) {		
+	public void sendArticle(Article page) {
+		boolean old = false;
 		for (Article curArticle : derivedArticles) {
-			if (curArticle.equals(page)){
+			if (curArticle.equals(page)) {
+				old = true;
 				page = curArticle.merge(page);
+				derivedArticles.remove(curArticle);
 			}
 		}
-		
-		ACLMessage responseMSG = new ACLMessage(ACLMessage.PROPOSE);
-		responseMSG.setSender(this.getAID());
-		//Random random = new Random();
-		//page.setRank(page.getRank() + random.nextInt(20) % 20);
-		responseMSG.setContent(page.toString());
-		// responseMSG.addReceiver(this.getUserAgentAID());
-		responseMSG.addReceiver(orchestratorAgentAID);
-		this.send(responseMSG);
+		addArticle(page);
+		if (!old) {
+			ACLMessage responseMSG = new ACLMessage(ACLMessage.PROPOSE);
+			responseMSG.setSender(this.getAID());
+			responseMSG.setContent(page.toString());
+			responseMSG.addReceiver(orchestratorAgentAID);
+			this.send(responseMSG);
+		}
 	}
 
+	
 	public Set<AID> getSearcherAgentsAID() {
 		return searchersAID;
 	}
@@ -114,9 +117,8 @@ public class AggregatorAgent extends Agent {
 	}
 
 	public boolean hasSearcherWithThisPropertyValue(String value) {
-		java.util.Iterator<String> it = searchersPropertyValues.iterator();
-		while (it.hasNext()) {
-			if (it.next().equals(value)) {
+		for (String propertyValue : searchersPropertyValues) {
+			if (propertyValue.equals(value)) {
 				return true;
 			}
 		}
@@ -133,15 +135,18 @@ public class AggregatorAgent extends Agent {
 
 	public void sendMsgFromQueueToSearchers() {
 		ACLMessage newMSG = queueOfSearchersMSGs.removeFirst();
-		java.util.Iterator<AID> it = searchersAID.iterator();
-		while (it.hasNext()) {
-			newMSG.addReceiver(it.next());
+		for (AID searcherAID : searchersAID) {
+			newMSG.addReceiver(searcherAID);
 		}
 		this.send(newMSG);
 	}
 
-	public void addArticle(Article cur) {
+	private void addArticle(Article cur) {
 		derivedArticles.add(cur);
+	}
+
+	public void cleanDerivedArticles() {
+		derivedArticles.clear();
 	}
 
 }

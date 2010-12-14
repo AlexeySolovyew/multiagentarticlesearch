@@ -67,7 +67,6 @@ public class OrchestratorAgent extends Agent {
 	public void sendArticle(Article page,AID receiver,int perf) {
 		ACLMessage responseMSG = new ACLMessage(perf);
 		responseMSG.setSender(this.getAID());
-		//page.setRank(page.getRank());
 		responseMSG.setContent(page.toString());
 		responseMSG.addReceiver(receiver);
 		this.send(responseMSG);
