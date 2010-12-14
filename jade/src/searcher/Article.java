@@ -142,8 +142,16 @@ public class Article {
 	}
 
 	public boolean equals(Article cur) {
-		return this.getAuthor().equals(cur.getAuthor())
-				&& this.getTitle().equals(cur.getTitle());
+		if (this.getAuthor().equals(cur.getAuthor())
+				&& this.getTitle().equals(cur.getTitle())) {
+			if (this.getAuthor().equals(author)
+					&& this.getTitle().equals(title)) {
+				return this.getURL().equals(cur.getURL());
+			} else {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void addRank(String searcherName, int rank) {
