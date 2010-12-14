@@ -75,11 +75,9 @@ public class UserAgentFrame extends JFrame implements HyperlinkListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
-				weAreInResults = true;
+				
 				outputField.setText(resultString);
-				outputField.setBackground(Color.white);
-				outputField.setForeground(Color.white);
-
+				weAreInResults = true;
 			}
 
 		});
@@ -177,10 +175,10 @@ public class UserAgentFrame extends JFrame implements HyperlinkListener {
 			}
 			agent.hasNewMessages = false;
 			outputField.setText(resultString);
-		} else {
+		} /*else {
 			System.out
 					.println("Извините, тут какая-то страничка открыта, хуле обновлять :\n");
-		}
+		}*/
 
 	}
 
