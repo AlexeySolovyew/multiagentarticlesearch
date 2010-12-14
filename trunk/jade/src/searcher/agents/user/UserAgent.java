@@ -31,6 +31,8 @@ import jade.wrapper.StaleProxyException;
 public class UserAgent extends Agent {
 
 	private List<Article> resultPages;
+	
+	public boolean hasNewMessages;
 
 	public static final int INIT = ACLMessage.PROXY;
 
@@ -101,6 +103,7 @@ public class UserAgent extends Agent {
 	protected void setup() {
 		super.setup();
 		resultPages = new ArrayList<Article>();
+		hasNewMessages=false;
 		initRelatedAgents();
 		addBehaviour(new UserCyclicBehaviour(this));
 		addBehaviour(new RefreshFrameBehaviour(new UserAgentFrame(this)));
@@ -127,6 +130,7 @@ public class UserAgent extends Agent {
 
 	public void addPageToList(Article a) {
 		
+		hasNewMessages=true;
 		if (resultPages != null) {
 			int size=resultPages.size();
 			if (size == 0){
@@ -135,7 +139,7 @@ public class UserAgent extends Agent {
 			else {
 				int place = a.getRank();
 				int i = 0;
-				for (; i<size && resultPages.get(i).getRank() <= place; i++)
+				for (; i<size && resultPages.get(i).getRank() >= place; i++)
 					;
 				resultPages.add(i, a);
 			}

@@ -43,10 +43,9 @@ public class UserDataBaseAgent extends Agent {
 
 	protected void setup() {
 		super.setup();
-		System.out.println("Вот щас бы файлики создать");
+		System.out.println("DataBaseAgent: Вот щас бы файлики создать");
 		farticles=initFile("articles.xml");
 		fauthors=initFile("authors.xml");
-		System.out.println("И где блять ваши файлики?!?");
 		addBehaviour(new UserDataBaseAgentCyclicBehaviour(this));
 	}
 
@@ -78,11 +77,11 @@ public class UserDataBaseAgent extends Agent {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("New file " + s
+			System.out.println("DataBaseAgent: New file " + s
 					+ " has been created to the current directory");
 
 		}
-		System.out.println("такой файл блять уже есть: "+f.getAbsolutePath());
+		System.out.println("DataBaseAgent: такой файл уже есть: "+f.getAbsolutePath());
 		try {
 			// Create filewriter
 			FileWriter fstream = new FileWriter(f);

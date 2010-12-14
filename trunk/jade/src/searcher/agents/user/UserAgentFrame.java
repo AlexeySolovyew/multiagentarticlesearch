@@ -145,7 +145,7 @@ public class UserAgentFrame extends JFrame implements HyperlinkListener {
 	}
 
 	public void showPages() throws InterruptedException {
-		if (weAreInResults) {
+		if (weAreInResults && agent.hasNewMessages) {
 			List<Article> resultPages = agent.getPages();
 			resultString = "";
 			for (int i = 0; i < resultPages.size(); i++) {
@@ -160,6 +160,7 @@ public class UserAgentFrame extends JFrame implements HyperlinkListener {
 						+ "</TABLE><BR>";
 
 			}
+			agent.hasNewMessages=false;
 			outputField.setText(resultString);
 		}
 		else{
