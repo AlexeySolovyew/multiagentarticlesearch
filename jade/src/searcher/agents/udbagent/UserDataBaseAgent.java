@@ -77,7 +77,7 @@ public class UserDataBaseAgent extends Agent {
 			System.out.println("DataBaseAgent: New file " + s
 					+ " has been created to the current directory");
 
-		}
+		
 		System.out.println("DataBaseAgent: такой файл уже есть: "
 				+ f.getAbsolutePath());
 		try {
@@ -96,6 +96,7 @@ public class UserDataBaseAgent extends Agent {
 			out.close();
 		} catch (Exception e) {// Catch exception if any
 			System.err.println("Error: " + e.getMessage());
+		}
 		}
 		
 		return f;
@@ -135,8 +136,6 @@ public class UserDataBaseAgent extends Agent {
 				if (nl.item(i).getTextContent().equals(a.getURL())) {
 					System.out
 							.println("UserDataBase: this article already exists");
-					System.out
-					.println("UserDataBase: his parent is "+nl.item(i).getParentNode().getNodeName());
 					Node rankNode = nl.item(i).getParentNode().getChildNodes()
 							.item(1);
 					System.out
@@ -260,6 +259,95 @@ public class UserDataBaseAgent extends Agent {
 
 	}
 
+	public Article updateRank(Article a){
+		Document document = null;
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder;
+		try {
+			builder = factory.newDocumentBuilder();
+			document = builder.parse(farticles);
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		Element root = document.getDocumentElement();
+		NodeList nl = root.getElementsByTagName("ID");
+		if (nl.getLength() == 0) {
+			System.out
+					.println("UserDataBase: sorry, my friend, no articles in my database yet");
+			return a;
+
+		} else {
+			int i = 0;
+			for (; i < nl.getLength(); i++) {
+				if (nl.item(i).getTextContent().equals(a.getURL())) {
+
+					Node rankNode = nl.item(i).getParentNode().getChildNodes()
+							.item(1);
+					System.out
+						.println("UserDataBase: found it's rank, sending you updated article");
+						a.addUserRank((new Integer(rankNode
+								.getTextContent())).intValue());
+						break;
+				}
+			}
+			if (i==nl.getLength()){
+				System.out.println("UserDataBase: sorry, my friend, this article doesn't exist");
+			}
+		}
+
+		try {
+			builder = factory.newDocumentBuilder();
+			document = builder.parse(fauthors);
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		root = document.getDocumentElement();
+		nl = root.getElementsByTagName("NAME");
+		if (nl.getLength() == 0) {
+			System.out
+					.println("UserDataBase: sorry, my friend, no authors in my database yet");
+			return a;
+			
+		} else {
+			int i = 0;
+			for (; i < nl.getLength(); i++) {
+				if (nl.item(i).getTextContent().equals(a.getAuthor())) {
+					System.out
+							.println("UserDataBase: found author's rank, updating atricle");
+					Node rankNode = nl.item(i).getParentNode().getChildNodes()
+							.item(1);
+					a.addUserRank((new Integer(rankNode
+								.getTextContent())).intValue());
+					return a;
+				}
+			}
+			if (i==nl.getLength()){
+				System.out.println("UserDataBase: sorry, my friend, author of this article doesn't exist");
+				return a;
+			}
+		}
+
+		return null;
+		
+	}
+	
+	
 	private Element createNode(Document document, String s1, String s2, String content) {
 		Element art = document.createElement(s1);
 		Element elem;

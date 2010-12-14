@@ -46,12 +46,8 @@ public class UserAgent extends Agent {
 	private void initRelatedAgents() {
 		PlatformController container = getContainerController();
 		try {
-			// searchers = new HashSet<AID>();
 			createOrchestratorAgent(container);
 			createUserDataBaseAgent(container);
-			// createDummySA1(container);
-			// createDummySA2(container);
-			// createGoogleSA(container);
 			sendInitMSGs();
 		} catch (Exception e) {
 			System.err.println("Exception while adding agents: " + e);
