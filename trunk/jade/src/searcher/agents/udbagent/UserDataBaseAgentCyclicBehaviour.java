@@ -66,9 +66,12 @@ public class UserDataBaseAgentCyclicBehaviour extends CyclicBehaviour {
 				.MatchPerformative(ACLMessage.REQUEST));
 		if (msgRequest != null) {
 			if (agent.getOrchestratorAID().equals(msgRequest.getSender())) {
+				
+				// туточки мы обращаемс€ к базе данных ƒЅагента
+				Article a= new Article(msgRequest.getContent());
 				ACLMessage responseMSG = new ACLMessage(ACLMessage.INFORM);
 				responseMSG.setSender(agent.getAID());
-				responseMSG.setContent(msgRequest.getContent());
+				responseMSG.setContent(agent.updateRank(a).toString());
 				responseMSG.addReceiver(agent.getOrchestratorAID());
 				agent.send(responseMSG);
 				System.out
