@@ -130,7 +130,7 @@ public class Article {
 		this.url = id;
 		this.urlPDF = idPDF;
 		this.title = deleteIllegalSymbolsForXML(title);
-		//this.summary = deleteIllegalSymbolsForXML(summary);
+		this.summary = deleteIllegalSymbolsForXML(summary);
 		this.author = deleteIllegalSymbolsForXML(author);
 		this.publishedDate = deleteIllegalSymbolsForXML(publishedDate);
 		this.updatedDate = deleteIllegalSymbolsForXML(updatedDate);
