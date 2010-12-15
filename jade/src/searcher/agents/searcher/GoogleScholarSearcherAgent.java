@@ -76,24 +76,28 @@ public class GoogleScholarSearcherAgent extends SearcherAgent {
 			curIndex = fileContent.indexOf("</span>", startIndexOfAuthors);
 			String authors = fileContent.substring(startIndexOfAuthors+SUBSTRING_FOR_AUTHORS_AND_SUMMARY.length(), curIndex);
 			
-			int startIndexOfSummary = curIndex+2;
+			int startIndexOfSummary = curIndex+7;
 			curIndex =  fileContent.indexOf("<span", startIndexOfSummary);
 			String summary = fileContent.substring(startIndexOfSummary, curIndex);
 			
 			if(fileContent.substring(saveCurIndex, curIndex).contains(SUBSTRING_FOR_ARTICLE)){
 				curIndex = saveCurIndex;
+				
 				authors = "no author: Exception: this article possibly has error";
 				summary = "no summary: Exception: this article possibly has error";
+			}else{
+				/*
+				System.out.println(testIndex + ") "  + " title = " + title);
+				System.out.println("  url = "+ url );
+				System.out.println("  authors = " + authors);
+				System.out.println("  summury = " + summary);
+				*/
+				//System.out.println("_____________________" + curIndexArticle + "_________________________");
+				System.out.println("______________________________________" + summary);
+				Article	article = new Article(url,"noPDF",title,summary,authors,"unknown","unknown");
+				article.addSearcherSenderAndRank(this.getName(), getCurRankArticle(curIndexArticle));
+				this.sendArticle(article);
 			}
-			/*
-			System.out.println(testIndex + ") "  + " title = " + title);
-			System.out.println("  url = "+ url );
-			System.out.println("  authors = " + authors);
-			System.out.println("  summury = " + summary);
-			*/
-			Article	article = new Article(url,"noPDF",title,summary,authors,"unknown","unknown");
-			article.addSearcherSenderAndRank(this.getName(), getCurRankArticle(curIndexArticle));
-			this.sendArticle(article);
 			
 			startIndexArticle = curIndex;
 			startIndexArticle = fileContent.indexOf(SUBSTRING_FOR_ARTICLE,
