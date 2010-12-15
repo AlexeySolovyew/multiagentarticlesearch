@@ -2,6 +2,7 @@ package searcher.agents.orchestrator;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 import java.util.StringTokenizer;
 
@@ -29,7 +30,8 @@ public class OrchestratorAgent extends Agent {
 	public static final String INIT_USER = "INIT_USER";
 	private AID userAgentAID;
 	private AID userDataBaseAgentAID;
-	private AID aggregatorAgentAID;
+	private AID currentAggregatorAgentAID;
+	private List<AID> aggregatorAgentsAID = new LinkedList<AID>();
 	private LinkedList<ACLMessage> queueOfAggregatorsMSGs = new LinkedList<ACLMessage>();
 
 	public OrchestratorAgent() {
@@ -47,7 +49,7 @@ public class OrchestratorAgent extends Agent {
 	}
 
 	public AID getAggregatorAgentAID() {
-		return aggregatorAgentAID;
+		return currentAggregatorAgentAID;
 	}
 
 	public void addMsgToQueueOfAggregatorsMSGs(ACLMessage msg) {
@@ -64,7 +66,7 @@ public class OrchestratorAgent extends Agent {
 		this.send(newMSG);
 	}
 
-	public void sendArticle(Article page,AID receiver,int perf) {
+	public void sendArticle(Article page, AID receiver, int perf) {
 		ACLMessage responseMSG = new ACLMessage(perf);
 		responseMSG.setSender(this.getAID());
 		responseMSG.setContent(page.toString());
@@ -80,8 +82,8 @@ public class OrchestratorAgent extends Agent {
 		addBehaviour(new OrchestratorOneShotBehavior(this));
 	}
 
-	public void setAggregatorAgentAID(AID aggregatorAgentAID) {
-		this.aggregatorAgentAID = aggregatorAgentAID;
+	public void addAggregatorAgentAID(AID aggregatorAgentAID) {
+		aggregatorAgentsAID.add(aggregatorAgentAID);
 	}
 
 	public void setUserDataBaseAgentAID(AID aid) {
@@ -90,6 +92,16 @@ public class OrchestratorAgent extends Agent {
 
 	public AID getUserDataBaseAgentAID() {
 		return userDataBaseAgentAID;
+	}
+
+	public void setCurrentAggregator() {
+		Random random = new Random();
+		currentAggregatorAgentAID = aggregatorAgentsAID.get(Math.abs(random.nextInt()
+				% aggregatorAgentsAID.size()));
+	}
+
+	public void cleanAggregatorsAID() {
+		aggregatorAgentsAID.clear();
 	}
 
 }
