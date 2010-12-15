@@ -78,32 +78,37 @@ public class Article {
 			e.printStackTrace();
 		} catch (SAXException e) {
 			// TODO Auto-generated catch block
+			System.out.println("______PALEVO_____IN_ARTICLE:");
 			System.out.println(articleAsString);
-			e.printStackTrace();
+			//e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Element root = document.getDocumentElement();
-
-		this.title = root.getElementsByTagName(TITLE).item(0).getTextContent();
-		// this.rank = new Integer(root.getElementsByTagName(RANK).item(0)
-		// .getTextContent());
-		this.url = root.getElementsByTagName(URL).item(0).getTextContent();
-		this.author = root.getElementsByTagName(AUTHOR).item(0)
-				.getTextContent();
-		this.urlPDF = root.getElementsByTagName(URL_PDF).item(0)
-				.getTextContent();
-		this.summary = root.getElementsByTagName(SUMMARY).item(0)
-				.getTextContent();
-		this.publishedDate = root.getElementsByTagName(PUBLISHED_DATE).item(0)
-				.getTextContent();
-		this.updatedDate = root.getElementsByTagName(UPDATED_DATE).item(0)
-				.getTextContent();
-		this.user_rank = new Integer(root.getElementsByTagName(USER_RANK)
-				.item(0).getTextContent());
-
-		extractSearchersNames(root);
+		if(document!=null){
+			Element root = document.getDocumentElement();
+	
+			this.title = root.getElementsByTagName(TITLE).item(0).getTextContent();
+			// this.rank = new Integer(root.getElementsByTagName(RANK).item(0)
+			// .getTextContent());
+			this.url = root.getElementsByTagName(URL).item(0).getTextContent();
+			this.author = root.getElementsByTagName(AUTHOR).item(0)
+					.getTextContent();
+			this.urlPDF = root.getElementsByTagName(URL_PDF).item(0)
+					.getTextContent();
+			this.summary = root.getElementsByTagName(SUMMARY).item(0)
+					.getTextContent();
+			this.publishedDate = root.getElementsByTagName(PUBLISHED_DATE).item(0)
+					.getTextContent();
+			this.updatedDate = root.getElementsByTagName(UPDATED_DATE).item(0)
+					.getTextContent();
+			this.user_rank = new Integer(root.getElementsByTagName(USER_RANK)
+					.item(0).getTextContent());
+	
+			extractSearchersNames(root);
+		}else{
+			System.out.println("___________PALEVO_________");
+		}
 
 	}
 
@@ -122,8 +127,8 @@ public class Article {
 
 	public Article(String id, String idPDF, String title, String summary,
 			String author, String publishedDate, String updatedDate) {
-		this.url = deleteIllegalSymbolsForXML(id);
-		this.urlPDF = deleteIllegalSymbolsForXML(idPDF);
+		this.url = id;
+		this.urlPDF = idPDF;
 		this.title = deleteIllegalSymbolsForXML(title);
 		this.summary = deleteIllegalSymbolsForXML(summary);
 		this.author = deleteIllegalSymbolsForXML(author);
@@ -133,11 +138,21 @@ public class Article {
 	}
 
 	private String deleteIllegalSymbolsForXML(String st) {
-		for (int i = 0; i < st.length(); i++) {
-			if (st.charAt(i) == '<' || st.charAt(i) == '>' || st.charAt(i)=='&') {
-				st = st.substring(0, i) + st.substring(i + 1);
+		int startIndex = st.indexOf('<', 0);
+		int curIndex = 0;
+		while (startIndex != -1) {
+			int finishIndex = st.indexOf('>', startIndex);
+			if (finishIndex != -1) {
+				String subst = st.substring(startIndex, finishIndex + 1);
+				st = st.replaceAll(subst, "");
+				curIndex = finishIndex - subst.length();
+				startIndex = st.indexOf('<', curIndex);
+			}else{
+				st = st.replaceAll("<", " ");
+				startIndex = -1;
 			}
 		}
+		st = st.replace('&', ' ');
 		return st;
 	}
 
@@ -203,8 +218,8 @@ public class Article {
 		String searchersNamesInfo = getSearchersNamesInfo();
 		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" 
 		+ "<article>" 
-		+"<" + TITLE + ">" + title + "</" + TITLE + ">" 
 		+ "<" + URL + ">"+ url + "</" + URL + ">" 
+		+"<" + TITLE + ">" + title + "</" + TITLE + ">" 
 		+ "<" + AUTHOR + ">" + author + "</"+ AUTHOR + ">" 
 		+ "<" + URL_PDF + ">" + urlPDF + "</" + URL_PDF+ ">" 
 		+ "<" + SUMMARY + ">" + summary + "</" + SUMMARY + ">"

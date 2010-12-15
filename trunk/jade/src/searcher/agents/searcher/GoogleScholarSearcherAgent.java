@@ -93,7 +93,7 @@ public class GoogleScholarSearcherAgent extends SearcherAgent {
 				System.out.println("  summury = " + summary);
 				*/
 				//System.out.println("_____________________" + curIndexArticle + "_________________________");
-				System.out.println("______________________________________" + summary);
+				//System.out.println("______________________________________" + summary);
 				Article	article = new Article(url,"noPDF",title,summary,authors,"unknown","unknown");
 				article.addSearcherSenderAndRank(this.getName(), getCurRankArticle(curIndexArticle));
 				this.sendArticle(article);

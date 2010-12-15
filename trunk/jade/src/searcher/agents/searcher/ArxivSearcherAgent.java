@@ -64,11 +64,11 @@ public class ArxivSearcherAgent extends SearcherAgent {
 	public void searchAndSendResults(ACLMessage msg) {
 		String query = msg.getContent();
 		for (int numberStart = 0; numberStart < MAX_AMOUNT_OF_RESULTS_ON_ONE_REQUEST; numberStart += AMOUNT_OF_RESULTS_ON_EACH_REQUEST) {
-			System.out.println("NUMBER_START = " + numberStart);
+			//System.out.println("NUMBER_START = " + numberStart);
 			Document document = request(query,numberStart );
 			Element root = document.getDocumentElement();
 			NodeList nodeListEntry = root.getElementsByTagName("entry");
-			System.out.println("кол-ыо результатов за раз = " + nodeListEntry.getLength());
+			//System.out.println("кол-ыо результатов за раз = " + nodeListEntry.getLength());
 			for (int i = 0; i < nodeListEntry.getLength(); i++) {
 				assert i < AMOUNT_OF_RESULTS_ON_EACH_REQUEST;
 				Node entryNode = nodeListEntry.item(i);
