@@ -80,24 +80,21 @@ public class GoogleScholarSearcherAgent extends SearcherAgent {
 			curIndex =  fileContent.indexOf("<span", startIndexOfSummary);
 			String summary = fileContent.substring(startIndexOfSummary, curIndex);
 			
-			if(fileContent.substring(saveCurIndex, curIndex).contains(SUBSTRING_FOR_ARTICLE)){
-				curIndex = saveCurIndex;
-				
-				authors = "no author: Exception: this article possibly has error";
-				summary = "no summary: Exception: this article possibly has error";
+			if(curIndex!=-1 && saveCurIndex < curIndex){
+				if(fileContent.substring(saveCurIndex, curIndex).contains(SUBSTRING_FOR_ARTICLE)){
+					curIndex = saveCurIndex;
+					
+					authors = "no author: Exception: this article possibly has error";
+					summary = "no summary: Exception: this article possibly has error";
+				}else{
+					Article	article = new Article(url,"noPDF",title,summary,authors,"unknown","unknown");
+					article.addSearcherSenderAndRank(this.getName(), getCurRankArticle(curIndexArticle));
+					this.sendArticle(article);
+				}
 			}else{
-				/*
-				System.out.println(testIndex + ") "  + " title = " + title);
-				System.out.println("  url = "+ url );
-				System.out.println("  authors = " + authors);
-				System.out.println("  summury = " + summary);
-				*/
-				//System.out.println("_____________________" + curIndexArticle + "_________________________");
-				//System.out.println("______________________________________" + summary);
-				Article	article = new Article(url,"noPDF",title,summary,authors,"unknown","unknown");
-				article.addSearcherSenderAndRank(this.getName(), getCurRankArticle(curIndexArticle));
-				this.sendArticle(article);
+				return;
 			}
+				
 			
 			startIndexArticle = curIndex;
 			startIndexArticle = fileContent.indexOf(SUBSTRING_FOR_ARTICLE,
@@ -166,10 +163,6 @@ public class GoogleScholarSearcherAgent extends SearcherAgent {
 	 * @return
 	 */
 	private static boolean endDatas(byte[] buf, int r) {
-		/*
-		 * if (buf[r - 3] == 10 && buf[r - 2] == 13 && buf[r - 1] == 10) {
-		 * return true; }
-		 */
 		String bufSt = new String(buf, 0, r);
 		if (bufSt.indexOf("</html>") != -1) {
 			return true;
