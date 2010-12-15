@@ -24,14 +24,18 @@ public class BootStrAgent extends Agent {
 	private int amountOfUsers = 1;
 
 	public BootStrAgent() {
+		/*
 		dbsNumber2AgentClassName.put(1,
 				"searcher.agents.searcher.DummySearcherAgent1");
 		dbsNumber2AgentClassName.put(2,
 				"searcher.agents.searcher.DummySearcherAgent2");
-		dbsNumber2AgentClassName.put(3,
+		*/
+		dbsNumber2AgentClassName.put(1,
 				"searcher.agents.searcher.GoogleSearcherAgent");
-		dbsNumber2AgentClassName.put(4,
+		dbsNumber2AgentClassName.put(2,
 		"searcher.agents.searcher.ArxivSearcherAgent");
+		dbsNumber2AgentClassName.put(3,
+		"searcher.agents.searcher.GoogleScholarSearcherAgent");
 
 	}
 
