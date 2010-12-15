@@ -60,8 +60,9 @@ public class AggregatorOneShotBehavior extends OneShotBehaviour {
 								Property pt = (Property) propertyIt.next();
 								if (pt.getName().equals("source")
 										&& (pt.getValue().equals("Arxiv") || pt
-												//.getValue().equals("Google")|| pt
-												.getValue().equals("GoogleScholar"))
+										// .getValue().equals("Google")|| pt
+												.getValue().equals(
+														"GoogleScholar"))
 										&& !agent
 												.hasSearcherWithThisPropertyValue((String) pt
 														.getValue())) {
@@ -73,6 +74,7 @@ public class AggregatorOneShotBehavior extends OneShotBehaviour {
 						}
 					}
 				}
+				agent.sendMsgFromQueueToSearchers();
 			} else {
 				System.out.println("Agent " + agent.getLocalName()
 						+ " did not find any \"search-articles\" service");
@@ -80,7 +82,6 @@ public class AggregatorOneShotBehavior extends OneShotBehaviour {
 		} catch (FIPAException fe) {
 			fe.printStackTrace();
 		}
-		agent.sendMsgFromQueueToSearchers();
 	}
 
 }

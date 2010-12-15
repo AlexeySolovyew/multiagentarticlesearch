@@ -30,8 +30,8 @@ public class OrchestratorOneShotBehavior extends OneShotBehaviour {
 			template.addServices(templateSd);
 
 			SearchConstraints sc = new SearchConstraints();
-			// We want to receive only 1 result
-			sc.setMaxResults(new Long(1));
+			// We want to receive only 2 results
+			sc.setMaxResults(new Long(2));
 
 			DFAgentDescription[] results = DFService.search(agent, template, sc);
 			if (results.length > 0) {
@@ -50,11 +50,12 @@ public class OrchestratorOneShotBehavior extends OneShotBehaviour {
 							System.out.println("- Service \"" + sd.getName()
 									+ "\" provided by agent "
 									+ provider.getName());
-							agent.setAggregatorAgentAID(provider);
-							agent.sendMsgFromQueueToAggregator();
+							agent.addAggregatorAgentAID(provider);
 						}
 					}
 				}
+				agent.setCurrentAggregator();
+				agent.sendMsgFromQueueToAggregator();
 			} else {
 				System.out.println("Agent " + agent.getLocalName()
 						+ " did not find any \"aggregate-articles\" service");

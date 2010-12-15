@@ -149,4 +149,8 @@ public class AggregatorAgent extends Agent {
 		derivedArticles.clear();
 	}
 
+	public void cleanSearchersAID() {
+		searchersAID.clear();
+	}
+
 }

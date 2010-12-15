@@ -27,8 +27,8 @@ public class AggregatorCyclicBehaviour extends CyclicBehaviour {
 		if (msgRequest != null) {
 			agent.setOrchestratorAgentAID(msgRequest.getSender());
 			agent.cleanDerivedArticles();
+			//agent.cleanSearchersAID();
 			agent.addMsgToQueueOfSearchersMSGs(msgRequest);
-			Set<AID> searcherAIDS = agent.getSearcherAgentsAID();
 			agent.findAndLoadSearchers();
 			System.out.println("AggregatorAgent receives msgSearch = "
 					+ msgRequest.getContent());
