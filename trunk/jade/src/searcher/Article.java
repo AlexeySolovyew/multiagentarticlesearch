@@ -134,7 +134,7 @@ public class Article {
 
 	private String deleteIllegalSymbolsForXML(String st) {
 		for (int i = 0; i < st.length(); i++) {
-			if (st.charAt(i) == '<' || st.charAt(i) == '>') {
+			if (st.charAt(i) == '<' || st.charAt(i) == '>' || st.charAt(i)=='&') {
 				st = st.substring(0, i) + st.substring(i + 1);
 			}
 		}
@@ -201,15 +201,18 @@ public class Article {
 
 	public String toString() {
 		String searchersNamesInfo = getSearchersNamesInfo();
-		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + "<article>" + "<"
-				+ TITLE + ">" + title + "</" + TITLE + ">" + "<" + URL + ">"
-				+ url + "</" + URL + ">" + "<" + AUTHOR + ">" + author + "</"
-				+ AUTHOR + ">" + "<" + URL_PDF + ">" + urlPDF + "</" + URL_PDF
-				+ ">" + "<" + SUMMARY + ">" + summary + "</" + SUMMARY + ">"
-				+ "<" + PUBLISHED_DATE + ">" + publishedDate + "</"
-				+ PUBLISHED_DATE + ">" + "<" + UPDATED_DATE + ">" + updatedDate
-				+ "</" + UPDATED_DATE + ">" + "<" + USER_RANK + ">" + user_rank
-				+ "</" + USER_RANK + ">" + searchersNamesInfo + "</article>";
+		return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" 
+		+ "<article>" 
+		+"<" + TITLE + ">" + title + "</" + TITLE + ">" 
+		+ "<" + URL + ">"+ url + "</" + URL + ">" 
+		+ "<" + AUTHOR + ">" + author + "</"+ AUTHOR + ">" 
+		+ "<" + URL_PDF + ">" + urlPDF + "</" + URL_PDF+ ">" 
+		+ "<" + SUMMARY + ">" + summary + "</" + SUMMARY + ">"
+		+ "<" + PUBLISHED_DATE + ">" + publishedDate + "</"+ PUBLISHED_DATE + ">" 
+		+ "<" + UPDATED_DATE + ">" + updatedDate+ "</" + UPDATED_DATE + ">" 
+		+ "<" + USER_RANK + ">" + user_rank+ "</" + USER_RANK + ">" 
+		+ searchersNamesInfo 
+		+ "</article>";
 	}
 
 	private String getSearchersNamesInfo() {

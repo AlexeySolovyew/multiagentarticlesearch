@@ -59,8 +59,9 @@ public class AggregatorOneShotBehavior extends OneShotBehaviour {
 							while (propertyIt.hasNext()) {
 								Property pt = (Property) propertyIt.next();
 								if (pt.getName().equals("source")
-										&& (pt.getValue().equals("Google") || pt
-												.getValue().equals("Arxiv"))
+										&& (pt.getValue().equals("Arxiv") || pt
+												//.getValue().equals("Google")|| pt
+												.getValue().equals("GoogleScholar"))
 										&& !agent
 												.hasSearcherWithThisPropertyValue((String) pt
 														.getValue())) {
