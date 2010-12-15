@@ -18,9 +18,9 @@ public class BootStrAgent extends Agent {
 
 
 	private BootStrAgentFrame itsFrame;
-	private int amountOfAggregators = 2;
 	private Map<Integer, String> dbsNumber2AgentClassName = new HashMap<Integer, String>();
-	private int amountOfSearchersForEachDBS = 1; // DBS - DataBase of Searcher
+	private int amountOfAggregators = 2;
+	private int amountOfSearchersForEachDBS = 2; // DBS - DataBase of Searcher
 	private int amountOfUsers = 1;
 
 	public BootStrAgent() {
@@ -29,12 +29,12 @@ public class BootStrAgent extends Agent {
 				"searcher.agents.searcher.DummySearcherAgent1");
 		dbsNumber2AgentClassName.put(2,
 				"searcher.agents.searcher.DummySearcherAgent2");
-		*/
 		dbsNumber2AgentClassName.put(1,
 				"searcher.agents.searcher.GoogleSearcherAgent");
-		dbsNumber2AgentClassName.put(2,
+		 */
+		dbsNumber2AgentClassName.put(1,
 		"searcher.agents.searcher.ArxivSearcherAgent");
-		dbsNumber2AgentClassName.put(3,
+		dbsNumber2AgentClassName.put(2,
 		"searcher.agents.searcher.GoogleScholarSearcherAgent");
 
 	}
