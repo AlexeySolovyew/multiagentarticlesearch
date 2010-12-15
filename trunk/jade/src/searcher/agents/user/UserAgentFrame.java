@@ -151,7 +151,7 @@ public class UserAgentFrame extends JFrame implements HyperlinkListener {
 						+ "<TR><TD WIDTH=200><B>Title</B></TD><TD>"
 						+ curr.getTitle()
 						+ "</TD></TR>"
-						+ "<TR COLOR=RED><TD WIDTH=200><B>Author</B></TD><TD>"
+						+ "<TR COLOR=GREEN><TD WIDTH=200><B>Author</B></TD><TD>"
 						+ curr.getAuthor()
 						+ "</TD></TR>"
 						+ "<TR><TD WIDTH=200><B>URL</B></TD><TD><A HREF="
@@ -159,7 +159,7 @@ public class UserAgentFrame extends JFrame implements HyperlinkListener {
 						+ ">"
 						+ curr.getURL()
 						+ "</A></TD></TR>"
-						+ "<TR COLOR=RED><TD WIDTH=200><B>PDF</B></TD><TD><A HREF="
+						+ "<TR COLOR=GREEN><TD WIDTH=200><B>PDF</B></TD><TD><A HREF="
 						+ curr.getURLPDF()
 						+ ">"
 						+ curr.getURLPDF()
@@ -167,14 +167,14 @@ public class UserAgentFrame extends JFrame implements HyperlinkListener {
 						+ "<TR><TD WIDTH=200><B>Summary</B></TD><TD>"
 						+ curr.getSummary()
 						+ "</TD></TR>"
-						+ "<TR COLOR=RED><TD WIDTH=200><B>Published date</B></TD><TD>"
+						+ "<TR COLOR=GREEN><TD WIDTH=200><B>Published date</B></TD><TD>"
 						+ curr.getDate()
 						+ "</TD></TR>" +
 						"<TR><TD WIDTH=200><B>Updated date</B></TD><TD>"
 						+ curr.getUpdDate()
 						+ "</TD></TR>" +
 						"</TD></TR>" +
-						"<TR COLOR=RED><TD WIDTH=200><B>Updated date</B></TD><TD>"
+						"<TR COLOR=GREEN><TD WIDTH=200><B>Searcher-hero</B></TD><TD>"
 						+ curr.getSearchers()
 						+ "</TD></TR>"
 						+ "<TR><TD WIDTH=200><B>Total rank</B></TD><TD>"
