@@ -183,6 +183,10 @@ public class Article {
 		return publishedDate;
 	}
 
+	public String getUpdDate(){
+		return updatedDate;
+	}
+	
 	public String getURL() {
 		return url;
 	}
@@ -197,6 +201,10 @@ public class Article {
 
 	public String getSummary() {
 		return summary;
+	}
+	
+	public Set<String> getSearchers(){
+		return searchersSenders2Rank.keySet();
 	}
 
 	public int getRank() {
