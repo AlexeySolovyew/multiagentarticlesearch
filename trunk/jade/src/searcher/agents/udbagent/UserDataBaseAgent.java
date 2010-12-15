@@ -77,34 +77,32 @@ public class UserDataBaseAgent extends Agent {
 			System.out.println("DataBaseAgent: New file " + s
 					+ " has been created to the current directory");
 
-		
-		System.out.println("DataBaseAgent: такой файл уже есть: "
-				+ f.getAbsolutePath());
-		try {
-			// Create filewriter
-			FileWriter fstream = new FileWriter(f);
-			BufferedWriter out = new BufferedWriter(fstream);
+			System.out.println("DataBaseAgent: такой файл уже есть: "
+					+ f.getAbsolutePath());
+			try {
+				// Create filewriter
+				FileWriter fstream = new FileWriter(f);
+				BufferedWriter out = new BufferedWriter(fstream);
 
-			out.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+				out.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 
-			out.newLine();
-			out.write("<"+type+">");
-			out.newLine();
-			out.write("</"+type+">");
+				out.newLine();
+				out.write("<" + type + ">");
+				out.newLine();
+				out.write("</" + type + ">");
 
-			// Close the output stream
-			out.close();
-		} catch (Exception e) {// Catch exception if any
-			System.err.println("Error: " + e.getMessage());
+				// Close the output stream
+				out.close();
+			} catch (Exception e) {// Catch exception if any
+				System.err.println("Error: " + e.getMessage());
+			}
 		}
-		}
-		
+
 		return f;
 	}
 
 	public void addRatings(Article a) throws DOMException, IOException {
 
-		
 		Document document = null;
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder;
@@ -139,15 +137,17 @@ public class UserDataBaseAgent extends Agent {
 					Node rankNode = nl.item(i).getParentNode().getChildNodes()
 							.item(1);
 					System.out
-						.println("UserDataBase: adding rank to existing article");
-						rankNode.setTextContent(((new Integer(rankNode
-								.getTextContent())).intValue() + 10) + "");
-				break;
+							.println("UserDataBase: adding rank to existing article");
+					rankNode.setTextContent(((new Integer(rankNode
+							.getTextContent())).intValue() + 10) + "");
+					break;
 				}
 			}
-			if (i==nl.getLength()){
-				System.out.println("UserDataBase: this article doesn't exist, adding new node");
-				root.appendChild(createNode(document, "ARTICLE", "ID", a.getURL()));
+			if (i == nl.getLength()) {
+				System.out
+						.println("UserDataBase: this article doesn't exist, adding new node");
+				root.appendChild(createNode(document, "ARTICLE", "ID",
+						a.getURL()));
 			}
 		}
 
@@ -181,9 +181,9 @@ public class UserDataBaseAgent extends Agent {
 				x = te.getException();
 			x.printStackTrace();
 		}
-		
+
 		// а тут авторы
-		
+
 		try {
 			builder = factory.newDocumentBuilder();
 			document = builder.parse(fauthors);
@@ -200,30 +200,35 @@ public class UserDataBaseAgent extends Agent {
 
 		root = document.getDocumentElement();
 		nl = root.getElementsByTagName("NAME");
-		if (nl.getLength() == 0) {
-			System.out
-					.println("UserDataBase: adding new author to stats, there are no authors in the file yet");
-			root.appendChild(createNode(document, "AUTHOR","NAME",a.getAuthor() ));
+		if (!a.getAuthor().equals("no author")) {
+			if (nl.getLength() == 0) {
+				System.out
+						.println("UserDataBase: adding new author to stats, there are no authors in the file yet");
+				root.appendChild(createNode(document, "AUTHOR", "NAME",
+						a.getAuthor()));
 
-		} else {
-			int i = 0;
-			for (; i < nl.getLength(); i++) {
-				if (nl.item(i).getTextContent().equals(a.getAuthor())) {
-					System.out
-							.println("UserDataBase: this author already exists");
-					Node rankNode = nl.item(i).getParentNode().getChildNodes()
-							.item(1);
-					System.out
-						.println("UserDataBase: adding rank to existing author");
+			} else {
+				int i = 0;
+				for (; i < nl.getLength(); i++) {
+					if (nl.item(i).getTextContent().equals(a.getAuthor())) {
+						System.out
+								.println("UserDataBase: this author already exists");
+						Node rankNode = nl.item(i).getParentNode()
+								.getChildNodes().item(1);
+						System.out
+								.println("UserDataBase: adding rank to existing author");
 						rankNode.setTextContent(((new Integer(rankNode
 								.getTextContent())).intValue() + 10) + "");
-					 
-					break;
+
+						break;
+					}
 				}
-			}
-			if (i==nl.getLength()){
-				System.out.println("UserDataBase: this author doesn't exist, adding new node");
-				root.appendChild(createNode(document, "AUTHOR","NAME",a.getAuthor() ));
+				if (i == nl.getLength()) {
+					System.out
+							.println("UserDataBase: this author doesn't exist, adding new node");
+					root.appendChild(createNode(document, "AUTHOR", "NAME",
+							a.getAuthor()));
+				}
 			}
 		}
 
@@ -259,7 +264,7 @@ public class UserDataBaseAgent extends Agent {
 
 	}
 
-	public Article updateRank(Article a){
+	public Article updateRank(Article a) {
 		Document document = null;
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder;
@@ -292,14 +297,15 @@ public class UserDataBaseAgent extends Agent {
 					Node rankNode = nl.item(i).getParentNode().getChildNodes()
 							.item(1);
 					System.out
-						.println("UserDataBase: found it's rank, sending you updated article");
-						a.addUserRank((new Integer(rankNode
-								.getTextContent())).intValue());
-						break;
+							.println("UserDataBase: found it's rank, sending you updated article");
+					a.addUserRank((new Integer(rankNode.getTextContent()))
+							.intValue());
+					break;
 				}
 			}
-			if (i==nl.getLength()){
-				System.out.println("UserDataBase: sorry, my friend, this article doesn't exist");
+			if (i == nl.getLength()) {
+				System.out
+						.println("UserDataBase: sorry, my friend, this article doesn't exist");
 			}
 		}
 
@@ -323,7 +329,7 @@ public class UserDataBaseAgent extends Agent {
 			System.out
 					.println("UserDataBase: sorry, my friend, no authors in my database yet");
 			return a;
-			
+
 		} else {
 			int i = 0;
 			for (; i < nl.getLength(); i++) {
@@ -332,23 +338,24 @@ public class UserDataBaseAgent extends Agent {
 							.println("UserDataBase: found author's rank, updating atricle");
 					Node rankNode = nl.item(i).getParentNode().getChildNodes()
 							.item(1);
-					a.addUserRank((new Integer(rankNode
-								.getTextContent())).intValue());
+					a.addUserRank((new Integer(rankNode.getTextContent()))
+							.intValue());
 					return a;
 				}
 			}
-			if (i==nl.getLength()){
-				System.out.println("UserDataBase: sorry, my friend, author of this article doesn't exist");
+			if (i == nl.getLength()) {
+				System.out
+						.println("UserDataBase: sorry, my friend, author of this article doesn't exist");
 				return a;
 			}
 		}
 
 		return null;
-		
+
 	}
-	
-	
-	private Element createNode(Document document, String s1, String s2, String content) {
+
+	private Element createNode(Document document, String s1, String s2,
+			String content) {
 		Element art = document.createElement(s1);
 		Element elem;
 		Text elem_value;
