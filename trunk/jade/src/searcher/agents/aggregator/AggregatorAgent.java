@@ -1,8 +1,11 @@
 package searcher.agents.aggregator;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -23,12 +26,12 @@ import jade.domain.FIPAAgentManagement.SearchConstraints;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
 import jade.proto.SubscriptionInitiator;
-import jade.util.leap.ArrayList;
 import jade.util.leap.Iterator;
 
 public class AggregatorAgent extends Agent {
 	private AID orchestratorAgentAID;
-	private Set<AID> searchersAID = new HashSet<AID>();
+	private Set<AID> currentSearchersAID = new HashSet<AID>();
+	private HashMap<String, List<AID>> searchersProperty2AID = new HashMap<String, List<AID>>();
 	private LinkedList<ACLMessage> queueOfSearchersMSGs = new LinkedList<ACLMessage>();
 	private Set<String> pages = new HashSet<String>();
 	private Set<String> searchersPropertyValues = new HashSet<String>();
@@ -84,12 +87,12 @@ public class AggregatorAgent extends Agent {
 		for (Article curArticle : derivedArticles) {
 			if (curArticle.equals(page)) {
 				old = true;
-				page = curArticle.merge(page);
-				derivedArticles.remove(curArticle);
+				curArticle = curArticle.merge(page);
+				break;
 			}
 		}
-		addArticle(page);
 		if (!old) {
+			addArticle(page);
 			ACLMessage responseMSG = new ACLMessage(ACLMessage.PROPOSE);
 			responseMSG.setSender(this.getAID());
 			responseMSG.setContent(page.toString());
@@ -98,9 +101,8 @@ public class AggregatorAgent extends Agent {
 		}
 	}
 
-	
 	public Set<AID> getSearcherAgentsAID() {
-		return searchersAID;
+		return currentSearchersAID;
 	}
 
 	public void setOrchestratorAgentAID(AID sender) {
@@ -116,7 +118,7 @@ public class AggregatorAgent extends Agent {
 
 	}
 
-	public boolean hasSearcherWithThisPropertyValue(String value) {
+	private boolean hasSearcherWithThisPropertyValue(String value) {
 		for (String propertyValue : searchersPropertyValues) {
 			if (propertyValue.equals(value)) {
 				return true;
@@ -129,13 +131,13 @@ public class AggregatorAgent extends Agent {
 		searchersPropertyValues.add(value);
 	}
 
-	public void addSearcherAgentAID(AID provider) {
-		searchersAID.add(provider);
+	private void addSearcherAgentAID(AID provider) {
+		currentSearchersAID.add(provider);
 	}
 
 	public void sendMsgFromQueueToSearchers() {
 		ACLMessage newMSG = queueOfSearchersMSGs.removeFirst();
-		for (AID searcherAID : searchersAID) {
+		for (AID searcherAID : currentSearchersAID) {
 			newMSG.addReceiver(searcherAID);
 		}
 		this.send(newMSG);
@@ -150,7 +152,30 @@ public class AggregatorAgent extends Agent {
 	}
 
 	public void cleanSearchersAID() {
-		searchersAID.clear();
+		currentSearchersAID.clear();
+	}
+
+	public void addSearcherAgentAIDWithProperty(String name, AID provider) {
+
+		List<AID> listAIDs = searchersProperty2AID.get(name);
+		if (listAIDs == null) {
+			listAIDs = new ArrayList<AID>();
+			listAIDs.add(provider);
+			searchersProperty2AID.put(name, listAIDs);
+		} else {
+			listAIDs.add(provider);
+		}
+	}
+
+	public void setCurrentSearchers() {
+		for (String curPropertyName : searchersProperty2AID.keySet()) {
+			if (hasSearcherWithThisPropertyValue(curPropertyName)) {
+				List<AID> curAIDs = searchersProperty2AID.get(curPropertyName);
+				Random random = new Random();
+				addSearcherAgentAID(curAIDs.get(Math.abs(random.nextInt()
+						% curAIDs.size())));
+			}
+		}
 	}
 
 }
