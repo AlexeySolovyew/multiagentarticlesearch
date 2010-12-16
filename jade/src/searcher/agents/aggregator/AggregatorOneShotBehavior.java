@@ -59,21 +59,19 @@ public class AggregatorOneShotBehavior extends OneShotBehaviour {
 							while (propertyIt.hasNext()) {
 								Property pt = (Property) propertyIt.next();
 								if (pt.getName().equals("source")
-										&& (pt.getValue().equals("Arxiv") || pt
-										// .getValue().equals("Google")|| pt
-												.getValue().equals(
-														"GoogleScholar"))
-										&& !agent
-												.hasSearcherWithThisPropertyValue((String) pt
-														.getValue())) {
+										&& (pt.getValue().equals("Arxiv") || 
+										// pt.getValue().equals("Google")|| 
+												pt.getValue().equals(
+														"GoogleScholar"))) {
 									agent.addSearcherPropertyValue((String) pt
 											.getValue());
-									agent.addSearcherAgentAID(provider);
+									agent.addSearcherAgentAIDWithProperty((String)pt.getValue(),provider);
 								}
 							}
 						}
 					}
 				}
+				agent.setCurrentSearchers();
 				agent.sendMsgFromQueueToSearchers();
 			} else {
 				System.out.println("Agent " + agent.getLocalName()
