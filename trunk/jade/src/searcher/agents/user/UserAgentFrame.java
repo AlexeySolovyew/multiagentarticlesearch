@@ -182,10 +182,7 @@ public class UserAgentFrame extends JFrame implements HyperlinkListener {
 			}
 			agent.hasNewMessages = false;
 			outputField.setText(resultString);
-		} /*else {
-			System.out
-					.println("Извините, тут какая-то страничка открыта, хуле обновлять :\n");
-		}*/
+		} 
 
 	}
 
