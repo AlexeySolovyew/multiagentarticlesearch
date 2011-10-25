@@ -17,8 +17,13 @@
      move_uploaded_file($_FILES["filename"]["tmp_name"], "../files/".$_FILES["filename"]["name"]);
    } else {
       echo("Ошибка загрузки файла");
-   }		
+   }
+//$line = system("ghc -e \"take 10 lst\" \"../files/$_FILES["filename"]["name"]\",$result);
+//echo $line;
+//echo "<br>";
+//echo $result;
+header('Location: http://simuni.ru/index.php?result=true');
+	
 ?>
-<a href="index.php?filepath=../files/<? echo $_FILES["filename"]["name"]; ?>">На главную</a>
 </body>
 </html>
