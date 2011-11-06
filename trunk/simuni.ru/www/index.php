@@ -3,8 +3,15 @@
 <title>Functional Programming</title>
 </head>
 <body>
+<?
+mysql_connect("localhost","root","solovyev");
+mysql_select_db("simuni");
+?>
 <h2><p><b> Форма для загрузки файлов </b></p></h2>
       <form action="index.php" method="post" enctype="multipart/form-data">
+	  Номер задачи, которую вы заливаете:
+	  <input name="tasknum"><br>
+	  Файл с задачей: <br>
       <input type="file" name="filename"><br> 
       <input type="submit" value="Загрузить и начать тестирование"><br>
       </form>
@@ -22,16 +29,36 @@
    {
      // Если файл загружен успешно, перемещаем его
      // из временной директории в конечную
-     move_uploaded_file($_FILES["filename"]["tmp_name"], "../files/".$_FILES["filename"]["name"]);
-$line = system("ghc -e \"take 10 lst\" ../files/".$_FILES["filename"]["name"],$result);
-echo $line;
-echo "<br>";
-echo $result;
+	 $filedir = "../files/".$_FILES["filename"]["name"];
+     move_uploaded_file($_FILES["filename"]["tmp_name"], $filedir);
+	 if ($_POST['tasknum'] != null){
+	 //пытаемся прогнать все тесты
+	 echo "Загружаем тестовую базу...<br>";
+$tasktests = mysql_query("SELECT * FROM Test WHERE TaskNum=".$_POST['tasknum']);
+$q = mysql_num_rows($tasktests);
+echo "Всего загружено тестов: ".$q."<br>";
+for ($i=0; $i<$q; $i++){
+	$row = mysql_fetch_array($tasktests);
+	echo "Прогоняется тест номер: ".$i."<br>";
+	//$line = exec("ghc -e \"".$row[Expression]."\" ".$filedir,$line,$result);
+	$line = exec("ghc -e \"".$row[Expression]."\" ".$filedir,$array,$result);
+	if ($result != 0) {
+		echo "Не удалось вычислить необходимое выражение, проверьте правильность синтаксиса";
+		break;
+	}
+	echo "Результат сравнения строк ".$line." и ".$row[Result].": ".strcmp ($line, $row[Result])."<br>";
+	if (strcmp($line, $row[Result]) != 0){
+	  echo "Тесты зафейлились на выражении: ".$row[Expression];
+	  break;
+	}
+}
+if ($i==$q) echo "Тесты успешно пройдены!";
+}
    } else {
       echo("Файл не загружен");
    }
-
-	
 ?>
-
+<br>
+<a href="testsall.php">Все тесты</a> <br>
+<a href="add_test.php">Добавить тест</a>
 </body></html>
