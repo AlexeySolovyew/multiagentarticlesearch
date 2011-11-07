@@ -7,7 +7,7 @@
 mysql_connect("localhost","root","solovyev");
 mysql_select_db("simuni");
 ?>
-<h2><p><b> Форма для загрузки файлов </b></p></h2>
+<h2><p><b> Форма для загрузки файлов с задачами </b></p></h2>
       <form action="index.php" method="post" enctype="multipart/form-data">
 	  Номер задачи, которую вы заливаете:
 	  <input name="tasknum"><br>
@@ -25,13 +25,13 @@ mysql_select_db("simuni");
      exit;
    }
    // Проверяем загружен ли файл
-   if(is_uploaded_file($_FILES["filename"]["tmp_name"]))
+   if (is_uploaded_file($_FILES["filename"]["tmp_name"]) && $_POST['tasknum'] != null)
    {
      // Если файл загружен успешно, перемещаем его
      // из временной директории в конечную
 	 $filedir = "../files/".$_FILES["filename"]["name"];
      move_uploaded_file($_FILES["filename"]["tmp_name"], $filedir);
-	 if ($_POST['tasknum'] != null){
+	 $real_file_path = realpath($filedir);
 	 //пытаемся прогнать все тесты
 	 echo "Загружаем тестовую базу...<br>";
 $tasktests = mysql_query("SELECT * FROM Test WHERE TaskNum=".$_POST['tasknum']);
@@ -41,9 +41,10 @@ for ($i=0; $i<$q; $i++){
 	$row = mysql_fetch_array($tasktests);
 	echo "Прогоняется тест номер: ".$i."<br>";
 	//$line = exec("ghc -e \"".$row[Expression]."\" ".$filedir,$line,$result);
-	$line = exec("ghc -e \"".$row[Expression]."\" ".$filedir,$array,$result);
+	//echo "ghc -e \"".$row[Expression]."\" ".$real_file_path;
+	$line = exec("ghc -e \"".$row[Expression]."\" ".$real_file_path,$array,$result);
 	if ($result != 0) {
-		echo "Не удалось вычислить необходимое выражение, проверьте правильность синтаксиса";
+		echo "Не удалось вычислить выражение \"".$row[Expression]."\", проверьте правильность синтаксиса";
 		break;
 	}
 	echo "Результат сравнения строк ".$line." и ".$row[Result].": ".strcmp ($line, $row[Result])."<br>";
@@ -53,9 +54,8 @@ for ($i=0; $i<$q; $i++){
 	}
 }
 if ($i==$q) echo "Тесты успешно пройдены!";
-}
    } else {
-      echo("Файл не загружен");
+      echo("Пожалуйста, заполните все поля");
    }
 ?>
 <br>
