@@ -41,8 +41,9 @@ for ($i=0; $i<$q; $i++){
 	$row = mysql_fetch_array($tasktests);
 	echo "Прогоняется тест номер: ".$i."<br>";
 	//$line = exec("ghc -e \"".$row[Expression]."\" ".$filedir,$line,$result);
-	//echo "ghc -e \"".$row[Expression]."\" ".$real_file_path;
+	echo "ghc -e \"".$row[Expression]."\" ".$real_file_path;
 	$line = exec("ghc -e \"".$row[Expression]."\" ".$real_file_path,$array,$result);
+	echo $result;
 	if ($result != 0) {
 		echo "Не удалось вычислить выражение \"".$row[Expression]."\", проверьте правильность синтаксиса";
 		break;
