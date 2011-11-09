@@ -13,6 +13,9 @@ sumhol' sum _ = sum
 kantor n = [(i,j)|i<-[1..n-1],let j = n-i] ++ kantor (n+1)
 --сам список пар чисел:
 lst = kantor 2                                                            
+--
+f n = f (n+1)
+
 
                            
 
