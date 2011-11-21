@@ -1,0 +1,1 @@
+ALTER TABLE  `Test` ADD  `Smart` INT NOT NULL DEFAULT  '0'

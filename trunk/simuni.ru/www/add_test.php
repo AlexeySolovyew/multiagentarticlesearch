@@ -11,6 +11,8 @@
 	  <input name="expr"><br> 
 	  Ожидаемое значение:
 	  <input name="val"><br>
+	  Хитрый тест:
+	  <input name="smart" type="checkbox"><br>
       <input type="submit" value="Добавить тест"><br>
 </form> 
 </html>

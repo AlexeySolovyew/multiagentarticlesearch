@@ -7,8 +7,12 @@
 mysql_connect("localhost","root","solovyev");
 mysql_select_db("simuni");
 if ($_POST['tasknum']!=null){
-
-	mysql_query("INSERT INTO Test (Expression,Result,TaskNum) VALUES (\"".$_POST['expr']."\",\"".$_POST['val']."\",\"".$_POST['tasknum']."\")");
+	$smart=0;
+	if (strcmp($_POST['smart'],"on") == 0) {$smart=1;}
+	echo "INSERT INTO Test (Expression,Result,TaskNum,Smart) VALUES (\"".$_POST['expr']."\",\"".$_POST['val']."\",\"".$_POST['tasknum']."\",\""
+	.$smart."\")";
+	mysql_query("INSERT INTO Test (Expression,Result,TaskNum,Smart) VALUES (\"".$_POST['expr']."\",\"".$_POST['val']."\",\"".$_POST['tasknum']."\",\""
+	.$smart."\")");
 	echo "<div color=\"green\">Тест успешно добавлен.</div><br>";
 }
 ?>
@@ -26,13 +30,16 @@ if ($_POST['tasknum']!=null){
 <td>
 <b>Ожидаемое значение</b>
 </td>
+<td>
+<b>Хитрый</b>
+</td>
 </tr>
 <?
 $tests = mysql_query("SELECT * FROM Test");
 $q = mysql_num_rows($tests);
 for ( $i=0; $i<$q; $i++){
 	$row = mysql_fetch_array($tests);
-	echo "<tr><td>".$row[TaskNum]."</td><td>".$row[Expression]."</td><td>".$row[Result]."</td></tr>";
+	echo "<tr><td>".$row[TaskNum]."</td><td>".$row[Expression]."</td><td>".$row[Result]."</td><td>".$row[Smart]."</td></tr>";
 }
 ?>
 </table>
