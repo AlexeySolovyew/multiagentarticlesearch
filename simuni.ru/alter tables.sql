@@ -1,1 +1,5 @@
 ALTER TABLE  `Test` ADD  `Smart` INT NOT NULL DEFAULT  '0'
+
+ALTER TABLE  `Test` ADD  `TestForTaskID` INT NOT NULL
+
+ALTER TABLE  `Task` ADD  `HometaskID` INT NOT NULL

@@ -9,10 +9,10 @@ mysql_select_db("simuni");
 if ($_POST['tasknum']!=null){
 	$smart=0;
 	if (strcmp($_POST['smart'],"on") == 0) {$smart=1;}
-	echo "INSERT INTO Test (Expression,Result,TaskNum,Smart) VALUES (\"".$_POST['expr']."\",\"".$_POST['val']."\",\"".$_POST['tasknum']."\",\""
-	.$smart."\")";
-	mysql_query("INSERT INTO Test (Expression,Result,TaskNum,Smart) VALUES (\"".$_POST['expr']."\",\"".$_POST['val']."\",\"".$_POST['tasknum']."\",\""
-	.$smart."\")");
+	echo "INSERT INTO Test (Expression,Result,TaskID,Smart,TestForTaskID) VALUES (\"".$_POST['expr']."\",\"".$_POST['val']."\",\"".$_POST['tasknum']."\",\""
+	.$smart."\",\"".$_POST['testfortask']."\")";
+	mysql_query("INSERT INTO Test (Expression,Result,TaskID,Smart,TestForTaskID) VALUES (\"".$_POST['expr']."\",\"".$_POST['val']."\",\"".$_POST['tasknum']."\",\""
+	.$smart."\",\"".$_POST['testfortask']."\")");
 	echo "<div color=\"green\">Тест успешно добавлен.</div><br>";
 }
 ?>
