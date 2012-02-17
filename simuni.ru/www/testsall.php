@@ -39,7 +39,7 @@ $tests = mysql_query("SELECT * FROM Test");
 $q = mysql_num_rows($tests);
 for ( $i=0; $i<$q; $i++){
 	$row = mysql_fetch_array($tests);
-	echo "<tr><td>".$row[TaskNum]."</td><td>".$row[Expression]."</td><td>".$row[Result]."</td><td>".$row[Smart]."</td></tr>";
+	echo "<tr><td>".$row[TaskID]."</td><td>".$row[Expression]."</td><td>".$row[Result]."</td><td>".$row[Smart]."</td></tr>";
 }
 ?>
 </table>

@@ -24,9 +24,22 @@ mysql_select_db("simuni");
 	 $filedir = "../files/".$_FILES["filename"]["name"];
      move_uploaded_file($_FILES["filename"]["tmp_name"], $filedir);
 	 $real_file_path = realpath($filedir);
+	 } else if ($_POST['code']!=null){
+	 //если текстом, то пытаемся создать файл
+	   $filedir = "../files/filetask".$_POST['tasknum'].".hs";
+	   if(!file_exists($filedir)){
+            $fp=fopen($filedir,"w");
+            fclose($fp);
+           }   
+	   $real_file_path = realpath($filedir);
+	   file_put_contents($real_file_path, $_POST['code'] );
+	   //далее отладочная печать
+	   //echo $_POST['code'];
+	   //echo $real_file_path;
+	 }
 	 //пытаемся прогнать все тесты
 	 echo "Загружаем тестовую базу...<br>";
-$tasktests = mysql_query("SELECT * FROM Test WHERE TaskNum=".$_POST['tasknum']);
+$tasktests = mysql_query("SELECT * FROM Test WHERE TaskID=".$_POST['tasknum']);
 $q = mysql_num_rows($tasktests);
 echo "Всего загружено тестов: ".$q."<br>";
 for ($i=0; $i<$q; $i++){
@@ -51,9 +64,6 @@ for ($i=0; $i<$q; $i++){
 	}
 }
 if ($i==$q) echo "<br/>Тесты успешно пройдены!"; else echo "<br/>Попробуйте снова!";
-   } else {
-      echo("Пожалуйста, заполните все поля");
-   }
 ?>
 </body>
 </html>
