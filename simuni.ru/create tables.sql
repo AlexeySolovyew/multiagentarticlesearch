@@ -35,3 +35,38 @@ CREATE TABLE IF NOT EXISTS `Hometask` (
   PRIMARY KEY (`HometaskID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+---User---
+
+CREATE TABLE  `simuni`.`User` (
+`UserID` INT NOT NULL ,
+`Name` VARCHAR( 30 ) NOT NULL ,
+`Surname` VARCHAR( 30 ) NOT NULL ,
+`RoleID` INT NOT NULL ,
+`GroupNumber` INT NULL
+) ENGINE = MYISAM ;
+
+CREATE TABLE  `simuni`.`Solution` (
+`SolutionID` INT NOT NULL ,
+`TaskID` INT NOT NULL ,
+`UserID` INT NOT NULL ,
+`LoadTimestamp` INT NOT NULL ,
+`Result` INT NOT NULL
+) ENGINE = MYISAM ;
+
+CREATE TABLE  `simuni`.`Role` (
+`RoleID` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`RoleName` VARCHAR( 30 ) NOT NULL
+) ENGINE = MYISAM ;
+
+CREATE TABLE  `simuni`.`GeneralInfo` (
+`GeneralInfoID` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`Name` VARCHAR( 30 ) NOT NULL ,
+`Value` VARCHAR( 30 ) NOT NULL
+) ENGINE = MYISAM ;
+
+CREATE TABLE  `simuni`.`Result` (
+`ResultID` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`Text` VARCHAR( 30 ) NOT NULL
+) ENGINE = MYISAM ;
+
+
