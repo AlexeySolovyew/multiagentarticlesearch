@@ -1,4 +1,4 @@
-<? session_start(); ?>
+<?php session_start(); ?>
 <html>
 <head>
     <title>Functional Programming</title>
@@ -15,7 +15,7 @@
 <!--<a href="index.php">Вы студент?</a><br>
 <a href="prepod.php">Вы преподаватель?</a>
 -->
-<?
+<?php
 function redirectToStartPage($row)
 {
     if ($row['RoleID'] == 1) {
