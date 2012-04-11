@@ -1,4 +1,4 @@
-<?phpsession_start();
+<?php session_start();
 if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожалуйста, авторизуйтесь <a href=\"../index.php\">здесь</a>");?>
 <?php
@@ -34,7 +34,7 @@ if ($row[RoleID]!=2) die("Студенту нельзя лезть к матер
     $maxnum = mysql_query("SELECT MAX(HometaskID) AS Num FROM Hometask");
     $row = mysql_fetch_array($maxnum);
     ?>
-    <input type="hidden" name="maxnum" value="<?phpecho $row['Num']?>">
+    <input type="hidden" name="maxnum" value="<?php echo $row['Num']?>">
     Дедлайн:
     <input name="dead"> (ГГГГ-ММ-ДД)<br>
     <input type="submit" value="Добавить д.з."><br>

@@ -1,4 +1,4 @@
-<?phpsession_start();
+<?php session_start();
 if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожалуйста, авторизуйтесь <a href=\"index.php\">здесь</a>");
 
@@ -28,12 +28,12 @@ mysql_select_db("simuni");
         //подсветка комментариев
         echo preg_replace("/---.*\n/","<font color=\"red\">\\0</font>",$text);
         ?></pre><br>
-    <p>Результат: <?php$hts = mysql_query("SELECT * FROM Result WHERE ResultID=".$row['ResultID']);
+    <p>Результат: <?php $hts = mysql_query("SELECT * FROM Result WHERE ResultID=".$row['ResultID']);
         $resultname = mysql_fetch_assoc($hts);
         echo $resultname['Text'];
         ?>
         <br>
-     <p>Результат тестирования:<?phpecho $row[TestResult];?><br/>
+     <p>Результат тестирования:<?php echo $row[TestResult];?><br/>
 
 <a href="succ.php">Назад</a>
 

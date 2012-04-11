@@ -1,4 +1,4 @@
-<?phpsession_start();
+<?php session_start();
 if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожалуйста, авторизуйтесь <a href=\"../index.php\">здесь</a>");?>
 <?php
@@ -37,10 +37,10 @@ if ($row[RoleID]!=2) die("Студенту нельзя лезть к матер
     ?>
     <br>
     Тема:<br>
-    <input name="topic" value="<?phpecho $currrow['Topic']?>"><br>
+    <input name="topic" value="<?php echo $currrow['Topic']?>"><br>
     Крайний срок сдачи:<br>
-    <input name="dead" value="<?phpecho $currrow['Deadline']?>"><br>
-    <input type="hidden" name="hometaskid" value="<?phpecho $_POST['hometaskid']?>">
+    <input name="dead" value="<?php echo $currrow['Deadline']?>"><br>
+    <input type="hidden" name="hometaskid" value="<?php echo $_POST['hometaskid']?>">
     <input type="submit" value="Принять изменения"><br>
 </form>
 </html>

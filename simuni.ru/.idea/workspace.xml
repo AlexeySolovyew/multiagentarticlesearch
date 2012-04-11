@@ -62,7 +62,7 @@
       <file leaf-file-name="add_test.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/prepod/add_test.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="34" selection-start="1864" selection-end="1864" vertical-scroll-proportion="0.0">
+            <state line="48" column="34" selection-start="1865" selection-end="1865" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -71,7 +71,7 @@
       <file leaf-file-name="edit_task.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/prepod/edit_task.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="24" selection-start="1813" selection-end="1813" vertical-scroll-proportion="0.0">
+            <state line="50" column="24" selection-start="1814" selection-end="1814" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -80,7 +80,7 @@
       <file leaf-file-name="check_solution.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/prepod/check_solution.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="32" selection-start="1539" selection-end="1539" vertical-scroll-proportion="0.0">
+            <state line="36" column="32" selection-start="1540" selection-end="1540" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -89,7 +89,7 @@
       <file leaf-file-name="succ.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/student/succ.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="24" selection-start="1647" selection-end="1647" vertical-scroll-proportion="0.0">
+            <state line="48" column="24" selection-start="1648" selection-end="1648" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -98,7 +98,7 @@
       <file leaf-file-name="watch_solution.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/student/watch_solution.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="65" selection-start="1177" selection-end="1177" vertical-scroll-proportion="0.0">
+            <state line="35" column="66" selection-start="1180" selection-end="1180" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -107,7 +107,7 @@
       <file leaf-file-name="index.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/student/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="35" selection-start="445" selection-end="445" vertical-scroll-proportion="0.0">
+            <state line="12" column="36" selection-start="447" selection-end="447" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -116,7 +116,7 @@
       <file leaf-file-name="login.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/login.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="13" selection-start="435" selection-end="435" vertical-scroll-proportion="0.0">
+            <state line="20" column="13" selection-start="432" selection-end="432" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -125,7 +125,7 @@
       <file leaf-file-name="index.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="23" selection-start="1049" selection-end="1049" vertical-scroll-proportion="0.33969465">
+            <state line="2" column="14" selection-start="40" selection-end="40" vertical-scroll-proportion="0.0648855">
               <folding />
             </state>
           </provider>
@@ -143,7 +143,7 @@
       <file leaf-file-name="load.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/student/load.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="35" selection-start="1199" selection-end="1199" vertical-scroll-proportion="0.0">
+            <state line="32" column="35" selection-start="1200" selection-end="1200" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -439,49 +439,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/prepod/add_test.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="34" selection-start="1864" selection-end="1864" vertical-scroll-proportion="0.0">
+        <state line="48" column="34" selection-start="1865" selection-end="1865" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/prepod/edit_task.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="24" selection-start="1813" selection-end="1813" vertical-scroll-proportion="0.0">
+        <state line="50" column="24" selection-start="1814" selection-end="1814" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/prepod/check_solution.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="32" selection-start="1539" selection-end="1539" vertical-scroll-proportion="0.0">
+        <state line="36" column="32" selection-start="1540" selection-end="1540" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/student/succ.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="24" selection-start="1647" selection-end="1647" vertical-scroll-proportion="0.0">
+        <state line="48" column="24" selection-start="1648" selection-end="1648" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/student/watch_solution.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="65" selection-start="1177" selection-end="1177" vertical-scroll-proportion="0.0">
+        <state line="35" column="66" selection-start="1180" selection-end="1180" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/student/load.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="35" selection-start="1199" selection-end="1199" vertical-scroll-proportion="0.0">
+        <state line="32" column="35" selection-start="1200" selection-end="1200" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/login.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="13" selection-start="435" selection-end="435" vertical-scroll-proportion="0.0">
+        <state line="20" column="13" selection-start="432" selection-end="432" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -495,14 +495,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/student/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="35" selection-start="445" selection-end="445" vertical-scroll-proportion="0.0">
+        <state line="12" column="36" selection-start="447" selection-end="447" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="23" selection-start="1049" selection-end="1049" vertical-scroll-proportion="0.33969465">
+        <state line="2" column="14" selection-start="40" selection-end="40" vertical-scroll-proportion="0.0648855">
           <folding />
         </state>
       </provider>
