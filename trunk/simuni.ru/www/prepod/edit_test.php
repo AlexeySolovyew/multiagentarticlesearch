@@ -1,4 +1,4 @@
-<?phpsession_start();
+<?php session_start();
 if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожалуйста, авторизуйтесь <a href=\"../index.php\">здесь</a>");?>
 <?php
@@ -48,12 +48,12 @@ if ($row[RoleID]!=2) die("Студенту нельзя лезть к матер
     </select>
         <br>
         Выражение:<br>
-        <input name="expr" value="<?phpecho $currrow['Expression']?>"><br>
+        <input name="expr" value="<?php echo $currrow['Expression']?>"><br>
         Ожидаемое значение:<br>
-        <input name="val" value="<?phpecho $currrow['Result']?>"><br>
+        <input name="val" value="<?php echo $currrow['Result']?>"><br>
         Хитрый?:<br>
-        <input name="smart" type="checkbox" <?phpif ($currrow['Smart'] == 1) echo "checked"?>><br>
-        <input type="hidden" name="testid" value="<?phpecho $_POST['testid']?>">
+        <input name="smart" type="checkbox" <?php if ($currrow['Smart'] == 1) echo "checked"?>><br>
+        <input type="hidden" name="testid" value="<?php echo $_POST['testid']?>">
 
         <input type="submit" value="Принять изменения"><br>
 </form>

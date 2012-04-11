@@ -1,4 +1,4 @@
-<?phpsession_start();
+<?php session_start();
 if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожалуйста, авторизуйтесь <a href=\"../index.php\">здесь</a>");?>
 <?php
@@ -48,12 +48,12 @@ if ($row[RoleID]!=2) die("Студенту нельзя лезть к матер
     ?>
     <br>
     Номер задачи в д.з.:<br>
-    <input name="taskforhometask" value="<?phpecho $currrow['TaskForHometask']?>"><br>
+    <input name="taskforhometask" value="<?php echo $currrow['TaskForHometask']?>"><br>
     Условие:<br>
-    <textarea cols="50" rows="10" name="condition"><?phpecho $currrow['Condition']?></textarea><br>
-    <input type="hidden" name="taskid" value="<?phpecho $_POST['taskid']?>">
+    <textarea cols="50" rows="10" name="condition"><?php echo $currrow['Condition']?></textarea><br>
+    <input type="hidden" name="taskid" value="<?php echo $_POST['taskid']?>">
     Цена:<br>
-    <input name="price" value="<?phpecho $currrow['Price']?>"><br/>
+    <input name="price" value="<?php echo $currrow['Price']?>"><br/>
     <input type="submit" value="Принять изменения"><br>
 </form>
 </html>
