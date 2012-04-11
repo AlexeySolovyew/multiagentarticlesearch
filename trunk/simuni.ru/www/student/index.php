@@ -1,4 +1,4 @@
-<?session_start();
+<?phpsession_start();
 if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожалуйста, авторизуйтесь <a href=\"../index.php\">здесь</a>");
 mysql_connect("localhost", "root", "Phoenix");
@@ -10,7 +10,7 @@ mysql_select_db("simuni");
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
-<h1>Здравствуйте, <? echo $_SESSION['user_id']; ?>! </h1><br>
+<h1>Здравствуйте, <?php echo $_SESSION['user_id']; ?>! </h1><br>
 <a href="load.php">Загрузить решение</a> <br>
 <a href="succ.php">Все загруженные решения</a> <br>
 <a href="index.php?exit=true">Выйти</a>
@@ -43,7 +43,7 @@ mysql_select_db("simuni");
         </td>
 
     </tr>
-    <?
+    <?php
     $query = "SELECT DISTINCT * FROM Task JOIN Hometask USING (HometaskID) WHERE HometaskID<=ALL
     (SELECT `Value` FROM GeneralInfo WHERE `Name`='CurrentHometaskID')";
     //обрабатываем фильтр

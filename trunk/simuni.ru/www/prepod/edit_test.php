@@ -1,4 +1,4 @@
-<?session_start();
+<?phpsession_start();
 if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожалуйста, авторизуйтесь <a href=\"../index.php\">здесь</a>");?>
 <?php
@@ -17,7 +17,7 @@ isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожа
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
-<?
+<?php
 mysql_connect("localhost", "root", "Phoenix");
 mysql_select_db("simuni");
 $queryyuser = "SELECT RoleID FROM `User` WHERE UserID='".$_SESSION['user_id']."'";
@@ -32,7 +32,7 @@ if ($row[RoleID]!=2) die("Студенту нельзя лезть к матер
     Номер задачи:<br>
 
     <p><select size="1" name="taskid">
-        <?
+        <?php
         $test = mysql_query("SELECT * from Test WHERE TestID=" . $_POST['testid']);
         $currrow = mysql_fetch_array($test);
         $tasks = mysql_query("SELECT TaskID,HometaskID,TaskForHometask FROM Task");
@@ -48,12 +48,12 @@ if ($row[RoleID]!=2) die("Студенту нельзя лезть к матер
     </select>
         <br>
         Выражение:<br>
-        <input name="expr" value="<?echo $currrow['Expression']?>"><br>
+        <input name="expr" value="<?phpecho $currrow['Expression']?>"><br>
         Ожидаемое значение:<br>
-        <input name="val" value="<?echo $currrow['Result']?>"><br>
+        <input name="val" value="<?phpecho $currrow['Result']?>"><br>
         Хитрый?:<br>
-        <input name="smart" type="checkbox" <?if ($currrow['Smart'] == 1) echo "checked"?>><br>
-        <input type="hidden" name="testid" value="<?echo $_POST['testid']?>">
+        <input name="smart" type="checkbox" <?phpif ($currrow['Smart'] == 1) echo "checked"?>><br>
+        <input type="hidden" name="testid" value="<?phpecho $_POST['testid']?>">
 
         <input type="submit" value="Принять изменения"><br>
 </form>

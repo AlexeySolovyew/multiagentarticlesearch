@@ -1,9 +1,9 @@
-<?session_start();
+<?phpsession_start();
 if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожалуйста, авторизуйтесь <a href=\"../index.php\">здесь</a>");
 ?>
 <html>
-<?
+<?php
 mysql_connect("localhost", "root", "Phoenix");
 mysql_select_db("simuni");
 $queryyuser = "SELECT RoleID FROM `User` WHERE UserID='".$_SESSION['user_id']."'";
@@ -19,7 +19,7 @@ if ($row['RoleID']!=2) die("Студенту нельзя лезть к мате
 <h2>Текущее домашнее задание:</h2><br>
 Студенту показаны задачи из д.з. только до текущего включительно.
 <br/>
-<?
+<?php
 if (isset($_POST['hometaskid'])){
     if (mysql_query("UPDATE GeneralInfo SET Value=".$_POST['hometaskid']." WHERE `Name`='CurrentHometaskID'")) {
         echo "Текущее д.з. успешно изменено.<br>";
@@ -36,7 +36,7 @@ echo "<b>" . $currhometask['HometaskID'] . " - " . $currhometask['Topic'] . "</b
 <form action="index.php" method="POST">
     <p><select size="1" name="hometaskid">
         <option selected disabled>Выберите домашнее задание</option>
-        <?
+        <?php
         $hts = mysql_query("SELECT HometaskID,Topic FROM Hometask");
         $q = mysql_num_rows($hts);
         for ($i = 0; $i < $q; $i++) {
@@ -57,7 +57,7 @@ echo "<b>" . $currhometask['HometaskID'] . " - " . $currhometask['Topic'] . "</b
 <br>
 <form action="index.php" method="POST">
     <p><select size="1" name="resultid">
-        <?
+        <?php
         $hts = mysql_query("SELECT * FROM Result");
         $q = mysql_num_rows($hts);
         for ($i = 0; $i < $q; $i++) {
@@ -104,7 +104,7 @@ echo "<b>" . $currhometask['HometaskID'] . " - " . $currhometask['Topic'] . "</b
             <b>Результат тестирования</b>
         </td>
     </tr>
-    <?
+    <?php
     $result = $_POST['resultid'];
     $query = "SELECT DISTINCT * FROM Solution JOIN Task USING (TaskID) JOIN Result USING (ResultID)";
     if ($result != null && $result != -1) {

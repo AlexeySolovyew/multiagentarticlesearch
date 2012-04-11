@@ -1,4 +1,4 @@
-<?session_start();
+<?phpsession_start();
 if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожалуйста, авторизуйтесь <a href=\"../index.php\">здесь</a>");?>
 <?php
@@ -17,7 +17,7 @@ isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожа
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
-<?
+<?php
 mysql_connect("localhost", "root", "Phoenix");
 mysql_select_db("simuni");
 $queryyuser = "SELECT RoleID FROM `User` WHERE UserID='".$_SESSION['user_id']."'";
@@ -30,17 +30,17 @@ if ($row[RoleID]!=2) die("Студенту нельзя лезть к матер
 <form action="hometasks.php" method="post">
 
     Номер д.з.:<br>
-    <?
+    <?php
     $task = mysql_query("SELECT * from Hometask WHERE HometaskID=" . $_POST['hometaskid']);
     $currrow = mysql_fetch_array($task);
     echo $currrow['HometaskID'];
     ?>
     <br>
     Тема:<br>
-    <input name="topic" value="<?echo $currrow['Topic']?>"><br>
+    <input name="topic" value="<?phpecho $currrow['Topic']?>"><br>
     Крайний срок сдачи:<br>
-    <input name="dead" value="<?echo $currrow['Deadline']?>"><br>
-    <input type="hidden" name="hometaskid" value="<?echo $_POST['hometaskid']?>">
+    <input name="dead" value="<?phpecho $currrow['Deadline']?>"><br>
+    <input type="hidden" name="hometaskid" value="<?phpecho $_POST['hometaskid']?>">
     <input type="submit" value="Принять изменения"><br>
 </form>
 </html>

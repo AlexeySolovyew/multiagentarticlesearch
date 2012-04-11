@@ -1,4 +1,4 @@
-﻿<?session_start();
+﻿<?phpsession_start();
 if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожалуйста, авторизуйтесь <a href=\"../index.php\">здесь</a>");
 mysql_connect("localhost", "root", "Phoenix");
@@ -15,7 +15,7 @@ if ($row[RoleID]!=2) die("Студенту нельзя лезть к матер
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
-<?
+<?php
 if ($_POST['val'] != null) {
     $smart = 0;
     if (strcmp($_POST['smart'], "on") == 0) {
@@ -56,7 +56,7 @@ if ($_POST['val'] != null) {
 <form action="tests.php" method="POST">
     <p><select size="1" name="taskid">
         <option value="-1">Для всех задач</option>
-        <?
+        <?php
         $tasks = mysql_query("SELECT TaskID,HometaskID,TaskForHometask FROM Task");
         $q = mysql_num_rows($tasks);
         for ($i = 0; $i < $q; $i++) {
@@ -98,7 +98,7 @@ if ($_POST['val'] != null) {
             <b>Удаление</b>
         </td>
     </tr>
-    <?
+    <?php
     $query = "SELECT * FROM Test JOIN Task USING (TaskID)";
     if (isset($_POST['taskid']) && $_POST['taskid']!=-1)
         $query = $query . " WHERE TaskID=" . $_POST['taskid'];
@@ -122,7 +122,7 @@ if ($_POST['val'] != null) {
 
 <form action="add_test.php" method="post">
     Перейти к добавлению нового теста для задачи ({номер д.з. - номер задачи в д.з.}):
-    <?
+    <?php
     $tasks = mysql_query("SELECT * FROM Task");
     $q = mysql_num_rows($tasks);
     echo "<p><select size=\"1\" name=\"taskid\">";

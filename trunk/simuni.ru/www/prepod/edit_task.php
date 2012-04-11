@@ -1,4 +1,4 @@
-<?session_start();
+<?phpsession_start();
 if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожалуйста, авторизуйтесь <a href=\"../index.php\">здесь</a>");?>
 <?php
@@ -17,7 +17,7 @@ isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожа
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
-<?
+<?php
 mysql_connect("localhost", "root", "Phoenix");
 mysql_select_db("simuni");
 $queryyuser = "SELECT RoleID FROM `User` WHERE UserID='".$_SESSION['user_id']."'";
@@ -30,7 +30,7 @@ if ($row[RoleID]!=2) die("Студенту нельзя лезть к матер
 <form action="tasks.php" method="post">
 
     Номер д.з.:<br>
-    <?
+    <?php
     $task = mysql_query("SELECT * from Task WHERE TaskID=" . $_POST['taskid']);
     $currrow = mysql_fetch_array($task);
     $hometasks = mysql_query("SELECT HometaskID,Topic FROM Hometask");
@@ -48,12 +48,12 @@ if ($row[RoleID]!=2) die("Студенту нельзя лезть к матер
     ?>
     <br>
     Номер задачи в д.з.:<br>
-    <input name="taskforhometask" value="<?echo $currrow['TaskForHometask']?>"><br>
+    <input name="taskforhometask" value="<?phpecho $currrow['TaskForHometask']?>"><br>
     Условие:<br>
-    <textarea cols="50" rows="10" name="condition"><?echo $currrow['Condition']?></textarea><br>
-    <input type="hidden" name="taskid" value="<?echo $_POST['taskid']?>">
+    <textarea cols="50" rows="10" name="condition"><?phpecho $currrow['Condition']?></textarea><br>
+    <input type="hidden" name="taskid" value="<?phpecho $_POST['taskid']?>">
     Цена:<br>
-    <input name="price" value="<?echo $currrow['Price']?>"><br/>
+    <input name="price" value="<?phpecho $currrow['Price']?>"><br/>
     <input type="submit" value="Принять изменения"><br>
 </form>
 </html>

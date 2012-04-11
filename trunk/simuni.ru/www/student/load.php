@@ -1,4 +1,4 @@
-<?session_start();
+<?phpsession_start();
 if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожалуйста, авторизуйтесь <a href=\"../index.php\">здесь</a>");?>
 <html>
@@ -21,7 +21,7 @@ mysql_select_db("simuni");
 
 <form action="upload.php" method="post" enctype="multipart/form-data">
     Номер задачи, которую вы заливаете: <br>
-    <?
+    <?php
     $tasks = mysql_query("SELECT * FROM Task WHERE HometaskID <= ALL
     (SELECT `Value` FROM GeneralInfo WHERE `Name`='CurrentHometaskID' )");
     $q = mysql_num_rows($tasks);
