@@ -49,8 +49,8 @@ mysql_select_db("simuni");
         file_put_contents($real_file_path, $_POST['code']);
         $code = $_POST['code'];
         //далее отладочная печать
-        //echo $_POST['code'];
-        //echo $real_file_path;
+        echo $_POST['code'];
+        echo $real_file_path;
     }
 
     //пытаемся прогнать все тесты
@@ -93,7 +93,8 @@ mysql_select_db("simuni");
     } else {
         echo "Неверно выбрана задача...";
     }
-    //if (isset($filedir)) unlink($filedir);
+    //удаляем временный файл
+    if (isset($filedir)) unlink($filedir);
     ?>
     <br/>
 <a href="load.php">Вернуться на страницу загрузки</a>
