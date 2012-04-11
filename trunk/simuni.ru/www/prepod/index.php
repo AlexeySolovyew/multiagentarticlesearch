@@ -4,7 +4,7 @@ isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожа
 ?>
 <html>
 <?php
-mysql_connect("localhost", "root", "Phoenix");
+mysql_connect("localhost", "root", "12345678");
 mysql_select_db("simuni");
 $queryyuser = "SELECT RoleID FROM `User` WHERE UserID='".$_SESSION['user_id']."'";
 $resuser = mysql_query($queryyuser);

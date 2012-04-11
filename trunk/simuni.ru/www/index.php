@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?phpphp session_start(); ?>
 <html>
 <head>
     <title>Functional Programming</title>
@@ -15,7 +15,7 @@
 <!--<a href="index.php">Вы студент?</a><br>
 <a href="prepod.php">Вы преподаватель?</a>
 -->
-<?php
+<?phpphp
 function redirectToStartPage($row)
 {
     if ($row['RoleID'] == 1) {
@@ -32,7 +32,7 @@ function redirectToStartPage($row)
     }
 }
 
-mysql_connect("localhost", "root", "Phoenix");
+mysql_connect("localhost", "root", "12345678");
 mysql_select_db("simuni");
 
 if (isset($_SESSION['user_id'])) {

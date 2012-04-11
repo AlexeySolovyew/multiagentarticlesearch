@@ -3,7 +3,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-<?php
+<?phpphp
 /**
  * Created by JetBrains PhpStorm.
  * User: Алексей

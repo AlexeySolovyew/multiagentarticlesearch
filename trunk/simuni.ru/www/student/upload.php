@@ -10,7 +10,7 @@ isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожа
 </head>
 <body>
 <?php
-mysql_connect("localhost", "root", "Phoenix");
+mysql_connect("localhost", "root", "12345678");
 mysql_select_db("simuni");
 ?>
 <p><b>Результат</b>:
