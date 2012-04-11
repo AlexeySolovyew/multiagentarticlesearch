@@ -1,9 +1,9 @@
-<?session_start();
+<?phpsession_start();
 if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожалуйста, авторизуйтесь <a href=\"../index.php\">здесь</a>");
 ?>
 <html>
-<?
+<?php
 mysql_connect("localhost", "root", "Phoenix");
 mysql_select_db("simuni");
 $queryyuser = "SELECT RoleID FROM `User` WHERE UserID='" . $_SESSION['user_id'] . "'";
@@ -34,7 +34,7 @@ if ($row['RoleID'] != 2) die("Студенту нельзя лезть к мат
             <b>Количество баллов</b>
         </td>
     </tr>
-    <?
+    <?php
     $qusers = "SELECT * FROM `User` WHERE RoleID=1 ORDER BY Surname";
     $users = mysql_query($qusers);
     $countusers = mysql_num_rows($users);

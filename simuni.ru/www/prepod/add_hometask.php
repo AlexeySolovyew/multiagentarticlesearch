@@ -1,7 +1,7 @@
-<?session_start();
+<?phpsession_start();
 if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожалуйста, авторизуйтесь <a href=\"../index.php\">здесь</a>");?>
-<?
+<?php
 /**
  * Created by JetBrains PhpStorm.
  * User: Алексей
@@ -17,7 +17,7 @@ isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожа
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
-<?
+<?php
 mysql_connect("localhost", "root", "Phoenix");
 mysql_select_db("simuni");
 $queryyuser = "SELECT RoleID FROM `User` WHERE UserID='".$_SESSION['user_id']."'";
@@ -30,11 +30,11 @@ if ($row[RoleID]!=2) die("Студенту нельзя лезть к матер
 
     Введите тему нового домашнего задания:
     <input name="topic"><br>
-    <?
+    <?php
     $maxnum = mysql_query("SELECT MAX(HometaskID) AS Num FROM Hometask");
     $row = mysql_fetch_array($maxnum);
     ?>
-    <input type="hidden" name="maxnum" value="<?echo $row['Num']?>">
+    <input type="hidden" name="maxnum" value="<?phpecho $row['Num']?>">
     Дедлайн:
     <input name="dead"> (ГГГГ-ММ-ДД)<br>
     <input type="submit" value="Добавить д.з."><br>

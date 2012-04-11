@@ -1,4 +1,4 @@
-<?session_start();
+<?phpsession_start();
 if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожалуйста, авторизуйтесь <a href=\"../index.php\">здесь</a>");?>
 <html>
@@ -8,7 +8,7 @@ isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожа
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
-<?
+<?php
 mysql_connect("localhost", "root", "Phoenix");
 mysql_select_db("simuni");
 $queryyuser = "SELECT RoleID FROM `User` WHERE UserID='".$_SESSION['user_id']."'";
@@ -56,7 +56,7 @@ else if ($_POST['taskid'] != null) {
 <form action="tasks.php" method="POST">
     <p><select size="1" name="hometaskid">
         <option value="-1">Для всех домашних заданий</option>
-        <?
+        <?php
         $hts = mysql_query("SELECT HometaskID,Topic FROM Hometask");
         $q = mysql_num_rows($hts);
         for ($i = 0; $i < $q; $i++) {
@@ -98,7 +98,7 @@ else if ($_POST['taskid'] != null) {
             <b>Удаление</b>
         </td>
     </tr>
-    <?
+    <?php
     $query = "SELECT * FROM Task";
     if (isset($_POST['hometaskid']) && $_POST['hometaskid'] != -1)
         $query = $query . " WHERE HometaskID=" . $_POST['hometaskid'];

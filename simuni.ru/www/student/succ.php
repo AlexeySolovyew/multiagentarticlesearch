@@ -1,4 +1,4 @@
-<?session_start();
+<?phpsession_start();
 if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожалуйста, авторизуйтесь <a href=\"index.php\">здесь</a>");
 mysql_connect("localhost", "root", "Phoenix");
@@ -12,7 +12,7 @@ mysql_select_db("simuni");
 <form action="succ.php" method="POST">
     <p><select size="1" name="taskid">
         <option value="-1">Для всех задач</option>
-        <?
+        <?php
         $tasks = mysql_query("SELECT TaskID,HometaskID,TaskForHometask FROM Task
         WHERE HometaskID <= ALL (SELECT Value FROM GeneralInfo WHERE `Name`='CurrentHometaskID')");
         $q = mysql_num_rows($tasks);
@@ -52,7 +52,7 @@ mysql_select_db("simuni");
             <b>Результат тестирования</b>
         </td>
     </tr>
-    <?
+    <?php
     $query = "SELECT DISTINCT * FROM Solution JOIN Task USING (TaskID) JOIN Result USING (ResultID)
      JOIN `User` USING (UserID) WHERE UserID='".$_SESSION['user_id']."'";
     //обрабатываем фильтр
