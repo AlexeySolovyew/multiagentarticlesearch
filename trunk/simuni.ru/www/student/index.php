@@ -13,11 +13,12 @@ mysql_select_db("simuni");
 <h1>Здравствуйте, <?php  echo $_SESSION['user_id']; ?>! </h1><br>
 <a href="load.php">Загрузить решение</a> <br>
 <a href="succ.php">Все загруженные решения</a> <br>
+<a href="history.php">История задач (Ваши успехи)</a> <br>
 <a href="index.php?exit=true">Выйти</a>
 
 <table border="1">
     <caption>
-        <h2>Ваши успехи:</h2>
+        <h2>Горячие задачи (не зачтены + дедлайн не прошел):</h2>
     </caption>
     <tr>
         <td>
@@ -45,32 +46,28 @@ mysql_select_db("simuni");
     </tr>
     <?php
     $query = "SELECT DISTINCT * FROM Task JOIN Hometask USING (HometaskID) WHERE HometaskID<=ALL
-    (SELECT `Value` FROM GeneralInfo WHERE `Name`='CurrentHometaskID')";
+    (SELECT `Value` FROM GeneralInfo WHERE `Name`='CurrentHometaskID') AND Deadline>=NOW()";
     //обрабатываем фильтр
-    $query=$query." ORDER BY HometaskID DESC";
+    $query=$query." ORDER BY HometaskID DESC,TaskForHometask ASC";
     // echo $_SESSION['user_id'];
     // echo $query;
     $tasks = mysql_query($query);
     $q = mysql_num_rows($tasks);
     for ($i = 0; $i < $q; $i++) {
         $row = mysql_fetch_array($tasks);
-        $qr = "SELECT ResultID FROM Solution WHERE TaskID=".$row[TaskID]." AND UserID='".$_SESSION['user_id']."'";
+        $qr = "SELECT ResultID, Text FROM Solution JOIN Result USING (ResultID) WHERE TaskID=".$row[TaskID]." AND UserID='".$_SESSION['user_id']."' ORDER BY LoadTimestamp DESC";
         $qrresult = mysql_query($qr);
         $count = mysql_num_rows($qrresult);
-        $result = "Не проверена";
-        if ($count==0) $result="Ещё не загружалось ни одного решения";
-        for ($j = 0; $j<$count;$j++){
+        if ($count==0) {
+            $result="Ещё не загружалось ни одного решения";
+            $resid="239";
+        } else {
             $rowresult = mysql_fetch_array($qrresult);
-            if ($rowresult[ResultID]==3) {
-                $result="Списана";
-                break;
-            } elseif ($rowresult[ResultID]==1){
-                $result="Зачтена";
-                break;
-            } elseif ($rowresult[ResultID] == 2){
-                $result="Проверена, но не зачтена";
-            }
+            $result = $rowresult['Text'];
+            $resid = $rowresult['ResultID'];
         }
+        //проверяем на зачтенность
+        if (strcmp("1",$resid)!=0) {
         echo "<tr><td>" . $row[HometaskID] . "</td><td>" . $row[TaskForHometask] . "</td>
         <td>".$row[Condition]."</td><td>" . $result . "</td>
         <td>" .
@@ -79,6 +76,7 @@ mysql_select_db("simuni");
         <td>" .
             "<form action=\"load.php\" method=\"POST\"><input type=\"hidden\" name=\"taskid\" value=\"$row[TaskID]\">
         <input type=\"submit\" value=\"загрузить\"></form></td></tr>";
+        }
     }
     ?>
 

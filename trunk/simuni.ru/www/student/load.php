@@ -30,12 +30,14 @@ mysql_select_db("simuni");
     for ($i = 0; $i < $q; $i++) {
         $row = mysql_fetch_array($tasks);
         if (isset($_POST['taskid']) && strcmp($_POST['taskid'],$row['TaskID'])==0) {
+            $cond = $row['Condition'];
             echo "<option selected value=" . $row['TaskID'] . ">" . $row['HometaskID'] . " - " . $row['TaskForHometask'] . "</option>";
         } else {
             echo "<option value=" . $row['TaskID'] . ">" . $row['HometaskID'] . " - " . $row['TaskForHometask'] . "</option>";
         }
     }
     echo "</select><br>";
+    if (isset($cond)) echo "Условие: <br/>".$cond."<br/><br/>";
     ?>
     Файл с задачей: <br>
     <input type="file" name="filename"><br>

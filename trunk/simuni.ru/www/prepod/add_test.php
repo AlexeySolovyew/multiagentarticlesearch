@@ -44,6 +44,8 @@ if ($_POST['taskid'] != null) {
     <input name="val"><br>
     Хитрый тест:
     <input name="smart" type="checkbox"><br>
+    Подсказка к хитрому тесту:
+    <textarea name="help"></textarea><br>
     <input type="submit" value="Добавить тест"><br>
 </form>
 <a href="index.php">На главную</a>

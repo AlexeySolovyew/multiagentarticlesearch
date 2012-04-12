@@ -114,7 +114,9 @@ else if ($_POST['taskid'] != null) {
         <td>" .
             "<form action=\"edit_task.php\" method=\"POST\"><input type=\"hidden\" name=\"taskid\" value=\"$row[TaskID]\">
         <input type=\"submit\" value=\"редактировать\"></form></td><td>" .
-            "<form action=\"tasks.php\" method=\"POST\"><input type=\"hidden\" name=\"taskid\" value=\"$row[TaskID]\">
+            "<form action=\"tasks.php\" method=\"POST\" onSubmit=\"return confirm('Вы уверены?');\">
+            <input type=\"hidden\" name=\"taskid\" value=\"$row[TaskID]\">
+            <input type=\"hidden\" name=\"hometaskid\" value=\"$row[HometaskID]\">
         <input type=\"submit\" value=\"удалить\"></form></td></tr>";
     }
     ?>

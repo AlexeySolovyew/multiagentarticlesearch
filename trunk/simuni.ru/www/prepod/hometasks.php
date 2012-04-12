@@ -80,7 +80,7 @@ else if ($_POST['hometaskid'] != null) {
         <td>" .
             "<form action=\"edit_hometask.php\" method=\"POST\"><input type=\"hidden\" name=\"hometaskid\" value=\"$row[HometaskID]\">
         <input type=\"submit\" value=\"редактировать\"></form></td><td>" .
-            "<form action=\"hometasks.php\" method=\"POST\"><input type=\"hidden\" name=\"hometaskid\" value=\"$row[HometaskID]\">
+            "<form action=\"hometasks.php\" method=\"POST\" onSubmit=\"return confirm('Вы уверены?');\"><input type=\"hidden\" name=\"hometaskid\" value=\"$row[HometaskID]\">
         <input type=\"submit\" value=\"удалить\"></form></td></tr>";
     }
     ?>

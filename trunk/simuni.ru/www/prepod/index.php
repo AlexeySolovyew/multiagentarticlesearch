@@ -20,6 +20,8 @@ if ($row['RoleID']!=2) die("Студенту нельзя лезть к мате
 Студенту показаны задачи из д.з. только до текущего включительно.
 <br/>
 <?php
+$result = "0";
+    if (isset($_POST['resultid'])) $result = $_POST['resultid'];
 if (isset($_POST['hometaskid'])){
     if (mysql_query("UPDATE GeneralInfo SET Value=".$_POST['hometaskid']." WHERE `Name`='CurrentHometaskID'")) {
         echo "Текущее д.з. успешно изменено.<br>";
@@ -62,13 +64,13 @@ echo "<b>" . $currhometask['HometaskID'] . " - " . $currhometask['Topic'] . "</b
         $q = mysql_num_rows($hts);
         for ($i = 0; $i < $q; $i++) {
             $row = mysql_fetch_array($hts);
-            if (strcmp($_POST['resultid'], $row['ResultID']) == 0) {
+            if (strcmp($result, $row['ResultID']) == 0) {
                 echo "<option selected value=\"" . $row['ResultID'] . "\">" . $row['Text'] . "</option>";
             } else {
                 echo "<option value=\"" . $row['ResultID'] . "\">" . $row['Text'] . "</option>";
             }
         }
-        if ($_POST['resultid'] == null || strcmp($_POST['resultid'], "-1") == 0) {
+        if ($result == null || strcmp($result, "-1") == 0) {
             echo "<option selected value=\"-1\">Все</option>";
         } else {
             echo "<option value=\"-1\">Все</option>";
@@ -105,27 +107,31 @@ echo "<b>" . $currhometask['HometaskID'] . " - " . $currhometask['Topic'] . "</b
         </td>
     </tr>
     <?php
-    $result = $_POST['resultid'];
-    $query = "SELECT DISTINCT * FROM Solution JOIN Task USING (TaskID) JOIN Result USING (ResultID)";
-    if ($result != null && $result != -1) {
-        $query = $query . " WHERE ResultID=" . $result;
-    }
-    $query=$query." ORDER BY LoadTimestamp DESC";
+    //запрос на множество пар задача - юзер
+    $query = "SELECT DISTINCT UserID,TaskID FROM Solution JOIN Task USING (TaskID) JOIN `User` USING (UserID)";
     //echo $query;
     $solutions = mysql_query($query);
     $q = mysql_num_rows($solutions);
     for ($i = 0; $i < $q; $i++) {
         $row = mysql_fetch_array($solutions);
         $sqluser = "SELECT `Name`,Surname FROM User WHERE `UserID`='" . $row['UserID'] . "'";
+        //запрос на получение последнего решения, загруженного пользователем по данной задаче
+        $sqlsolution = "SELECT * FROM Solution JOIN Result USING (ResultID) JOIN Task USING (TaskID)
+        WHERE TaskID=".$row['TaskID']." AND UserID='".$row['UserID']."' ORDER BY LoadTimestamp DESC";
+        //echo $sqlsolution;
         //echo $sqluser;
         $res = mysql_query($sqluser);
         $rowuser = mysql_fetch_assoc($res);
+        $sol = mysql_query($sqlsolution);
+        $rowsol = mysql_fetch_assoc($sol);
+        if ($result==-1 || strcmp($result,$rowsol['ResultID'])==0){
         echo "<tr><td>" . $rowuser[Name] . " " . $rowuser[Surname] . "</td>
-        <td>" . $row[HometaskID] . "</td><td>" . $row[TaskForHometask] . "</td>
-        <td>".$row[LoadTimestamp]."</td><td>" . $row[Text] . "</td>
+        <td>" . $rowsol[HometaskID] . "</td><td>" . $rowsol[TaskForHometask] . "</td>
+        <td>".$rowsol[LoadTimestamp]."</td><td>" . $rowsol[Text] . "</td>
         <td>" .
-            "<form action=\"check_solution.php\" method=\"POST\"><input type=\"hidden\" name=\"solutionid\" value=\"$row[SolutionID]\">
-        <input type=\"submit\" value=\"проверить\"></form></td><td>" . $row[TestResult] . "</td>";
+            "<form action=\"check_solution.php\" method=\"POST\"><input type=\"hidden\" name=\"solutionid\" value=\"$rowsol[SolutionID]\">
+        <input type=\"submit\" style=\"background: url(../img/check.ico); height:128px; width:128px; line-height:12px;\" value=\"\"></form></td><td>" . $rowsol[TestResult] . "</td>";
+        }
     }
     ?>
 </table>

@@ -23,20 +23,21 @@ mysql_select_db("simuni");
     }
     $code = "";
     // Проверяем загружен ли файл
-    if (is_uploaded_file($_FILES["filename"]["tmp_name"]) && $_POST['tasknum'] != null) {
+    if (is_uploaded_file($_FILES["filename"]["tmp_name"]) && isset($_POST['tasknum'])) {
         // Если файл загружен успешно, перемещаем его
         // из временной директории в конечную
-        $filedir = "../files/" . $_FILES["filename"]["name"];
+        $filedir = "../../files/" . $_FILES["filename"]["name"];
+        //$real_file_path = realpath($filedir);
+        //echo $filedir;
+        //echo $real_file_path;
         move_uploaded_file($_FILES["filename"]["tmp_name"], $filedir);
-        $real_file_path = realpath($filedir);
-        echo $filedir;
         $file_handle = fopen($filedir, "r");
         while (!feof($file_handle)) {
             echo feof($file_handle);
             $line = fgets($file_handle);
-            $code.$line."\n";
-            echo $code;
+            $code = $code.$line."\n";
         }
+        echo $code;
         fclose($file_handle);
     } else if ($_POST['code'] != null) {
         //если текстом, то пытаемся создать файл
@@ -49,8 +50,8 @@ mysql_select_db("simuni");
         file_put_contents($real_file_path, $_POST['code']);
         $code = $_POST['code'];
         //далее отладочная печать
-        echo $_POST['code'];
-        echo $real_file_path;
+        //echo $_POST['code'];
+        //echo $real_file_path;
     }
 
     //пытаемся прогнать все тесты
@@ -77,7 +78,7 @@ mysql_select_db("simuni");
                     $testresult = "Выражение имеет неправильное значение: " . $row[Expression];
                     echo $testresult;
                 } else {
-                    $testresult = "Хитрый тест номер " . $i . " не пройден :(";
+                    $testresult = "Хитрый тест номер " . $i . " не пройден :(<br/>Подсказка: ".$row['SmartHelp'];
                     echo $testresult;
                 }
                 break;
