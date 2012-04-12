@@ -47,12 +47,16 @@ if ($row[RoleID]!=2) die("Студенту нельзя лезть к матер
         }?>
     </select>
         <br>
+        Номер теста для задачи:<br>
+        <input name="testfortask" value="<?php echo $currrow['TestForTaskID']?>"><br>
         Выражение:<br>
         <input name="expr" value="<?php echo $currrow['Expression']?>"><br>
         Ожидаемое значение:<br>
         <input name="val" value="<?php echo $currrow['Result']?>"><br>
         Хитрый?:<br>
         <input name="smart" type="checkbox" <?php if ($currrow['Smart'] == 1) echo "checked"?>><br>
+        Подсказка к хитрому:<br>
+        <textarea name="help"><?php echo $currrow['SmartHelp']?></textarea><br>
         <input type="hidden" name="testid" value="<?php echo $_POST['testid']?>">
 
         <input type="submit" value="Принять изменения"><br>

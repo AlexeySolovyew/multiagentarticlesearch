@@ -23,9 +23,9 @@ if ($_POST['val'] != null) {
     }
     if ($_POST['testid'] == null) {
         //добавление нового теста
-        if (mysql_query("INSERT INTO Test (Expression,Result,TaskID,Smart,TestForTaskID) VALUES (\"" . $_POST['expr'] . "\",\"" .
+        if (mysql_query("INSERT INTO Test (Expression,Result,TaskID,Smart,TestForTaskID,SmartHelp) VALUES (\"" . $_POST['expr'] . "\",\"" .
             $_POST['val'] . "\",\"" . $_POST['taskid'] . "\",\""
-            . $smart . "\",\"" . $_POST['testfortask'] . "\")")
+            . $smart . "\",\"" . $_POST['testfortask'] . "\",\"" . $_POST['help'] . "\")")
         ) {
             echo "<div>Тест успешно добавлен.</div><br>";
         } else {
@@ -36,7 +36,7 @@ if ($_POST['val'] != null) {
         //echo "UPDATE Test SET Expression='" . $_POST['expr'] . "',Result='" . $_POST['val'] . "',TaskID='" . $_POST['taskid'] . "',
         //Smart='" . $smart . "' WHERE TestID=" . $_POST['testid'];
         if (mysql_query("UPDATE Test SET Expression='" . $_POST['expr'] . "',Result='" . $_POST['val'] . "',TaskID='" . $_POST['taskid'] . "',
-        Smart='" . $smart . "' WHERE TestID=" . $_POST['testid'])
+        Smart='" . $smart . "',TestForTaskID='" . $_POST['testfortask'] . "',SmartHelp='".$_POST['help']."' WHERE TestID=" . $_POST['testid'])
         ) {
             echo "Тест успешно отредактирован.<br>";
         } else {
@@ -83,6 +83,9 @@ if ($_POST['val'] != null) {
             <b>Номер задачи в д.з.</b>
         </td>
         <td>
+            <b>Номер теста для задачи</b>
+        </td>
+        <td>
             <b>Выражение</b>
         </td>
         <td>
@@ -90,6 +93,9 @@ if ($_POST['val'] != null) {
         </td>
         <td>
             <b>Хитрый</b>
+        </td>
+        <td>
+            <b>Подсказка к хитрому</b>
         </td>
         <td>
             <b>Редактирование</b>
@@ -102,17 +108,20 @@ if ($_POST['val'] != null) {
     $query = "SELECT * FROM Test JOIN Task USING (TaskID)";
     if (isset($_POST['taskid']) && $_POST['taskid']!=-1)
         $query = $query . " WHERE TaskID=" . $_POST['taskid'];
-    $query = $query." ORDER BY TaskID";
+    $query = $query." ORDER BY TaskID,TestForTaskID";
     $tests = mysql_query($query);
     $q = mysql_num_rows($tests);
     for ($i = 0; $i < $q; $i++) {
         $row = mysql_fetch_array($tests);
         echo "<tr><td>" . $row[HometaskID] . "</td>
-        <td>" . $row[TaskForHometask] . "</td><td>" . $row[Expression] . "</td><td>" . $row[Result] . "</td><td>" . $row[Smart] . "</td>
+        <td>" . $row[TaskForHometask] . "</td><td>" . $row[TestForTaskID] . "</td><td>" . $row[Expression] . "</td><td>" . $row[Result] . "</td>
+        <td>" . $row[Smart] . "</td><td>" . $row[SmartHelp] . "</td>
         <td>" .
             "<form action=\"edit_test.php\" method=\"POST\"><input type=\"hidden\" name=\"testid\" value=\"$row[TestID]\">
         <input type=\"submit\" value=\"редактировать\"></form></td><td>" .
-            "<form action=\"tests.php\" method=\"POST\"><input type=\"hidden\" name=\"testid\" value=\"$row[TestID]\">
+            "<form action=\"tests.php\" method=\"POST\" onSubmit=\"return confirm('Вы уверены?');\">
+            <input type=\"hidden\" name=\"testid\" value=\"$row[TestID]\">
+            <input type=\"hidden\" name=\"taskid\" value=\"$row[TaskID]\">
         <input type=\"submit\" value=\"удалить\"></form></td></tr>";
     }
     ?>
