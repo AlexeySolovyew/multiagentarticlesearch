@@ -95,7 +95,7 @@ mysql_select_db("simuni");
         echo "Неверно выбрана задача...";
     }
     //удаляем временный файл
-    if (isset($filedir)) unlink($filedir);
+    //if (isset($filedir)) unlink($filedir);
     ?>
     <br/>
 <a href="load.php">Вернуться на страницу загрузки</a>
