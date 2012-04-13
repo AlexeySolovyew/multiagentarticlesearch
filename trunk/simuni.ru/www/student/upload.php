@@ -67,7 +67,9 @@ mysql_select_db("simuni");
             //$line = exec("ghc -e \"".$row[Expression]."\" ".$filedir,$line,$result);
             //echo "ghc -e \"".$row[Expression]."\" ".$real_file_path;
             $line = exec("ghc -e \"" . $row[Expression] . "\" " . $real_file_path, $array, $result);
-            //echo $result;
+            echo $result;
+			echo $line;
+			echo "ghc -e \"" . $row[Expression] . "\" " . $real_file_path;
             if ($result != 0 || $line == "") {
                 $testresult = "Не удалось вычислить выражение \"" . $row[Expression] . "\", проверьте правильность синтаксиса";
                 echo $testresult;
