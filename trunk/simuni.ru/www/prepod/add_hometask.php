@@ -35,7 +35,7 @@ if ($row[RoleID]!=2) die("Студенту нельзя лезть к матер
     $row = mysql_fetch_array($maxnum);
     ?>
     <input type="hidden" name="maxnum" value="<?php echo $row['Num']?>">
-    Дедлайн:
+    Крайний срок сдачи:
     <input name="dead"> (ГГГГ-ММ-ДД)<br>
     <input type="submit" value="Добавить д.з."><br>
 </form>

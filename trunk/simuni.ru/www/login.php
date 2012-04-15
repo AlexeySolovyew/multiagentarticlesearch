@@ -1,9 +1,4 @@
-<html>
-<head>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-</head>
-<body>
-<?php
+<?php session_start();
 /**
  * Created by JetBrains PhpStorm.
  * User: Алексей
@@ -11,7 +6,13 @@
  * Time: 12:50
  * To change this template use File | Settings | File Templates.
  */
+ if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 ?>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
 Вход:<br>
 <form action="index.php" method="post">
     <table>

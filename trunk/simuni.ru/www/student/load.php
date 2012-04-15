@@ -17,10 +17,10 @@ isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожа
 mysql_connect("localhost", "root", "12345678");
 mysql_select_db("simuni");
 ?>
-<h2><b> Форма для загрузки файлов с решениями </b></h2>
+<h2>Загрузка решения</h2>
 
 <form action="upload.php" method="post" enctype="multipart/form-data">
-    Номер задачи, которую вы заливаете: <br>
+    Номер задачи: <br>
     <?php
     $tasks = mysql_query("SELECT * FROM Task WHERE HometaskID <= ALL
     (SELECT `Value` FROM GeneralInfo WHERE `Name`='CurrentHometaskID' )");

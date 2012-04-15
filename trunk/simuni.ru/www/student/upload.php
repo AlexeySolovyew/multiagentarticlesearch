@@ -67,9 +67,9 @@ mysql_select_db("simuni");
             //$line = exec("ghc -e \"".$row[Expression]."\" ".$filedir,$line,$result);
             //echo "ghc -e \"".$row[Expression]."\" ".$real_file_path;
             $line = exec("ghc -e \"" . $row[Expression] . "\" " . $real_file_path, $array, $result);
-            echo $result;
-			echo $line;
-			echo "ghc -e \"" . $row[Expression] . "\" " . $real_file_path;
+            //echo $result;
+			//echo $line;
+			//echo "ghc -e \"" . $row[Expression] . "\" " . $real_file_path;
             if ($result != 0 || $line == "") {
                 $testresult = "Не удалось вычислить выражение \"" . $row[Expression] . "\", проверьте правильность синтаксиса";
                 echo $testresult;
@@ -100,6 +100,8 @@ mysql_select_db("simuni");
     if (isset($filedir)) unlink($filedir);
     ?>
     <br/>
-<a href="load.php">Вернуться на страницу загрузки</a>
+
+<form action="load.php" method="POST"><input type="hidden" name="taskid" value="<?php echo $_POST[tasknum]?>">
+<input type="submit" value="Загрузить ещё решение"></form>
 </body>
 </html>

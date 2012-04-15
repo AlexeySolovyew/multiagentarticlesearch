@@ -41,7 +41,7 @@ if ($row[RoleID]!=2) die("Студенту нельзя лезть к матер
     Крайний срок сдачи:<br>
     <input name="dead" value="<?php echo $currrow['Deadline']?>"><br>
     <input type="hidden" name="hometaskid" value="<?php echo $_POST['hometaskid']?>">
-    <input type="submit" value="Принять изменения"><br>
+    <input type="subit" value="Принять изменения"><br>
 </form>
 </html>
 

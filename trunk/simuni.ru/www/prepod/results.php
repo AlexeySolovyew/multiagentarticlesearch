@@ -52,6 +52,8 @@ if ($row['RoleID'] != 2) die("Студенту нельзя лезть к мат
         $array = mysql_fetch_array($uprice);
         //посчитали к-во баллов юзверя
         $balls = $array[Priceall];
+		//ставим ноль вручную, если вообще ни одной зачтенной задачки
+		if ($balls==="0") $balls=0;
         echo "<tr><td>" . $rowuser[Surname] . " " . $rowuser[Name] . "</td><td>" . $rowuser[GroupNumber] . "</td>
         <td>" . $counttasks . "</td><td>" . $balls . "</td></tr>";
 
