@@ -54,7 +54,7 @@ echo "<b>" . $currhometask['HometaskID'] . " - " . $currhometask['Topic'] . "</b
 <a href="tasks.php">Задачи</a> <br>
 <a href="tests.php">Тесты</a> <br>
 <a href="results.php">Результаты всех студентов</a><br/>
-<a href="index.php?exit=true">Выйти</a>
+<a href="../login.php?exit=true">Выйти</a>
 <br>
 <br>
 <form action="index.php" method="POST">

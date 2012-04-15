@@ -10,15 +10,36 @@ mysql_select_db("simuni");
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
-<h1>Здравствуйте, <?php  echo $_SESSION['user_id']; ?>! </h1><br>
+<h1>Здравствуйте, <?php  echo $_SESSION['user_id']; ?>! </h1>
+<div align="center"><h1>
+<?php
+$query = "SELECT DISTINCT TaskID FROM `User` JOIN Solution USING (UserID) JOIN Task USING (TaskID)
+    WHERE ResultID=1 AND UserID='".$_SESSION['user_id']."'";
+        //echo $query;
+        $querypoints = "SELECT SUM(Price) AS Priceall FROM Task WHERE TaskID IN (" . $query . ")";
+        //echo $querypoints;
+        $utasks = mysql_query($query);
+        //посчитали к-во задачек юзверя
+        $counttasks = mysql_num_rows($utasks);
+        $uprice = mysql_query($querypoints);
+        $array = mysql_fetch_array($uprice);
+        //посчитали к-во баллов юзверя
+        $balls = $array[Priceall];
+		//ставим ноль вручную, если вообще ни одной зачтенной задачки
+		if ($balls==="0") $balls=0;
+		echo "Общее число баллов: <b>".$balls."</b>";
+?>
+</h1>
+</div>
+<br>
 <a href="load.php">Загрузить решение</a> <br>
 <a href="succ.php">Все загруженные решения</a> <br>
-<a href="history.php">История задач (Ваши успехи)</a> <br>
-<a href="index.php?exit=true">Выйти</a>
+<a href="history.php">История задач (ваши успехи)</a> <br>
+<a href="../login.php?exit=true">Выйти</a>
 
 <table border="1">
     <caption>
-        <h2>Горячие задачи (не зачтены + дедлайн не прошел):</h2>
+        <h2>Горячие задачи (отображены задачи, которые не зачтены, но крайний срок сдачи ещё не прошел):</h2>
     </caption>
     <tr>
         <td>
