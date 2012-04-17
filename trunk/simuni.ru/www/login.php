@@ -11,8 +11,16 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+	<script type="text/javascript" src="http://userapi.com/js/api/openapi.js?49"></script>
+
+<script type="text/javascript">
+  VK.init({apiId: API_ID});
+</script>
 </head>
 <body>
+<table>
+<tr>
+<td width="50%">
 Вход:<br>
 <form action="index.php" method="post">
     <table>
@@ -30,5 +38,17 @@
         </tr>
     </table>
 </form>
+</td>
+<td width="50%">
+<div id="vk_auth"></div>
+<script type="text/javascript">
+VK.Widgets.Auth("vk_auth", {width: "200px", authUrl: '/register.php'});
+</script>
+</td>
+</tr>
+</table>
+
+
+
 </body>
 </html>
