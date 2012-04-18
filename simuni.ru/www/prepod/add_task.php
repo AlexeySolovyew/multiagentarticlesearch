@@ -16,7 +16,9 @@ $resuser = mysql_query($queryyuser);
 $row = mysql_fetch_array($resuser);
 if ($row[RoleID]!=2) die("Студенту нельзя лезть к материалам преподавателя!");
 ?>
-<b>Введите данные о новой задаче:</b>
+<h1>Введите данные о новой задаче:</h1>
+<br>
+<br>
 <form action="tasks.php" method="post">
 
     Номер д.з.:<br>

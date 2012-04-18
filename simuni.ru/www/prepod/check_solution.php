@@ -43,7 +43,7 @@ $row = mysql_fetch_array($solution);
     Номер задачи: <?php echo $row[HometaskID]." - ".$row[TaskForHometask]?><br/>
     Условие: <?php echo $row[Condition]?><br/>
     Текст решения: <br>
-    <textarea id="code" rows="15" cols="140" name="code"><?php echo $row['Code'];?></textarea><br>
+    <textarea id="code" rows="15" cols="100" name="code"><?php echo $row['Code'];?></textarea><br>
 
     <p><select size="1" name="resultid">
         <?php

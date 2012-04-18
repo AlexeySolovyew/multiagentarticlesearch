@@ -89,7 +89,7 @@ mysql_select_db("simuni");
         <td>".$row[Condition]."</td><td>" . $result . "</td>
         <td>" .
             "<form action=\"succ.php\" method=\"POST\"><input type=\"hidden\" name=\"taskid\" value=\"$row[TaskID]\">
-        <input type=\"submit\" value=\"загруженные решения задачи\"></form></td><td>" . $row[Deadline] . "</td>
+        <input type=\"submit\" style=\"background: url(../img/view.png); height:50px; width:50px; line-height:12px;\" value=\"\"></form></td><td>" . $row[Deadline] . "</td>
         </tr>";
         }
     }

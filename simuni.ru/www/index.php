@@ -11,10 +11,6 @@
         location = url
     }
 </script>
-
-<!--<a href="index.php">Вы студент?</a><br>
-<a href="prepod.php">Вы преподаватель?</a>
--->
 <?php
 function redirectToStartPage($row)
 {
@@ -49,7 +45,7 @@ if (isset($_SESSION['user_id'])) {
     if (mysql_query($queryIns)) {
         echo "Вы успешно зарегистрировались!<br>";
     } else {
-        echo "Пользователь с таким логином уже существует.<br>";
+        echo "Вы не зарегистрированы. Пожалуйста, проверьте правильность полей.<br>";
     }
 } elseif (isset($_POST['login']) && isset($_POST['password'])) {
     $login = mysql_real_escape_string($_POST['login']);
@@ -78,6 +74,41 @@ if (isset($_SESSION['user_id'])) {
     else {
         echo "Неправильный логин или пароль.<br>";
     }
+} elseif (isset($_GET['uid'])){
+//авторизация через вк
+$login = $_GET['uid'];
+$query = "SELECT *
+            FROM `User`
+            WHERE `UserID`='{$login}'
+            LIMIT 1";
+			
+$sql = mysql_query($query) or die(mysql_error());
+
+    
+	// если такой пользователь не нашелся
+    if (mysql_num_rows($sql) < 1) {
+	//новый пользователь вошел через ВК, регаем
+		$queryIns = "INSERT INTO `User` (UserID,Password,Name,Surname,GroupNumber)" .
+        "VALUES ('" . $_GET['uid'] . "','','" . $_GET['first_name'] . "','" . $_POST['last_name'] . "',
+    0)";
+            if (!mysql_query($queryIns)) die("Трудности с новыми пользователями, пожалуйста, попробуйте позже.".$queryIns);
+        
+    } 
+    else {
+	//сравниваем хэш для серкьюрности
+		//echo md5("2910180".$_GET['uid']."kudiQOGdUMycn0QKYaRe");
+		//echo $_GET['hash'];
+        if (strcmp($_GET['hash'],md5("2910180".$_GET['uid']."kudiQOGdUMycn0QKYaRe"))!=0) die("Ошибка входа.");
+		
+    }
+	
+	$_SESSION['user_id'] = $login;
+	//пользователь найден, редиректим на нужную страницу в зависимости от роли
+    echo "<script language='Javascript'>
+                    setTimeout('reload(\"student/index.php\")', 1);
+                  </script>";
+			
+
 }
 ?>
 <p>Здравствуйте, Вы не авторизованы.</p>

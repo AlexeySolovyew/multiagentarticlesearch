@@ -68,7 +68,7 @@ mysql_select_db("simuni");
         <td>".$row[LoadTimestamp]."</td><td>" . $row[Text] . "</td>
         <td>" .
             "<form action=\"watch_solution.php\" method=\"POST\"><input type=\"hidden\" name=\"solutionid\" value=\"$row[SolutionID]\">
-        <input type=\"submit\" value=\"подробнее\"></form></td><td>" . $row[TestResult] . "</td></tr>";
+        <input type=\"submit\" style=\"background: url(../img/check.png); height:50px; width:50px; line-height:12px;\" value=\"\"></form></td><td>" . $row[TestResult] . "</td></tr>";
     }
     ?>
     <br/>

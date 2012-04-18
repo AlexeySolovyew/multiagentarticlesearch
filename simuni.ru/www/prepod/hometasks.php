@@ -79,9 +79,9 @@ else if ($_POST['hometaskid'] != null) {
         <td>".$row[Deadline]."</td>
         <td>" .
             "<form action=\"edit_hometask.php\" method=\"POST\"><input type=\"hidden\" name=\"hometaskid\" value=\"$row[HometaskID]\">
-        <input type=\"submit\" value=\"редактировать\"></form></td><td>" .
+        <input type=\"submit\" style=\"background: url(../img/edit.png); height:50px; width:50px; line-height:12px;\" value=\"\"></form></td><td>" .
             "<form action=\"hometasks.php\" method=\"POST\" onSubmit=\"return confirm('Вы уверены?');\"><input type=\"hidden\" name=\"hometaskid\" value=\"$row[HometaskID]\">
-        <input type=\"submit\" value=\"удалить\"></form></td></tr>";
+        <input type=\"submit\" style=\"background: url(../img/delete.jpg); height:50px; width:50px; line-height:12px;\" value=\"\"></form></td></tr>";
     }
     ?>
 </table>
