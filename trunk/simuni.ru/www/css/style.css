@@ -6,12 +6,17 @@ Released for free under a Creative Commons Attribution 2.5 License
 */
 
 body {
-	margin: 0;
+	margin-left: 200;
+	margin-right: 200;
 	padding: 0;
-	background: #FFFFFF;
-	font-family: Arial, Helvetica, sans-serif;
+	background: lightgrey;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 14px;
 	color: #3B3B3B;
+	background-image: url("../img/lambda.jpg");
+    background-repeat: no-repeat;
+	background-attachment: fixed;
+    background-position: top right;
 }
 
 h1, h2, h3 {
@@ -45,8 +50,8 @@ ul, ol {
 }
 
 a {
-	text-decoration: none;
-	color: #E74E37;
+	text-decoration: underline;
+	color: blue;
 }
 
 a:hover {
@@ -381,10 +386,11 @@ a:hover {
 table {
     border-collapse: collapse;
     border: 1px solid #666666;
-    font: normal 11px verdana, arial, helvetica, sans-serif;
+    font: normal 12px verdana, arial, helvetica, sans-serif;
     color: #363636;
     background: #f6f6f6;
     text-align:left;
+	width: 100%;
 }
 caption {
     text-align: center;
@@ -403,7 +409,7 @@ thead th, tfoot th {
     padding:5px;
 }
 table a {
-    color: #333333;
+	color: blue;
     text-decoration:none;
 }
 table a:hover {

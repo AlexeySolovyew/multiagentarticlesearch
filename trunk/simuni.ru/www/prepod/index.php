@@ -15,6 +15,16 @@ if ($row['RoleID']!=2) die("Студенту нельзя лезть к мате
     <title>Интерфейс преподавателя</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
+<table border=1>
+<tr>
+<td valign="top">
+<a href="hometasks.php">Домашние задания</a> <br/>
+<a href="tasks.php">Задачи</a> <br>
+<a href="tests.php">Тесты</a> <br>
+<a href="results.php">Результаты всех студентов</a><br/>
+<a href="../login.php?exit=true">Выйти</a>
+</td>
+<td>
 <body>
 <h2>Текущее домашнее задание:</h2><br>
 Студенту показаны задачи из д.з. только до текущего включительно.
@@ -50,11 +60,6 @@ echo "<b>" . $currhometask['HometaskID'] . " - " . $currhometask['Topic'] . "</b
         <input type="submit" value="изменить">
 </form>
 <br>
-<a href="hometasks.php">Домашние задания</a> <br/>
-<a href="tasks.php">Задачи</a> <br>
-<a href="tests.php">Тесты</a> <br>
-<a href="results.php">Результаты всех студентов</a><br/>
-<a href="../login.php?exit=true">Выйти</a>
 <br>
 <br>
 <form action="index.php" method="POST">
@@ -130,12 +135,14 @@ echo "<b>" . $currhometask['HometaskID'] . " - " . $currhometask['Topic'] . "</b
         <td>".$rowsol[LoadTimestamp]."</td><td>" . $rowsol[Text] . "</td>
         <td>" .
             "<form action=\"check_solution.php\" method=\"POST\"><input type=\"hidden\" name=\"solutionid\" value=\"$rowsol[SolutionID]\">
-        <input type=\"submit\" style=\"background: url(../img/check.ico); height:128px; width:128px; line-height:12px;\" value=\"\"></form></td><td>" . $rowsol[TestResult] . "</td>";
+        <input type=\"submit\" style=\"background: url(../img/check.png); height:50px; width:50px; line-height:12px;\" value=\"\"></form></td><td>" . $rowsol[TestResult] . "</td>";
         }
     }
     ?>
 </table>
-
+</td>
+</tr>
+</table>
 
 
 </body>

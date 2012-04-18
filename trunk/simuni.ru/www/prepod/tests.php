@@ -53,7 +53,11 @@ if ($_POST['val'] != null) {
     }
 }
 ?>
-<form action="tests.php" method="POST">
+<table border="1">
+    <caption>
+        <h1>Список тестов:</h1>
+    </caption>
+	<form action="tests.php" method="POST">
     <p><select size="1" name="taskid">
         <option value="-1">Для всех задач</option>
         <?php
@@ -71,10 +75,6 @@ if ($_POST['val'] != null) {
     </select>
         <input type="submit" value="фильтровать">
 </form>
-<table border="1">
-    <caption>
-        <h2>Список тестов</h2>
-    </caption>
     <tr>
         <td>
             <b>Номер д.з.</b>
@@ -118,11 +118,11 @@ if ($_POST['val'] != null) {
         <td>" . $row[Smart] . "</td><td>" . $row[SmartHelp] . "</td>
         <td>" .
             "<form action=\"edit_test.php\" method=\"POST\"><input type=\"hidden\" name=\"testid\" value=\"$row[TestID]\">
-        <input type=\"submit\" value=\"редактировать\"></form></td><td>" .
+        <input type=\"submit\" style=\"background: url(../img/edit.png); height:50px; width:50px; line-height:12px;\" value=\"\"></form></td><td>" .
             "<form action=\"tests.php\" method=\"POST\" onSubmit=\"return confirm('Вы уверены?');\">
             <input type=\"hidden\" name=\"testid\" value=\"$row[TestID]\">
             <input type=\"hidden\" name=\"taskid\" value=\"$row[TaskID]\">
-        <input type=\"submit\" value=\"удалить\"></form></td></tr>";
+        <input type=\"submit\" style=\"background: url(../img/delete.jpg); height:50px; width:50px; line-height:12px;\" value=\"\"></td></tr>";
     }
     ?>
 </table>

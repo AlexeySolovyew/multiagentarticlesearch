@@ -10,6 +10,11 @@
 
 
 ?>
+<html>
+<head>
+ <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
 <form action="index.php" method="post">
     <input type="hidden" name="register" value="1">
     <table>
@@ -19,7 +24,7 @@
         </tr>
         <tr>
             <td>Пароль:</td>
-            <td><input type="password" name="password" /></td>
+            <td><input type="password" name="password"/></td>
         </tr>
         <tr>
             <td>Имя:</td>
@@ -39,4 +44,5 @@
         </tr>
     </table>
 </form>
-
+</body>
+</html>

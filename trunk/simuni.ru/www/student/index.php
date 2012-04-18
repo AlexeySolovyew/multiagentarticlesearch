@@ -3,6 +3,9 @@ if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожалуйста, авторизуйтесь <a href=\"../index.php\">здесь</a>");
 mysql_connect("localhost", "root", "12345678");
 mysql_select_db("simuni");
+$queryyuser = "SELECT * FROM `User` WHERE UserID='".$_SESSION['user_id']."'";
+$resuser = mysql_query($queryyuser);
+$row = mysql_fetch_array($resuser);
 ?>
 <html>
 <head>
@@ -10,7 +13,7 @@ mysql_select_db("simuni");
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
-<h1>Здравствуйте, <?php  echo $_SESSION['user_id']; ?>! </h1>
+<h1>Здравствуйте, <?php  echo $row['Name']; ?>! </h1>
 <div align="center"><h1>
 <?php
 $query = "SELECT DISTINCT TaskID FROM `User` JOIN Solution USING (UserID) JOIN Task USING (TaskID)
@@ -35,11 +38,12 @@ $query = "SELECT DISTINCT TaskID FROM `User` JOIN Solution USING (UserID) JOIN T
 <a href="load.php">Загрузить решение</a> <br>
 <a href="succ.php">Все загруженные решения</a> <br>
 <a href="history.php">История задач (ваши успехи)</a> <br>
+<a href="profile.php">Мой профиль</a> <br>
 <a href="../login.php?exit=true">Выйти</a>
 
 <table border="1">
     <caption>
-        <h2>Горячие задачи (отображены задачи, которые не зачтены, но крайний срок сдачи ещё не прошел):</h2>
+        <h2>Горячие задачи*</h2><br>
     </caption>
     <tr>
         <td>
@@ -93,13 +97,15 @@ $query = "SELECT DISTINCT TaskID FROM `User` JOIN Solution USING (UserID) JOIN T
         <td>".$row[Condition]."</td><td>" . $result . "</td>
         <td>" .
             "<form action=\"succ.php\" method=\"POST\"><input type=\"hidden\" name=\"taskid\" value=\"$row[TaskID]\">
-        <input type=\"submit\" value=\"загруженные решения задачи\"></form></td><td>" . $row[Deadline] . "</td>
+        <input type=\"submit\" style=\"background: url(../img/view.png); height:50px; width:50px; line-height:12px;\" value=\"\"></form></td><td>" . $row[Deadline] . "</td>
         <td>" .
             "<form action=\"load.php\" method=\"POST\"><input type=\"hidden\" name=\"taskid\" value=\"$row[TaskID]\">
-        <input type=\"submit\" value=\"загрузить\"></form></td></tr>";
+        <input type=\"submit\" style=\"background: url(../img/download.png); height:50px; width:50px; line-height:12px;\" value=\"\"></form></td></tr>";
         }
     }
     ?>
+	</table>
+	<p>* отображены задачи, которые не зачтены, но крайний срок сдачи ещё не прошел
 
 </body>
 </html>

@@ -14,7 +14,7 @@
 	<script type="text/javascript" src="http://userapi.com/js/api/openapi.js?49"></script>
 
 <script type="text/javascript">
-  VK.init({apiId: API_ID});
+  VK.init({apiId: 2910180});
 </script>
 </head>
 <body>
@@ -39,10 +39,10 @@
     </table>
 </form>
 </td>
-<td width="50%">
+<td align="center" width="50%">
 <div id="vk_auth"></div>
 <script type="text/javascript">
-VK.Widgets.Auth("vk_auth", {width: "200px", authUrl: '/register.php'});
+VK.Widgets.Auth("vk_auth", {width: "200px", authUrl: '<?php echo str_replace("login.php","index.php",$_SERVER["REQUEST_URI"]); ?>'});
 </script>
 </td>
 </tr>

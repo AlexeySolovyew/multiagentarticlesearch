@@ -53,6 +53,9 @@ else if ($_POST['taskid'] != null) {
 
 }
 ?>
+<table width="100%">
+<tr>
+<td>
 <form action="tasks.php" method="POST">
     <p><select size="1" name="hometaskid">
         <option value="-1">Для всех домашних заданий</option>
@@ -71,6 +74,14 @@ else if ($_POST['taskid'] != null) {
     </select>
         <input type="submit" value="фильтровать">
 </form>
+</td>
+<td align="center"><a href="add_task.php">Добавить задачу</a><td>
+<td align="right"><a href="../index.php">На главную</a><td>
+</tr>
+</table>
+<br>
+<br>
+
 <table border="1">
     <caption>
         <h2>Список задач</h2>
@@ -110,21 +121,18 @@ else if ($_POST['taskid'] != null) {
         echo "<tr><td>" . $row[HometaskID] . "</td><td>" . $row[TaskForHometask] . "</td><td>" . $row[Condition] . "</td>
         <td>" .
             "<form action=\"tests.php\" method=\"POST\"><input type=\"hidden\" name=\"taskid\" value=\"$row[TaskID]\">
-        <input type=\"submit\" value=\"тесты по задаче\"></form></td><td>".$row[Price]."</td>
+        <input type=\"submit\" style=\"background: url(../img/view.png); height:50px; width:50px; line-height:12px;\" value=\"\"></form></td><td>".$row[Price]."</td>
         <td>" .
             "<form action=\"edit_task.php\" method=\"POST\"><input type=\"hidden\" name=\"taskid\" value=\"$row[TaskID]\">
-        <input type=\"submit\" value=\"редактировать\"></form></td><td>" .
+        <input type=\"submit\" style=\"background: url(../img/edit.png); height:50px; width:50px; line-height:12px;\" value=\"\"></form></td><td>" .
             "<form action=\"tasks.php\" method=\"POST\" onSubmit=\"return confirm('Вы уверены?');\">
             <input type=\"hidden\" name=\"taskid\" value=\"$row[TaskID]\">
             <input type=\"hidden\" name=\"hometaskid\" value=\"$row[HometaskID]\">
-        <input type=\"submit\" value=\"удалить\"></form></td></tr>";
+        <input type=\"submit\" style=\"background: url(../img/delete.jpg); height:50px; width:50px; line-height:12px;\" value=\"\"></form></td></tr>";
     }
     ?>
 </table>
 
-<a href="add_task.php">Добавить задачу</a>
-<br>
-<a href="../index.php">На главную</a>
 </body>
 </form>
 </html>
