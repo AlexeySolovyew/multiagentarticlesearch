@@ -25,15 +25,24 @@ $resuser = mysql_query($queryyuser);
 $row = mysql_fetch_array($resuser);
 if ($row[RoleID]!=2) die("Студенту нельзя лезть к материалам преподавателя!");
 ?>
-<b>Измените нужные поля:</b>
+<table width="100%">
+<tr>
+<td><a href="hometasks.php">К домашним заданиям</a><td>
+<td><a href="../index.php">На главную</a><td>
 
+</tr>
+</table>
+<br/>
+<br/>
+<h2 align = "center">Страница редактирования домашнего задания</h2>
+<br/>
 <form action="hometasks.php" method="post">
 
-    Номер д.з.:<br>
+    Номер домашнего задания:<br>
     <?php
     $task = mysql_query("SELECT * from Hometask WHERE HometaskID=" . $_POST['hometaskid']);
     $currrow = mysql_fetch_array($task);
-    echo $currrow['HometaskID'];
+    echo "<b>".$currrow['HometaskID']."</b><br/>";
     ?>
     <br>
     Тема:<br>
@@ -41,7 +50,7 @@ if ($row[RoleID]!=2) die("Студенту нельзя лезть к матер
     Крайний срок сдачи:<br>
     <input name="dead" value="<?php echo $currrow['Deadline']?>"><br>
     <input type="hidden" name="hometaskid" value="<?php echo $_POST['hometaskid']?>">
-    <input type="subit" value="Принять изменения"><br>
+    <input type="submit" value="Принять изменения"><br>
 </form>
 </html>
 

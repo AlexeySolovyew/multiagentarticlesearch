@@ -17,10 +17,17 @@ isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожа
 mysql_connect("localhost", "root", "12345678");
 mysql_select_db("simuni");
 ?>
-<h2>Загрузка решения</h2>
-
+<table width="100%">
+<tr>
+<td align="right"><a href="index.php">На главную</a><td>
+</tr>
+</table>
+<br/>
+<br/>
+<h2 align = "center">Загрузка решения</h2>
+<br/>
 <form action="upload.php" method="post" enctype="multipart/form-data">
-    Номер задачи: <br>
+    <u>Номер задачи:</u> <br>
     <?php
     $tasks = mysql_query("SELECT * FROM Task WHERE HometaskID <= ALL
     (SELECT `Value` FROM GeneralInfo WHERE `Name`='CurrentHometaskID' )");
@@ -37,16 +44,15 @@ mysql_select_db("simuni");
         }
     }
     echo "</select><br>";
-    if (isset($cond)) echo "Условие: <br/>".$cond."<br/><br/>";
+    if (isset($cond)) echo "<u>Условие:</u> <br/>".$cond."<br/><br/>";
     ?>
-    Файл с задачей: <br>
+    <u>Файл с задачей:</u> <br>
     <input type="file" name="filename"><br>
     или<br>
-    Текст задачи: <br>
+    <u>Текст задачи:</u> <br>
     <textarea type="text" rows="10" cols="50" maxlength="1000" name="code"></textarea><br>
     <input type="submit" value="Загрузить и начать тестирование"><br>
 </form>
-<a href="index.php">Назад</a>
 <br>
 </body>
 </html>

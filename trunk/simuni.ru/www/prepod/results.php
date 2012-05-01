@@ -16,10 +16,16 @@ if ($row['RoleID'] != 2) die("Студенту нельзя лезть к мат
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
+<table width="100%">
+<tr>
+<td align="right"><a href="../index.php">На главную</a><td>
+</tr>
+</table>
+<br/>
+<h2 align="center">Таблица с результатами</h2>
+<br/>
 <table border="1">
-    <caption>
-        <h2>Студенты:</h2>
-    </caption>
+    
     <tr>
         <td>
             <b>Студент</b>
@@ -60,9 +66,5 @@ if ($row['RoleID'] != 2) die("Студенту нельзя лезть к мат
     }
     ?>
 </table>
-
-<a href="index.php">На главную</a>
-
-
 </body>
 </html>

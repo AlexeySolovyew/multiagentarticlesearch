@@ -13,6 +13,15 @@ $row = mysql_fetch_array($resuser);
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
+<table width="100%">
+<tr>
+<td><a href="load.php">Загрузить решение</a></td>
+<td><a href="succ.php">Все загруженные решения</a> </td>
+<td><a href="history.php">История задач</a> </td>
+<td><a href="profile.php">Мой профиль</a> </td>
+<td><a href="../login.php?exit=true">Выйти</a></td>
+</tr>
+</table>
 <h1>Здравствуйте, <?php  echo $row['Name']; ?>! </h1>
 <div align="center"><h1>
 <?php
@@ -29,17 +38,13 @@ $query = "SELECT DISTINCT TaskID FROM `User` JOIN Solution USING (UserID) JOIN T
         //посчитали к-во баллов юзверя
         $balls = $array[Priceall];
 		//ставим ноль вручную, если вообще ни одной зачтенной задачки
-		if ($balls==="0") $balls=0;
+		if (!isset($balls)) $balls="0";
 		echo "Общее число баллов: <b>".$balls."</b>";
 ?>
 </h1>
 </div>
 <br>
-<a href="load.php">Загрузить решение</a> <br>
-<a href="succ.php">Все загруженные решения</a> <br>
-<a href="history.php">История задач (ваши успехи)</a> <br>
-<a href="profile.php">Мой профиль</a> <br>
-<a href="../login.php?exit=true">Выйти</a>
+
 
 <table border="1">
     <caption>
@@ -47,10 +52,10 @@ $query = "SELECT DISTINCT TaskID FROM `User` JOIN Solution USING (UserID) JOIN T
     </caption>
     <tr>
         <td>
-            <b>Номер д.з.</b>
+            <b>Номер домашнего задания</b>
         </td>
         <td>
-            <b>Номер задачи в д.з.</b>
+            <b>Номер задачи в задании</b>
         </td>
         <td>
             <b>Условие</b>
@@ -97,7 +102,7 @@ $query = "SELECT DISTINCT TaskID FROM `User` JOIN Solution USING (UserID) JOIN T
         <td>".$row[Condition]."</td><td>" . $result . "</td>
         <td>" .
             "<form action=\"succ.php\" method=\"POST\"><input type=\"hidden\" name=\"taskid\" value=\"$row[TaskID]\">
-        <input type=\"submit\" style=\"background: url(../img/view.png); height:50px; width:50px; line-height:12px;\" value=\"\"></form></td><td>" . $row[Deadline] . "</td>
+        <input type=\"submit\" style=\"background: url(../img/check.png); height:50px; width:50px; line-height:12px;\" value=\"\"></form></td><td>" . $row[Deadline] . "</td>
         <td>" .
             "<form action=\"load.php\" method=\"POST\"><input type=\"hidden\" name=\"taskid\" value=\"$row[TaskID]\">
         <input type=\"submit\" style=\"background: url(../img/download.png); height:50px; width:50px; line-height:12px;\" value=\"\"></form></td></tr>";

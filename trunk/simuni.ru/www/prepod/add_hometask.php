@@ -13,7 +13,7 @@ isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожа
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Добавление д.з. - курс ФП</title>
+    <title>Добавление домашнего задания - курс ФП</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
@@ -25,7 +25,17 @@ $resuser = mysql_query($queryyuser);
 $row = mysql_fetch_array($resuser);
 if ($row[RoleID]!=2) die("Студенту нельзя лезть к материалам преподавателя!");
 ?>
-<b>Введите данные о новом задании:</b>
+<table width="100%">
+<tr>
+<td><a href="hometasks.php">К домашним заданиям</a><td>
+<td><a href="../index.php">На главную</a><td>
+
+</tr>
+</table>
+<br/>
+<br/>
+<h2 align = "center">Страница добавления домашнего задания</h2>
+<br/>
 <form action="hometasks.php" method="post">
 
     Введите тему нового домашнего задания:
@@ -36,7 +46,7 @@ if ($row[RoleID]!=2) die("Студенту нельзя лезть к матер
     ?>
     <input type="hidden" name="maxnum" value="<?php echo $row['Num']?>">
     Крайний срок сдачи:
-    <input name="dead"> (ГГГГ-ММ-ДД)<br>
-    <input type="submit" value="Добавить д.з."><br>
+    <input name="dead"> <b>(ГГГГ-ММ-ДД)</b><br>
+    <input type="submit" value="Добавить домашнее задание"><br>
 </form>
 </html>

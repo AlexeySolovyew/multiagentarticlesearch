@@ -4,7 +4,7 @@ isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожа
 ?>
 <html>
 <head>
-    <title>Результат загрузки файла</title>
+    <title>Результат загрузки решения</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
@@ -13,8 +13,18 @@ isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожа
 mysql_connect("localhost", "root", "12345678");
 mysql_select_db("simuni");
 ?>
-<p><b>Результат</b>:
-    <br/>
+<table width="100%">
+<tr>
+<td>
+<form action="load.php" method="POST"><input type="hidden" name="taskid" value="<?php echo $_POST[tasknum]?>">
+<input type="submit" value="Загрузить ещё решение"></form>
+</td>
+<td><a href="index.php">На главную</a><td>
+</tr>
+</table>
+<br/>
+<h2 align = "center">Результат тестирования</h2>
+<br/>
 
     <?php
     if ($_FILES["filename"]["size"] > 1024 * 3 * 1024) {
@@ -101,7 +111,6 @@ mysql_select_db("simuni");
     ?>
     <br/>
 
-<form action="load.php" method="POST"><input type="hidden" name="taskid" value="<?php echo $_POST[tasknum]?>">
-<input type="submit" value="Загрузить ещё решение"></form>
+
 </body>
 </html>
