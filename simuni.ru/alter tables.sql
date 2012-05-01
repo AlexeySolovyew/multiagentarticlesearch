@@ -43,3 +43,5 @@ ALTER TABLE  `Task` ADD  `Reward` INT NOT NULL AFTER  `Condition`
 ALTER TABLE  `Task` ADD  `Price` INT NOT NULL
 
 ALTER TABLE  `Hometask` CHANGE  `Topic`  `Topic` VARCHAR( 200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+
+ALTER TABLE  `test` ADD  `SmartHelp` VARCHAR( 300 ) NULL

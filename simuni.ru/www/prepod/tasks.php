@@ -24,9 +24,9 @@ if ($_POST['taskforhometask'] != null) {
         if (mysql_query("UPDATE Task SET TaskForHometask=".$_POST['taskforhometask'].",HometaskID=".$_POST['hometaskid']."
         ,`Condition`='".$_POST['condition']."
         ',Price=".$_POST['price']." WHERE TaskID=".$_POST['taskid'])) {
-            echo "Задача успешно отредактирована.<br>";
+            echo "<font color=\"green\">Задача успешно отредактирована.</font><br>";
         } else {
-            echo "Ошибка.<br>";
+            echo "<font color=\"red\">Ошибка.</font><br>";
         }
 
     } else {
@@ -37,25 +37,31 @@ if ($_POST['taskforhometask'] != null) {
     '" . $_POST['condition'] . "',".$_POST['price'].")"
         )
         ) {
-            echo "Задача успешно добавлена.<br>";
+            echo "<font color=\"green\">Задача успешно добавлена.</font><br>";
         } else {
-            echo "Задача не была добавлена.<br>";
+            echo "<font color=\"red\">Задача не была добавлена.</font><br>";
         }
     }
 }
 //обработка запроса на удаление задачи
 else if ($_POST['taskid'] != null) {
     if (mysql_query("DELETE FROM Task WHERE TaskID=" . $_POST['taskid'])) {
-        echo "Задача успешно удалена.<br>";
+        echo "<font color=\"green\">Задача успешно удалена.</font><br>";
     } else {
-        echo "Не удалось удалить задачу.<br>";
+        echo "<font color=\"red\">Не удалось удалить задачу.</font><br>";
     }
 
 }
 ?>
 <table width="100%">
 <tr>
-<td>
+<td ><a href="add_task.php">Добавить задачу</a><td>
+<td><a href="../index.php">На главную</a><td>
+</tr>
+</table>
+<br/>
+<br/>
+<h2 align = "center">Таблица с задачами</h2>
 <form action="tasks.php" method="POST">
     <p><select size="1" name="hometaskid">
         <option value="-1">Для всех домашних заданий</option>
@@ -74,18 +80,7 @@ else if ($_POST['taskid'] != null) {
     </select>
         <input type="submit" value="фильтровать">
 </form>
-</td>
-<td align="center"><a href="add_task.php">Добавить задачу</a><td>
-<td align="right"><a href="../index.php">На главную</a><td>
-</tr>
-</table>
-<br>
-<br>
-
 <table border="1">
-    <caption>
-        <h2>Список задач</h2>
-    </caption>
     <tr>
         <td>
             <b>Номер д.з.</b>

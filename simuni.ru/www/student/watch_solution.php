@@ -17,9 +17,20 @@ mysql_select_db("simuni");
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
+<table width="100%">
+<tr>
+<td>
+<a href="succ.php">Ко всем решениям</a>
+</td>
+<td><a href="index.php">На главную</a><td>
+</tr>
+</table>
+<br/>
+<h2 align = "center">Подробный просмотр решения</h2>
+<br/>
 
 
-    Загруженное рещение: <br>
+    <u>Загруженное решение:</u> <br>
     <pre><?php
         $query = "SELECT * FROM Solution WHERE SolutionID=" . $_POST['solutionid'];
         $solution = mysql_query($query);
@@ -28,14 +39,13 @@ mysql_select_db("simuni");
         //подсветка комментариев
         echo preg_replace("/---.*\n/","<font color=\"red\">\\0</font>",$text);
         ?></pre><br>
-    <p>Результат: <?php $hts = mysql_query("SELECT * FROM Result WHERE ResultID=".$row['ResultID']);
+    <p><u>Результат:</u><br/> <?php $hts = mysql_query("SELECT * FROM Result WHERE ResultID=".$row['ResultID']);
         $resultname = mysql_fetch_assoc($hts);
         echo $resultname['Text'];
         ?>
-        <br>
-     <p>Результат тестирования:<?php echo $row[TestResult];?><br/>
+     <p><u>Результат тестирования:</u><br/><?php echo $row[TestResult];?><br/>
 
-<a href="succ.php">Назад</a>
+
 
 </body>
 </html>

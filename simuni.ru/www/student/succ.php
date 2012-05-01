@@ -9,6 +9,15 @@ mysql_select_db("simuni");
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
+<table width="100%">
+<tr>
+<td align="right"><a href="../index.php">На главную</a><td>
+</tr>
+</table>
+<br/>
+<br/>
+<h2 align = "center">Загруженные решения</h2>
+<br/>
 <form action="succ.php" method="POST">
     <p><select size="1" name="taskid">
         <option value="-1">Для всех задач</option>
@@ -29,15 +38,12 @@ mysql_select_db("simuni");
      <input type="submit" value="фильтровать">
 </form>
 <table border="1">
-    <caption>
-        <h2>Загруженные решения:</h2>
-    </caption>
     <tr>
         <td>
-            <b>Номер д.з.</b>
+            <b>Номер домашнего задания</b>
         </td>
         <td>
-            <b>Номер задачи в д.з.</b>
+            <b>Номер задачи в задании</b>
         </td>
         <td>
             <b>Время загрузки</b>
@@ -74,6 +80,5 @@ mysql_select_db("simuni");
     <br/>
 
 </table>
-<a href="../index.php">На главную</a>
 </body>
 </html>

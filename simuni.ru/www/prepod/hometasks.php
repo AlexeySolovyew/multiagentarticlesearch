@@ -3,7 +3,7 @@ if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожалуйста, авторизуйтесь <a href=\"../index.php\">здесь</a>");?>
 <html>
 <head>
-    <title>Все д.з. - курс ФП</title>
+    <title>Все домашние задания - курс ФП</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
@@ -19,33 +19,39 @@ if ($_POST['topic'] != null) {
     //обработка запроса на редактирование задачи
     if ($_POST['hometaskid'] != null) {
         if (mysql_query("UPDATE Hometask SET Topic='".$_POST['topic']."',Deadline='".$_POST['dead']."' WHERE HometaskID=".$_POST['hometaskid'])) {
-            echo "Д.з. успешно отредактировано.<br>";
+            echo "<font color=\"green\">Домашнее задание успешно отредактировано.</font><br>";
         } else {
-            echo "Ошибка.<br>";
+            echo "<font color=\"red\">Ошибка.</font><br>";
         }
 
     } else {
         if (mysql_query("INSERT INTO Hometask (HometaskID,Topic,Deadline) VALUES (".($_POST['maxnum']+1).",'" . $_POST['topic'] . "','".$_POST['dead']."')")) {
-            echo "Д.з. успешно добавлено.<br>";
+            echo "<font color=\"green\">Домашнее задание успешно добавлено.</font><br>";
         } else {
-            echo "Д.з. не было добавлено.<br>";
+            echo "<font color=\"red\">Домашнее задание не было добавлено.</font><br>";
         }
     }
 }
 //обработка запроса на удаление задачи
 else if ($_POST['hometaskid'] != null) {
     if (mysql_query("DELETE FROM Hometask WHERE HometaskID=" . $_POST['hometaskid'])) {
-        echo "Д.з. успешно удалено.<br>";
+        echo "<font color=\"green\">Домашнее задание успешно удалено.</font><br>";
     } else {
-        echo "Не удалось удалить д.з..<br>";
+        echo "<font color=\"red\">Не удалось удалить домашнее задание.</font><br>";
     }
 
 }
 ?>
+<table width="100%">
+<tr>
+<td ><a href="add_hometask.php">Добавить домашнее задание</a>
+<td><a href="../index.php">На главную</a><td>
+</tr>
+</table>
+<br/>
+<br/>
+<h2 align = "center">Таблица с домашними заданиями</h2>
 <table border="1">
-    <caption>
-        <h2>Список всех домашних заданий</h2>
-    </caption>
     <tr>
         <td>
             <b>Номер д.з.</b>
@@ -85,10 +91,6 @@ else if ($_POST['hometaskid'] != null) {
     }
     ?>
 </table>
-
-<a href="add_hometask.php">Добавить ещё д.з.</a>
-<br>
-<a href="../index.php">На главную</a>
 </body>
 </form>
 </html>

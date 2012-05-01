@@ -23,13 +23,16 @@ if ($_POST['val'] != null) {
     }
     if ($_POST['testid'] == null) {
         //добавление нового теста
+		echo "INSERT INTO Test (Expression,Result,TaskID,Smart,TestForTaskID,SmartHelp) VALUES (\"" . $_POST['expr'] . "\",\"" .
+            $_POST['val'] . "\",\"" . $_POST['taskid'] . "\",\""
+            . $smart . "\",\"" . $_POST['testfortask'] . "\",\"" . $_POST['help'] . "\")";
         if (mysql_query("INSERT INTO Test (Expression,Result,TaskID,Smart,TestForTaskID,SmartHelp) VALUES (\"" . $_POST['expr'] . "\",\"" .
             $_POST['val'] . "\",\"" . $_POST['taskid'] . "\",\""
             . $smart . "\",\"" . $_POST['testfortask'] . "\",\"" . $_POST['help'] . "\")")
         ) {
-            echo "<div>Тест успешно добавлен.</div><br>";
+            echo "<div><font color=\"green\">Тест успешно добавлен.</font></div><br>";
         } else {
-            echo "<div>Тест не был добавлен.</div><br>";
+            echo "<div><font color=\"red\">Тест не был добавлен.</font></div><br>";
         }
     } else {
         //редактирование теста
@@ -38,26 +41,51 @@ if ($_POST['val'] != null) {
         if (mysql_query("UPDATE Test SET Expression='" . $_POST['expr'] . "',Result='" . $_POST['val'] . "',TaskID='" . $_POST['taskid'] . "',
         Smart='" . $smart . "',TestForTaskID='" . $_POST['testfortask'] . "',SmartHelp='".$_POST['help']."' WHERE TestID=" . $_POST['testid'])
         ) {
-            echo "Тест успешно отредактирован.<br>";
+            echo "<font color=\"green\">Тест успешно отредактирован.</font><br>";
         } else {
-            echo "Ошибка.<br>";
+            echo "<font color=\"red\">Ошибка.</font><br/>";
         }
 
     }
 } else if ($_POST['testid'] != null) {
     //удаление теста
     if (mysql_query("DELETE FROM Test WHERE TestID=" . $_POST['testid'])) {
-        echo "Тест успешно удален.<br>";
+        echo "<font color=\"green\">Тест успешно удален.</font><br>";
     } else {
-        echo "Не удалось удалить тест.<br>";
+        echo "<font color=\"red\">Не удалось удалить тест.</font><br>";
     }
 }
 ?>
-<table border="1">
-    <caption>
-        <h1>Список тестов:</h1>
-    </caption>
-	<form action="tests.php" method="POST">
+<table width="100%">
+<tr>
+<td ><form action="add_test.php" method="post">
+	Задачи в списке отображаются в виде:<br> <b>{номер домашнего задания - номер задачи в этом задании}</b>
+    <?php
+    $tasks = mysql_query("SELECT * FROM Task");
+    $q = mysql_num_rows($tasks);
+    echo "<p><select size=\"1\" name=\"taskid\">";
+    echo "<option disabled>Выберите задачу</option>";
+    for ($i = 0; $i < $q; $i++) {
+        $row = mysql_fetch_array($tasks);
+        if (strcmp($_POST['taskid'], $row['TaskID']) == 0) {
+            echo "<option selected value=" . $row['TaskID'] . ">" . $row['HometaskID'] . " - " . $row['TaskForHometask'] . "</option>";
+        } else {
+            echo "<option value=" . $row['TaskID'] . ">" . $row['HometaskID'] . " - " . $row['TaskForHometask'] . "</option>";
+        }
+
+    }
+    echo "</select>";
+    ?>
+    <br>
+    <input type="submit" value="Добавить новый тест">
+</form><td>
+<td><a href="../index.php">На главную</a><td>
+</tr>
+</table>
+<br/>
+<br/>
+<h2 align="center">Таблица с тестами</h2>
+<form action="tests.php" method="POST">
     <p><select size="1" name="taskid">
         <option value="-1">Для всех задач</option>
         <?php
@@ -75,6 +103,7 @@ if ($_POST['val'] != null) {
     </select>
         <input type="submit" value="фильтровать">
 </form>
+<table border="1">
     <tr>
         <td>
             <b>Номер д.з.</b>
@@ -126,31 +155,5 @@ if ($_POST['val'] != null) {
     }
     ?>
 </table>
-<br>
-<br>
-
-<form action="add_test.php" method="post">
-    Перейти к добавлению нового теста для задачи ({номер д.з. - номер задачи в д.з.}):
-    <?php
-    $tasks = mysql_query("SELECT * FROM Task");
-    $q = mysql_num_rows($tasks);
-    echo "<p><select size=\"1\" name=\"taskid\">";
-    echo "<option disabled>Выберите задачу</option>";
-    for ($i = 0; $i < $q; $i++) {
-        $row = mysql_fetch_array($tasks);
-        if (strcmp($_POST['taskid'], $row['TaskID']) == 0) {
-            echo "<option selected value=" . $row['TaskID'] . ">" . $row['HometaskID'] . " - " . $row['TaskForHometask'] . "</option>";
-        } else {
-            echo "<option value=" . $row['TaskID'] . ">" . $row['HometaskID'] . " - " . $row['TaskForHometask'] . "</option>";
-        }
-
-    }
-    echo "</select>";
-    ?>
-    <br>
-    <input type="submit" value="Добавить новый тест">
-</form>
-<br>
-<a href="../index.php">На главную</a>
 </body>
 </html>

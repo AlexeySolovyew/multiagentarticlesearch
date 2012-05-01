@@ -16,14 +16,22 @@ $resuser = mysql_query($queryyuser);
 $row = mysql_fetch_array($resuser);
 if ($row[RoleID]!=2) die("Студенту нельзя лезть к материалам преподавателя!");
 ?>
-<b>Выберите параметры нового теста:</b>
+<table width="100%">
+<tr>
+<td align="right"><a href="tests.php">К тестам</a><td>
+<td align="right"><a href="../index.php">На главную</a><td>
+</tr>
+</table>
+<br/>
+<h2 align="center">Страница добавления теста </h2>
+<br/>
 <?php
 $res = mysql_query("SELECT * FROM Task WHERE TaskID=".$_POST['taskid']);
 $row=mysql_fetch_array($res);
 if ($_POST['taskid'] != null) {
-    echo "<p>Добавление нового теста к <b>".$row[TaskForHometask]."</b> задаче из <b>" . $row[HometaskID] . "</b> домашнего задания";
+    echo "<p>Добавление нового теста к <b>".$row[TaskForHometask]."</b> задаче из <b>" . $row[HometaskID] . "</b> домашнего задания.";
 } else {
-    echo "Не указан номер задачи, ахтунг";
+    echo "Не указан номер задачи.";
 }
 ?>
 <form action="tests.php" method="post">
@@ -38,15 +46,14 @@ if ($_POST['taskid'] != null) {
     echo "<input type=\"hidden\" name=\"taskid\" value=\"" . $_POST['taskid'] . "\">";
 
     ?>
-    Выражение:
-    <input name="expr"><br>
-    Ожидаемое значение:
-    <input name="val"><br>
-    Хитрый тест:
+    Выражение:<br/>
+    <input name="expr" value=""><br>
+    Ожидаемое значение:<br/>
+    <input name="val" value=""><br>
+    Хитрый тест:<br/>
     <input name="smart" type="checkbox"><br>
-    Подсказка к хитрому тесту:
+    Подсказка к хитрому тесту:<br/>
     <textarea name="help"></textarea><br>
     <input type="submit" value="Добавить тест"><br>
 </form>
-<a href="index.php">На главную</a>
 </html>

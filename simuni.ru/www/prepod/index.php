@@ -27,16 +27,15 @@ if ($row['RoleID']!=2) die("Студенту нельзя лезть к мате
 <td>
 <body>
 <h2>Текущее домашнее задание:</h2><br>
-Студенту показаны задачи из д.з. только до текущего включительно.
 <br/>
 <?php
 $result = "0";
     if (isset($_POST['resultid'])) $result = $_POST['resultid'];
 if (isset($_POST['hometaskid'])){
     if (mysql_query("UPDATE GeneralInfo SET Value=".$_POST['hometaskid']." WHERE `Name`='CurrentHometaskID'")) {
-        echo "Текущее д.з. успешно изменено.<br>";
+        echo "<font color=\"green\">Текущее д.з. успешно изменено.</font><br>";
     } else {
-        echo "Ошибка.<br>";
+        echo "<font color=\"red\">Ошибка. Пожалуйста, попробуйте позже.</font><br>";
     }
 }
 $info = mysql_query("SELECT * from GeneralInfo WHERE `Name`='CurrentHometaskID'");
@@ -59,9 +58,12 @@ echo "<b>" . $currhometask['HometaskID'] . " - " . $currhometask['Topic'] . "</b
     </select>
         <input type="submit" value="изменить">
 </form>
+<br/>
+Студентам доступны задачи из домашних заданий только до текущего <u>включительно</u>.
 <br>
 <br>
 <br>
+<h2 align="center">Таблица загруженных студентами решений</h2>
 <form action="index.php" method="POST">
     <p><select size="1" name="resultid">
         <?php
@@ -85,9 +87,6 @@ echo "<b>" . $currhometask['HometaskID'] . " - " . $currhometask['Topic'] . "</b
         <input type="submit" value="фильтровать">
 </form>
 <table border="1">
-    <caption>
-        <h2>Загруженные решения:</h2>
-    </caption>
     <tr>
         <td>
             <b>Студент</b>

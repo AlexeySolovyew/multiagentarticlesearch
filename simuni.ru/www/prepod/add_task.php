@@ -16,7 +16,14 @@ $resuser = mysql_query($queryyuser);
 $row = mysql_fetch_array($resuser);
 if ($row[RoleID]!=2) die("Студенту нельзя лезть к материалам преподавателя!");
 ?>
-<h1>Введите данные о новой задаче:</h1>
+<table width="100%">
+<tr>
+<td align="right"><a href="tasks.php">К задачам</a><td>
+<td align="right"><a href="../index.php">На главную</a><td>
+</tr>
+</table>
+<br/>
+<h2 align="center">Страница добавления задачи</h2>
 <br>
 <br>
 <form action="tasks.php" method="post">

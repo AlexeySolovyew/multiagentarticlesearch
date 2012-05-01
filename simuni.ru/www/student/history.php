@@ -10,7 +10,15 @@ mysql_select_db("simuni");
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
-<a href="index.php">На главную</a> <br>
+<table width="100%">
+<tr>
+<td align="right"><a href="../index.php">На главную</a><td>
+</tr>
+</table>
+<br/>
+<br/>
+<h2 align = "center">История выполнения заданий</h2>
+<br/>
 <form action="history.php" method="POST">
     <p><select size="1" name="resid">
         <option value="-1">Все результаты</option>
@@ -35,15 +43,12 @@ mysql_select_db("simuni");
      <input type="submit" value="фильтровать">
 </form>
 <table border="1">
-    <caption>
-        <h2>История выполнения задач:</h2>
-    </caption>
     <tr>
         <td>
-            <b>Номер д.з.</b>
+            <b>Номер домашнего задания</b>
         </td>
         <td>
-            <b>Номер задачи в д.з.</b>
+            <b>Номер задачи в задании</b>
         </td>
         <td>
             <b>Условие</b>

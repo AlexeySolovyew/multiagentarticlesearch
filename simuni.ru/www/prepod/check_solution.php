@@ -28,24 +28,21 @@ if ($row[RoleID]!=2) die("Студенту нельзя лезть к матер
 if ($_POST['code'] != null) {
     $query = "UPDATE Solution SET Code='" . $_POST['code'] . "',ResultID=" . $_POST['resultid'] . " WHERE SolutionID=" . $_POST['solutionid'];
     if (mysql_query($query)) {
-        echo "Решение студента успешно отредактировано.<br>";
+        echo "<font color=\"green\">Решение студента успешно отредактировано.</font><br>";
     } else {
-        echo "Ошибка.<br>";
+        echo "<font color=\"red\">Ошибка.</font><br>";
     }
 }
 $query = "SELECT * FROM Solution JOIN Task USING (TaskID) WHERE SolutionID=" . $_POST['solutionid'];
 $solution = mysql_query($query);
 $row = mysql_fetch_array($solution);
 ?>
-
 <form action="check_solution.php" method="POST">
-    <input type="hidden" name="solutionid" value="<?php echo $_POST['solutionid'];?>">
-    Номер задачи: <?php echo $row[HometaskID]." - ".$row[TaskForHometask]?><br/>
-    Условие: <?php echo $row[Condition]?><br/>
-    Текст решения: <br>
-    <textarea id="code" rows="15" cols="100" name="code"><?php echo $row['Code'];?></textarea><br>
-
-    <p><select size="1" name="resultid">
+<table width="100%">
+<tr>
+<td>
+<u>Статус решения:</u>
+<select size="1" name="resultid">
         <?php
         $hts = mysql_query("SELECT * FROM Result");
         $q = mysql_num_rows($hts);
@@ -59,16 +56,35 @@ $row = mysql_fetch_array($solution);
         }
         ?>
     </select>
-        <br>
-        <input type="submit" value="Сохранить изменения">
+</td>
+<td>
+<input type="submit" value="Сохранить изменения">
+</td>
+<td><form action="add_test.php" method="post">
+    <input type="hidden" name="taskid" value="<?php echo $row[TaskID]?>">
+    <input type="submit" value="Новый тест для этой задачи">
+</form></td>
+<td><a href="../index.php">На главную</a></td>
+</tr>
+</table>
+<br/>
+<h2 align = "center">Работа с присланным решением</h2>
+<br/>
+    <input type="hidden" name="solutionid" value="<?php echo $_POST['solutionid'];?>">
+    <u>Задача:</u> <br/><?php echo $row[HometaskID]." - ".$row[TaskForHometask]?><br/><br/>
+    <u>Условие:</u> <br/><?php echo $row[Condition]?><br/><br/>
+    <u>Текст решения*:</u> <br>
+	* комментарии, помеченные "---", будут выделяться цветом в системе студента</br>
+    <textarea id="code" rows="15" cols="115" name="code"><?php echo $row['Code'];?></textarea><br>
 </form>
-<a href="index.php">Назад</a>
 
+
+<!-- консоль -->
 <div id="term"></div>
 <script type="text/javascript">
     jQuery(document).ready(function ($) {
         $('#term').terminal(function (command, term) {
-            if (command === 'pause') {
+            if (command === 'p') {
                 term.pause('Paused...');
             } else if (command !== '') {
                 term.pause();
@@ -91,17 +107,12 @@ $row = mysql_fetch_array($solution);
                 term.echo('Please enter a command');
             }
         }, {
-            greetings:'Here you can evaluate expressions\nType \"pause\" for editing code of the solution, when edited, press button below',
+            greetings:'Here you can evaluate expressions\nType \"p\" for editing code of the solution, when edited, press button below',
             name:'haskell',
             height:200,
             prompt:'ghc>'});
     });
 </script>
-<form action="add_test.php" method="post">
-    <input type="hidden" name="taskid" value="<?php echo $row[TaskID]?>">
-    <input type="submit" value="Добавить новый тест для этой задачи">
-</form>
-
 </body>
 </html>
 

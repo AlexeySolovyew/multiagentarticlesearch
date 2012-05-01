@@ -16,9 +16,9 @@ if (isset($_POST['login'])){
   $updateSql = "UPDATE `User` SET Name='".$_POST['name']."', Surname='".$_POST['surname']."', GroupNumber=".$_POST['gnum'].", Password='".$_POST['password']."' WHERE UserID='".$_POST['login']."'";
   
   if (mysql_query($updateSql)) {
-  echo "Информация успешно отредактирована";
+  echo "<font color=\"green\">Информация успешно отредактирована.</font>";
   } else {
-  echo "Ошибка";
+  echo "<font color=\"red\">Ошибка.</font>";
   }
   
 }
@@ -36,9 +36,15 @@ if (isset($_POST['login'])){
  <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
-
-<a href="index.php"На главную></a>
-<h1>Редактирование профиля</h1>
+<table width="100%">
+<tr>
+<td align="right"><a href="../index.php">На главную</a><td>
+</tr>
+</table>
+<br/>
+<br/>
+<h2 align = "center">Редактирование профиля</h2>
+<br/>
 <form action="profile.php" method="post">
     <table>
 	<input type="hidden" name="login" value="<?php echo $_SESSION['user_id'];?>">
