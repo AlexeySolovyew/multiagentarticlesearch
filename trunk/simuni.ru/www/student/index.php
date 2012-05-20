@@ -22,7 +22,7 @@ $row = mysql_fetch_array($resuser);
 <td><a href="../login.php?exit=true">Выйти</a></td>
 </tr>
 </table>
-<h1>Здравствуйте, <?php  echo $row['Name']; ?>! </h1>
+<h1>Здравствуйте, &nbsp  <?php  echo $row['Name']; ?>! </h1>
 <div align="center"><h1>
 <?php
 $query = "SELECT DISTINCT TaskID FROM `User` JOIN Solution USING (UserID) JOIN Task USING (TaskID)

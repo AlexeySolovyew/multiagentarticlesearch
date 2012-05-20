@@ -37,6 +37,12 @@ if ($_POST['taskid'] != null) {
 <form action="tests.php" method="post">
 
     <?php
+	
+	$cond = mysql_query("SELECT `Condition` FROM Task WHERE TaskID=".$_POST['taskid']);
+	//echo "SELECT Condition FROM Task WHERE TaskID=".$_POST['taskid'];
+	$rowCond = mysql_fetch_array($cond);
+	echo "<u>Условие:</u> <br/>".$rowCond['Condition'];
+	echo "<br/><br/>";
 
     $maxnum = mysql_query("SELECT MAX(TestForTaskID) AS TestNum FROM Test WHERE TaskID=" . $_POST['taskid']);
     $row = mysql_fetch_array($maxnum);

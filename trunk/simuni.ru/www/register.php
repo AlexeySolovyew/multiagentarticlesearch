@@ -15,6 +15,11 @@
  <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+<h1 align = "center">Регистрация нового пользователя</h1>
+<br/>
+<b>Пожалуйста, заполните все поля</b>
+<br/>
+<br/>
 <form action="index.php" method="post">
     <input type="hidden" name="register" value="1">
     <table>
@@ -25,6 +30,10 @@
         <tr>
             <td>Пароль:</td>
             <td><input type="password" name="password"/></td>
+        </tr>
+		<tr>
+            <td>Подтверждение пароля:</td>
+            <td><input type="password" name="password2"/></td>
         </tr>
         <tr>
             <td>Имя:</td>

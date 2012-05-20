@@ -55,7 +55,27 @@ else if ($_POST['taskid'] != null) {
 ?>
 <table width="100%">
 <tr>
-<td ><a href="add_task.php">Добавить задачу</a><td>
+<td ><form action="add_task.php" method="post">
+	
+    <?php
+    $tasks = mysql_query("SELECT * FROM Hometask");
+    $q = mysql_num_rows($tasks);
+    echo "<p><select size=\"1\" name=\"hometaskid\">";
+    echo "<option disabled>Выберите задание</option>";
+    for ($i = 0; $i < $q; $i++) {
+        $row = mysql_fetch_array($tasks);
+        if (strcmp($_POST['hometaskid'], $row['HometaskID']) == 0) {
+           echo "<option selected value=" . $row['HometaskID'] . ">".$row['Topic']."</option>";
+        } else {
+            echo "<option value=" . $row['HometaskID'] . ">" . $row['Topic']. "</option>";
+        }
+
+    }
+    echo "</select>";
+    ?>
+    <br>
+    <input type="submit" value="Добавить задачу">
+</form><td>
 <td><a href="../index.php">На главную</a><td>
 </tr>
 </table>
