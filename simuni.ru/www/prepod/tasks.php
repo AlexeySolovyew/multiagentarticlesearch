@@ -29,18 +29,6 @@ if ($_POST['taskforhometask'] != null) {
             echo "<font color=\"red\">Ошибка.</font><br>";
         }
 
-    } else {
-        //echo "INSERT INTO Task (TaskForHometask,HometaskID,Condition) VALUES (\"" . $_POST['taskforhometask'] . "\",\"" . $_POST['hometaskid'] . "\",
-        //\"" . $_POST['condition'] . "\")";
-        //обработка запроса на добавление новой задачи
-        if (mysql_query("INSERT INTO Task (TaskForHometask,HometaskID,`Condition`,Price) VALUES (\"" . $_POST['taskforhometask'] . "\",\"" . $_POST['hometaskid'] . "\",
-    '" . $_POST['condition'] . "',".$_POST['price'].")"
-        )
-        ) {
-            echo "<font color=\"green\">Задача успешно добавлена.</font><br>";
-        } else {
-            echo "<font color=\"red\">Задача не была добавлена.</font><br>";
-        }
     }
 }
 //обработка запроса на удаление задачи

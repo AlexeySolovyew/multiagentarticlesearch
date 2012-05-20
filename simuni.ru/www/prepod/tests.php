@@ -151,7 +151,7 @@ if ($_POST['val'] != null) {
             "<form action=\"tests.php\" method=\"POST\" onSubmit=\"return confirm('Вы уверены?');\">
             <input type=\"hidden\" name=\"testid\" value=\"$row[TestID]\">
             <input type=\"hidden\" name=\"taskid\" value=\"$row[TaskID]\">
-        <input type=\"submit\" style=\"background: url(../img/delete.jpg); height:50px; width:50px; line-height:12px;\" value=\"\"></td></tr>";
+        <input type=\"submit\" style=\"background: url(../img/delete.jpg); height:50px; width:50px; line-height:12px;\" value=\"\"></form></td></tr>";
     }
     ?>
 </table>
