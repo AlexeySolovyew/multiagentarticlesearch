@@ -1,3 +1,1 @@
-gegrthrygyrgygcetg
-
-tgctegcteghxtg
+rev x = rev x

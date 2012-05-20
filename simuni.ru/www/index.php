@@ -39,6 +39,10 @@ if (isset($_SESSION['user_id'])) {
     $row = mysql_fetch_assoc($sql);
     redirectToStartPage($row);
 } elseif (isset($_POST['register'])) {
+	if (strcmp($_POST['password'],$_POST['password2'])!=0){
+		echo "<font color=\"red\">Пожалуйста, введите в обоих полях ввода пароля одинаковые пароли.</font><br>";
+	
+	} else {
     $queryIns = "INSERT INTO `User` (UserID,Password,Name,Surname,GroupNumber)" .
         "VALUES ('" . $_POST['login'] . "','" . $_POST['password'] . "','" . $_POST['name'] . "','" . $_POST['surname'] . "',
     '" . $_POST['gnum'] . "')";
@@ -47,6 +51,7 @@ if (isset($_SESSION['user_id'])) {
     } else {
         echo "<font color=\"red\">Вы не зарегистрированы. Пожалуйста, проверьте правильность полей.</font><br>";
     }
+	}
 } elseif (isset($_POST['login']) && isset($_POST['password'])) {
     $login = mysql_real_escape_string($_POST['login']);
     //$password = md5($_POST['password']);

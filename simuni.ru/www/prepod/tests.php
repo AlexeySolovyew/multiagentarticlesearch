@@ -23,9 +23,9 @@ if ($_POST['val'] != null) {
     }
     if ($_POST['testid'] == null) {
         //добавление нового теста
-		echo "INSERT INTO Test (Expression,Result,TaskID,Smart,TestForTaskID,SmartHelp) VALUES (\"" . $_POST['expr'] . "\",\"" .
+		/*echo "INSERT INTO Test (Expression,Result,TaskID,Smart,TestForTaskID,SmartHelp) VALUES (\"" . $_POST['expr'] . "\",\"" .
             $_POST['val'] . "\",\"" . $_POST['taskid'] . "\",\""
-            . $smart . "\",\"" . $_POST['testfortask'] . "\",\"" . $_POST['help'] . "\")";
+            . $smart . "\",\"" . $_POST['testfortask'] . "\",\"" . $_POST['help'] . "\")";*/
         if (mysql_query("INSERT INTO Test (Expression,Result,TaskID,Smart,TestForTaskID,SmartHelp) VALUES (\"" . $_POST['expr'] . "\",\"" .
             $_POST['val'] . "\",\"" . $_POST['taskid'] . "\",\""
             . $smart . "\",\"" . $_POST['testfortask'] . "\",\"" . $_POST['help'] . "\")")
@@ -106,10 +106,10 @@ if ($_POST['val'] != null) {
 <table border="1">
     <tr>
         <td>
-            <b>Номер д.з.</b>
+            <b>Номер домашнего задания</b>
         </td>
         <td>
-            <b>Номер задачи в д.з.</b>
+            <b>Номер задачи в домашнем задании</b>
         </td>
         <td>
             <b>Номер теста для задачи</b>

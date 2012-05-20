@@ -64,8 +64,21 @@ mysql_select_db("simuni");
         //echo $real_file_path;
     }
 
+	set_time_limit(30);
     //пытаемся прогнать все тесты
-    $testresult="";
+	$timeout=10;
+	$sleep = 1;
+    $testresult="";	
+	
+	//создаем файл, в который будем писать результаты работы haskell (нужно для запуска в фоновом режиме)
+	$resfiledir = "../../files/res.txt";
+	 if (!file_exists($resfiledir)) {
+            $fp = fopen($resfiledir, "w");
+            fclose($fp);
+        }
+	$realresdir = realpath($resfiledir);
+	//echo $realresdir;
+	
     echo "Загружаем тестовую базу...<br>";
     $tasktests = mysql_query("SELECT * FROM Test WHERE TaskID=" . $_POST['tasknum']);
     if ($tasktests) {
@@ -74,13 +87,37 @@ mysql_select_db("simuni");
         for ($i = 0; $i < $q; $i++) {
             $row = mysql_fetch_array($tasktests);
             echo "Прогоняется тест номер: " . $i . "<br>";
-            //$line = exec("ghc -e \"".$row[Expression]."\" ".$filedir,$line,$result);
-            //echo "ghc -e \"".$row[Expression]."\" ".$real_file_path;
-            $line = exec("ghc -e \"" . $row[Expression] . "\" " . $real_file_path, $array, $result);
+			//echo "start /b ghc -e \"" . $row[Expression] . "\" " . $real_file_path . " > ".$realresdir;
+            //exec("start /b ghc -e \"" . $row[Expression] . "\" " . $real_file_path . " > ".$realresdir/*, $array*/);
+			popen("start /b ghc -e \"" . $row[Expression] . "\" " . $real_file_path . " > ".$realresdir,"r");
+			//$pid = (int) $array[0];
+			//ждем 10 секунд, потом насильно завершаем процесс
+			 $cur = 0;
+			// пока не истекло время отведенное на выполнение скрипта продолжаем ждать
+			while( true ) {
+				sleep($sleep);
+				$cur += $sleep;
+				//echo "Current timeout: ".$cur;
+				$tasklist = exec("tasklist | find /c /i \"ghc.exe\"");
+				//echo "tasklist | find /c /i \"ghc.exe\"";
+				//echo $tasklist;
+				if($tasklist != "0") {
+					if ($cur >= $timeout){
+						$linekill = exec("taskkill /F /IM ghc.exe");
+						//echo $linekill;
+						break;
+					} 
+				} else {
+					break;
+				}
+			}
+			
             //echo $result;
+			$line = file_get_contents($realresdir);
+			$line = trim($line);
 			//echo $line;
-			//echo "ghc -e \"" . $row[Expression] . "\" " . $real_file_path;
-            if ($result != 0 || $line == "") {
+			//echo "ghc -e \"" . $row[Expression] . "\" " . $real_file_path . " > ".$realresdir;
+            if ($line === "") {
                 $testresult = "Не удалось вычислить выражение \"" . $row[Expression] . "\", проверьте правильность синтаксиса";
                 echo $testresult;
                 break;
@@ -107,7 +144,8 @@ mysql_select_db("simuni");
         echo "Неверно выбрана задача...";
     }
     //удаляем временный файл
-    if (isset($filedir)) unlink($filedir);
+	//TODO: раскомментить
+    //if (isset($filedir)) unlink($filedir);
     ?>
     <br/>
 

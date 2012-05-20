@@ -28,25 +28,26 @@ if ($row[RoleID]!=2) die("Студенту нельзя лезть к матер
 <br>
 <form action="tasks.php" method="post">
 
-    Номер д.з.:<br>
-    <?php
-    $tasks = mysql_query("SELECT HometaskID,Topic FROM Hometask");
-    $q = mysql_num_rows($tasks);
-    echo "<p><select size=\"1\" name=\"hometaskid\">";
-    echo "<option disabled>Номер домашнего задания</option>";
-    for ($i = 0; $i < $q; $i++) {
-        $row = mysql_fetch_array($tasks);
-        echo "<option value=" . $row['HometaskID'] . ">" . $row['HometaskID'] . " - ".$row['Topic']."</option>";
-    }
-    echo "</select>";
-    ?>
-    <br>
-    Номер задачи в д.з.:<br>
-    <input name="taskforhometask"><br>
+    Домашнее задание:<br>
+    <?php $tmp = mysql_query("SELECT Topic FROM Hometask WHERE HometaskID=".$_POST['hometaskid']);
+	$row = mysql_fetch_array($tmp);
+	$name = $row['Topic'];
+	echo "<b>".$_POST['hometaskid']." - ".$name."</b>";?>
+    <br/>
+	<br/>
+	В этом задании уже есть <b><?php 
+	$maxnum = mysql_query("SELECT MAX(TaskForHometask) AS TaskNum FROM Task WHERE HometaskID=" . $_POST['hometaskid']);
+    $row = mysql_fetch_array($maxnum);
+    echo $row['TaskNum'];?></b> задач(а) для данного задания
+	<br/>
+	<br/>
+    Номер задачи в задании:<br>
+    <input name="taskforhometask"><br><br/>
     Условие:<br>
-    <textarea cols="50" rows="10" name="condition"></textarea><br>
+    <textarea cols="50" rows="10" name="condition"></textarea><br><br/>
     Цена задачи:<br>
-    <input name="price"><br>
+    <input name="price"><br><br/>
+	<input type="hidden" name="hometaskid" value="<?php echo $_POST['hometaskid'];?>">
     <input type="submit" value="Добавить задачу"><br>
 </form>
 </html>
