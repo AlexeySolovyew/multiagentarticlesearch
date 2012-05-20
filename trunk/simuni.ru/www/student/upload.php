@@ -66,7 +66,7 @@ mysql_select_db("simuni");
 
 	set_time_limit(30);
     //пытаемся прогнать все тесты
-	$timeout=10;
+	$timeout=30;
 	$sleep = 1;
     $testresult="";	
 	

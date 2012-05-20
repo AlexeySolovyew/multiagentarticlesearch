@@ -107,7 +107,7 @@ $row = mysql_fetch_array($solution);
                 term.echo('Please enter a command');
             }
         }, {
-            greetings:'Here you can evaluate expressions\nType \"p\" for editing code of the solution, when edited, press button below',
+            greetings:'Консоль для вычисления выражений с помощью данного решения\nНапечатайте \"p\" для редактирования решения, после редактирования сохраните изменения',
             name:'haskell',
             height:200,
             prompt:'ghc>'});
