@@ -89,6 +89,7 @@ mysql_select_db("simuni");
             echo "Прогоняется тест номер: " . $i . "<br>";
 			//echo "start /b ghc -e \"" . $row[Expression] . "\" " . $real_file_path . " > ".$realresdir;
             //exec("start /b ghc -e \"" . $row[Expression] . "\" " . $real_file_path . " > ".$realresdir/*, $array*/);
+			//запуск в фоновом режиме интерпретатора
 			popen("start /b ghc -e \"" . $row[Expression] . "\" " . $real_file_path . " > ".$realresdir,"r");
 			//$pid = (int) $array[0];
 			//ждем 10 секунд, потом насильно завершаем процесс
@@ -112,11 +113,9 @@ mysql_select_db("simuni");
 				}
 			}
 			
-            //echo $result;
 			$line = file_get_contents($realresdir);
 			$line = trim($line);
 			//echo $line;
-			//echo "ghc -e \"" . $row[Expression] . "\" " . $real_file_path . " > ".$realresdir;
             if ($line === "") {
                 $testresult = "Не удалось вычислить выражение \"" . $row[Expression] . "\", проверьте правильность синтаксиса";
                 echo $testresult;
@@ -137,15 +136,15 @@ mysql_select_db("simuni");
             $testresult = "<br/>Тесты успешно пройдены!";
             echo $testresult; ;
         } else echo "<br/>Попробуйте снова!";
-
+		
+		//записываем попытку в базу
         mysql_query("INSERT INTO Solution (TaskID,UserID,LoadTimestamp,ResultID,Code,TestResult)
          VALUES (".$_POST['tasknum'].",'".$_SESSION['user_id']."',NOW(),0,'".$code."','".$testresult."')");
     } else {
         echo "Неверно выбрана задача...";
     }
     //удаляем временный файл
-	//TODO: раскомментить
-    //if (isset($filedir)) unlink($filedir);
+    if (isset($filedir)) unlink($filedir);
     ?>
     <br/>
 
