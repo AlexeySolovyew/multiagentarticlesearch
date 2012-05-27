@@ -64,7 +64,7 @@ mysql_select_db("simuni");
         //echo $real_file_path;
     }
 
-	set_time_limit(30);
+	//set_time_limit(40);
     //пытаемся прогнать все тесты
 	$timeout=30;
 	$sleep = 1;
@@ -92,7 +92,7 @@ mysql_select_db("simuni");
 			//запуск в фоновом режиме интерпретатора
 			popen("start /b ghc -e \"" . $row[Expression] . "\" " . $real_file_path . " > ".$realresdir,"r");
 			//$pid = (int) $array[0];
-			//ждем 10 секунд, потом насильно завершаем процесс
+			//ждем 30 секунд, потом насильно завершаем процесс
 			 $cur = 0;
 			// пока не истекло время отведенное на выполнение скрипта продолжаем ждать
 			while( true ) {
@@ -147,7 +147,5 @@ mysql_select_db("simuni");
     if (isset($filedir)) unlink($filedir);
     ?>
     <br/>
-
-
 </body>
 </html>

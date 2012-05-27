@@ -37,7 +37,7 @@ mysql_select_db("simuni");
         $row = mysql_fetch_array($solution);
         $text = $row['Code'];
         //подсветка комментариев
-        echo preg_replace("/---.*\n/","<font color=\"red\">\\0</font>",$text);
+        echo preg_replace("/---.*---/","<font color=\"red\">\\0</font>",$text);
         ?></pre><br>
     <p><u>Результат:</u><br/> <?php $hts = mysql_query("SELECT * FROM Result WHERE ResultID=".$row['ResultID']);
         $resultname = mysql_fetch_assoc($hts);

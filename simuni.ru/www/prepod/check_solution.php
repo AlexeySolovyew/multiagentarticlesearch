@@ -59,6 +59,7 @@ $row = mysql_fetch_array($solution);
 </td>
 <td>
 <input type="submit" value="Сохранить изменения">
+</form>
 </td>
 <td><form action="add_test.php" method="post">
     <input type="hidden" name="taskid" value="<?php echo $row[TaskID]?>">
