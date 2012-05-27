@@ -50,10 +50,17 @@ if ($row[RoleID]!=2) die("Студенту нельзя лезть к матер
 	echo "<b>".$_POST['hometaskid']." - ".$name."</b>";?>
     <br/>
 	<br/>
-	В этом задании уже есть <b><?php 
+	<?php 
 	$maxnum = mysql_query("SELECT MAX(TaskForHometask) AS TaskNum FROM Task WHERE HometaskID=" . $_POST['hometaskid']);
-    $row = mysql_fetch_array($maxnum);
-    echo $row['TaskNum'];?></b> задач(а) для данного задания
+	$row = mysql_fetch_array($maxnum);
+	if (!isset($row['TaskNum'])) {
+	    echo "Это будет первая задача для данного задания.";
+	} else {
+	    echo "В этом задании уже есть <b>";
+		echo $row['TaskNum'];
+		echo "</b> задач(а) для данного задания";
+	}
+	?>
 	<br/>
 	<br/>
     Номер задачи в задании:<br>
