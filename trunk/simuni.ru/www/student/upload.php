@@ -80,7 +80,7 @@ mysql_select_db("simuni");
 	//echo $realresdir;
 	
     echo "Загружаем тестовую базу...<br>";
-    $tasktests = mysql_query("SELECT * FROM Test WHERE TaskID=" . $_POST['tasknum']);
+    $tasktests = mysql_query("SELECT * FROM Test WHERE TaskID=" . $_POST['tasknum'] . " ORDER BY TestForTaskID");
     if ($tasktests) {
         $q = mysql_num_rows($tasktests);
         echo "Всего загружено тестов: " . $q . "<br>";
