@@ -12,8 +12,10 @@ $row = mysql_fetch_array($resuser);
 if ($row['RoleID'] != 2) die("Студенту нельзя лезть к материалам преподавателя!");
 ?>
 <head>
+    <LINK REL="SHORTCUT ICON" href="../favicon.ico">
     <title>Интерфейс преподавателя</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <LINK REL="SHORTCUT ICON" href="../favicon.ico">
 </head>
 <table border=1>
     <tr>

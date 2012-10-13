@@ -3,6 +3,7 @@ if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожалуйста, авторизуйтесь <a href=\"../index.php\">здесь</a>");?>
 <html>
 <head>
+    <LINK REL="SHORTCUT ICON" href="../favicon.ico">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Добавление задачи - курс ФП</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css">

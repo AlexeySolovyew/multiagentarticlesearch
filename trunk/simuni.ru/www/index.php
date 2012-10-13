@@ -4,6 +4,7 @@
     <title>Functional Programming</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <LINK REL="SHORTCUT ICON" href="favicon.ico">
 </head>
 <body>
 <script language='Javascript'>

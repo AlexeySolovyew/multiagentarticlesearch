@@ -9,8 +9,10 @@ $row = mysql_fetch_array($resuser);
 ?>
 <html>
 <head>
+    <LINK REL="SHORTCUT ICON" href="../favicon.ico">
     <title>Горячие задачи</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <LINK REL="SHORTCUT ICON" href="../favicon.ico">
 </head>
 <body>
 <table width="100%">

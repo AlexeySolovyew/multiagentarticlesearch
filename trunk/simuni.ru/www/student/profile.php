@@ -33,6 +33,7 @@ $row = mysql_fetch_assoc($sql);
 ?>
 <html>
 <head>
+    <LINK REL="SHORTCUT ICON" href="../favicon.ico">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>

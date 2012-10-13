@@ -4,6 +4,7 @@ isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожа
 ?>
 <html>
 <head>
+    <LINK REL="SHORTCUT ICON" href="../favicon.ico">
     <title>Результат загрузки решения</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" type="text/css" href="../css/style.css">

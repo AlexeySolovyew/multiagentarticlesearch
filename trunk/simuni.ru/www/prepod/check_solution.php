@@ -17,6 +17,7 @@ if ($row[RoleID] != 2) die("Студенту нельзя лезть к мате
 ?>
 <html>
 <head>
+    <LINK REL="SHORTCUT ICON" href="../favicon.ico">
     <link rel="stylesheet" type="text/css" href="../css/jquery.terminal.css"/>
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>

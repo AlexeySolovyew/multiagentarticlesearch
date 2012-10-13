@@ -10,6 +10,7 @@ if ($row[RoleID] != 2) die("Студенту нельзя лезть к мате
 ?>
 <html>
 <head>
+    <LINK REL="SHORTCUT ICON" href="../favicon.ico">
     <title>Тесты - курс ФП</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
