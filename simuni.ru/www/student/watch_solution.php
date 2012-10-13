@@ -14,6 +14,7 @@ mysql_select_db("simuni");
 ?>
 <html>
 <head>
+    <LINK REL="SHORTCUT ICON" href="../favicon.ico">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>

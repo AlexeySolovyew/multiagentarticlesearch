@@ -12,6 +12,7 @@ isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожа
 ?>
 <html>
 <head>
+    <LINK REL="SHORTCUT ICON" href="../favicon.ico">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Добавление домашнего задания - курс ФП</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css">

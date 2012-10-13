@@ -10,6 +10,7 @@ if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 ?>
 <html>
 <head>
+    <LINK REL="SHORTCUT ICON" href="favicon.ico">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script type="text/javascript" src="http://userapi.com/js/api/openapi.js?49"></script>
 
