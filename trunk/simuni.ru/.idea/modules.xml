@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Simuni.ru.iml" filepath="$PROJECT_DIR$/Simuni.ru.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/haskell.iml" filepath="$PROJECT_DIR$/.idea/haskell.iml" />
     </modules>
   </component>
 </project>

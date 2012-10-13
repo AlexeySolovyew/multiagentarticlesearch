@@ -18,20 +18,23 @@ isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожа
 </head>
 <body>
 <?php
-mysql_connect("localhost", "root", "12345678");
+mysql_connect("localhost", "root", "sTRS9LDpJMTXuUwE");
 mysql_select_db("simuni");
-$queryyuser = "SELECT RoleID FROM `User` WHERE UserID='".$_SESSION['user_id']."'";
+$queryyuser = "SELECT RoleID FROM `User` WHERE UserID='" . $_SESSION['user_id'] . "'";
 $resuser = mysql_query($queryyuser);
 $row = mysql_fetch_array($resuser);
-if ($row[RoleID]!=2) die("Студенту нельзя лезть к материалам преподавателя!");
+if ($row[RoleID] != 2) die("Студенту нельзя лезть к материалам преподавателя!");
 ?>
 <table width="100%">
-<tr>
-<td align="right"><a href="tasks.php">К задачам</a><td>
-<td align="right"><a href="../index.php">На главную</a><td>
-</tr>
+    <tr>
+        <td align="right"><a href="tasks.php">К задачам</a>
+        <td>
+        <td align="right"><a href="../index.php">На главную</a>
+        <td>
+    </tr>
 </table>
 <br/>
+
 <h2 align="center">Страница редактирования задачи</h2>
 <br>
 
@@ -46,7 +49,7 @@ if ($row[RoleID]!=2) die("Студенту нельзя лезть к матер
     echo "<p><select size=\"1\" name=\"hometaskid\">";
     for ($i = 0; $i < $q; $i++) {
         $row = mysql_fetch_array($hometasks);
-        if (strcmp($currrow['HometaskID'], $row['HometaskID'])==0) {
+        if (strcmp($currrow['HometaskID'], $row['HometaskID']) == 0) {
             echo "<option selected value=" . $row['HometaskID'] . ">" . $row['HometaskID'] . " - " . $row['Topic'] . "</option>";
         } else {
             echo "<option value=" . $row['HometaskID'] . ">" . $row['HometaskID'] . " - " . $row['Topic'] . "</option>";
@@ -58,7 +61,7 @@ if ($row[RoleID]!=2) die("Студенту нельзя лезть к матер
     Номер задачи в д.з.:<br>
     <input name="taskforhometask" value="<?php echo $currrow['TaskForHometask']?>"><br>
     Условие:<br>
-    <textarea cols="50" rows="10" name="condition"><?php echo $currrow['Condition']?></textarea><br>
+    <textarea cols="50" rows="10" name="condition"><?php echo htmlspecialchars($currrow['Condition'])?></textarea><br>
     <input type="hidden" name="taskid" value="<?php echo $_POST['taskid']?>">
     Цена:<br>
     <input name="price" value="<?php echo $currrow['Price']?>"><br/>

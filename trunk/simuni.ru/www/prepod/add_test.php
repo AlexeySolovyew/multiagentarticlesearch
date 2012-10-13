@@ -9,27 +9,30 @@ isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожа
 </head>
 <body>
 <?php
-mysql_connect("localhost", "root", "12345678");
+mysql_connect("localhost", "root", "sTRS9LDpJMTXuUwE");
 mysql_select_db("simuni");
-$queryyuser = "SELECT RoleID FROM `User` WHERE UserID='".$_SESSION['user_id']."'";
+$queryyuser = "SELECT RoleID FROM `User` WHERE UserID='" . $_SESSION['user_id'] . "'";
 $resuser = mysql_query($queryyuser);
 $row = mysql_fetch_array($resuser);
-if ($row[RoleID]!=2) die("Студенту нельзя лезть к материалам преподавателя!");
+if ($row[RoleID] != 2) die("Студенту нельзя лезть к материалам преподавателя!");
 ?>
 <table width="100%">
-<tr>
-<td align="right"><a href="tests.php">К тестам</a><td>
-<td align="right"><a href="../index.php">На главную</a><td>
-</tr>
+    <tr>
+        <td align="right"><a href="tests.php">К тестам</a>
+        <td>
+        <td align="right"><a href="../index.php">На главную</a>
+        <td>
+    </tr>
 </table>
 <br/>
+
 <h2 align="center">Страница добавления теста </h2>
 <br/>
 <?php
-$res = mysql_query("SELECT * FROM Task WHERE TaskID=".$_POST['taskid']);
-$row=mysql_fetch_array($res);
+$res = mysql_query("SELECT * FROM Task WHERE TaskID=" . $_POST['taskid']);
+$row = mysql_fetch_array($res);
 if ($_POST['taskid'] != null) {
-    echo "<p>Добавление нового теста к <b>".$row[TaskForHometask]."</b> задаче из <b>" . $row[HometaskID] . "</b> домашнего задания.";
+    echo "<p>Добавление нового теста к <b>" . $row[TaskForHometask] . "</b> задаче из <b>" . $row[HometaskID] . "</b> домашнего задания.";
 } else {
     echo "Не указан номер задачи.";
 }
@@ -37,11 +40,11 @@ if ($_POST['taskid'] != null) {
 <form action="tests.php" method="post">
 
     <?php
-	$cond = mysql_query("SELECT `Condition` FROM Task WHERE TaskID=".$_POST['taskid']);
-	//echo "SELECT Condition FROM Task WHERE TaskID=".$_POST['taskid'];
-	$rowCond = mysql_fetch_array($cond);
-	echo "<u>Условие:</u> <br/>".nl2br($rowCond['Condition']);
-	echo "<br/><br/>";
+    $cond = mysql_query("SELECT `Condition` FROM Task WHERE TaskID=" . $_POST['taskid']);
+    //echo "SELECT Condition FROM Task WHERE TaskID=".$_POST['taskid'];
+    $rowCond = mysql_fetch_array($cond);
+    echo "<u>Условие:</u> <br/>" . htmlspecialchars(nl2br(htmlspecialchars($rowCond['Condition'])));
+    echo "<br/><br/>";
 
     $maxnum = mysql_query("SELECT MAX(TestForTaskID) AS TestNum FROM Test WHERE TaskID=" . $_POST['taskid']);
     $row = mysql_fetch_array($maxnum);

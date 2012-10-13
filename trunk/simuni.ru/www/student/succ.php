@@ -1,7 +1,7 @@
 <?php session_start();
 if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожалуйста, авторизуйтесь <a href=\"index.php\">здесь</a>");
-mysql_connect("localhost", "root", "12345678");
+mysql_connect("localhost", "root", "sTRS9LDpJMTXuUwE");
 mysql_select_db("simuni");
 ?>
 <html>
@@ -10,14 +10,17 @@ mysql_select_db("simuni");
 </head>
 <body>
 <table width="100%">
-<tr>
-<td align="right"><a href="../index.php">На главную</a><td>
-</tr>
+    <tr>
+        <td align="right"><a href="../index.php">На главную</a>
+        <td>
+    </tr>
 </table>
 <br/>
 <br/>
-<h2 align = "center">Загруженные решения</h2>
+
+<h2 align="center">Загруженные решения</h2>
 <br/>
+
 <form action="succ.php" method="POST">
     <p><select size="1" name="taskid">
         <option value="-1">Для всех задач</option>
@@ -35,7 +38,7 @@ mysql_select_db("simuni");
         }
         ?>
     </select>
-     <input type="submit" value="фильтровать">
+        <input type="submit" value="фильтровать">
 </form>
 <table border="1">
     <tr>
@@ -60,21 +63,21 @@ mysql_select_db("simuni");
     </tr>
     <?php
     $query = "SELECT DISTINCT * FROM Solution JOIN Task USING (TaskID) JOIN Result USING (ResultID)
-     JOIN `User` USING (UserID) WHERE UserID='".$_SESSION['user_id']."'";
+     JOIN `User` USING (UserID) WHERE UserID='" . $_SESSION['user_id'] . "'";
     //обрабатываем фильтр
-    if (isset($_POST['taskid']) && $_POST['taskid']!=-1) $query=$query." AND Task.TaskID=".$_POST['taskid'];
-    $query=$query." ORDER BY LoadTimestamp DESC";
-   // echo $_SESSION['user_id'];
-   // echo $query;
+    if (isset($_POST['taskid']) && $_POST['taskid'] != -1) $query = $query . " AND Task.TaskID=" . $_POST['taskid'];
+    $query = $query . " ORDER BY LoadTimestamp DESC";
+    // echo $_SESSION['user_id'];
+    // echo $query;
     $solutions = mysql_query($query);
     $q = mysql_num_rows($solutions);
     for ($i = 0; $i < $q; $i++) {
         $row = mysql_fetch_array($solutions);
         echo "<tr><td>" . $row[HometaskID] . "</td><td>" . $row[TaskForHometask] . "</td>
-        <td>".$row[LoadTimestamp]."</td><td>" . $row[Text] . "</td>
+        <td>" . $row[LoadTimestamp] . "</td><td>" . $row[Text] . "</td>
         <td>" .
             "<form action=\"watch_solution.php\" method=\"POST\"><input type=\"hidden\" name=\"solutionid\" value=\"$row[SolutionID]\">
-        <input type=\"submit\" style=\"background: url(../img/check.png); height:50px; width:50px; line-height:12px;\" value=\"\"></form></td><td>" . $row[TestResult] . "</td></tr>";
+        <input type=\"submit\" class=\"search\" style=\"background: url(../img/check.png); height:50px; width:50px; line-height:12px;\" value=\"\"></form></td><td>" . $row[TestResult] . "</td></tr>";
     }
     ?>
     <br/>
