@@ -143,20 +143,31 @@ if ($tasktests) {
             break;
         }
     }
+
     if ($i == $q) {
         $testresult = "<br/>Тесты успешно пройдены!";
         echo $testresult;
-        ;
-    } else echo "<br/>Попробуйте снова!";
+    } else {
+        echo "<br/>Попробуйте снова!";
+    }
 
+    /*echo "INSERT INTO Solution (TaskID,UserID,LoadTimestamp,ResultID,Code,TestResult)
+         VALUES (" . $_POST['tasknum'] . ",'" . $_SESSION['user_id'] . "',NOW(),0,'" . str_replace("'", "''", $code) . "','" . $testresult . "')";*/
     //записываем попытку в базу
-    mysql_query("INSERT INTO Solution (TaskID,UserID,LoadTimestamp,ResultID,Code,TestResult)
+    $saved = mysql_query("INSERT INTO Solution (TaskID,UserID,LoadTimestamp,ResultID,Code,TestResult)
          VALUES (" . $_POST['tasknum'] . ",'" . $_SESSION['user_id'] . "',NOW(),0,'" . str_replace("'", "''", $code) . "','" . $testresult . "')");
+    if ($saved == 0) {
+        echo "<br/>Не удалось сохранить попытку в системе, проверьте кодировку файла, рекомендуемая кодировка: UTF-8";
+    } else {
+        echo "<br/>Решение успешно сохранено!";
+    }
+
+
 } else {
     echo "Неверно выбрана задача...";
 }
 //удаляем временный файл
-//if (isset($filedir)) unlink($filedir);
+if (isset($filedir)) unlink($filedir);
 ?>
 <br/>
 </body>
