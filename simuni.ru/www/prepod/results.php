@@ -4,7 +4,7 @@ isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожа
 ?>
 <html>
 <?php
-mysql_connect("localhost", "root", "12345678");
+mysql_connect("localhost", "root", "sTRS9LDpJMTXuUwE");
 mysql_select_db("simuni");
 $queryyuser = "SELECT RoleID FROM `User` WHERE UserID='" . $_SESSION['user_id'] . "'";
 $resuser = mysql_query($queryyuser);
@@ -17,15 +17,17 @@ if ($row['RoleID'] != 2) die("Студенту нельзя лезть к мат
 </head>
 <body>
 <table width="100%">
-<tr>
-<td align="right"><a href="../index.php">На главную</a><td>
-</tr>
+    <tr>
+        <td align="right"><a href="../index.php">На главную</a>
+        <td>
+    </tr>
 </table>
 <br/>
+
 <h2 align="center">Таблица с результатами</h2>
 <br/>
 <table border="1">
-    
+
     <tr>
         <td>
             <b>Студент</b>
@@ -47,7 +49,7 @@ if ($row['RoleID'] != 2) die("Студенту нельзя лезть к мат
     for ($i = 0; $i < $countusers; $i++) {
         $rowuser = mysql_fetch_array($users);
         $query = "SELECT DISTINCT TaskID FROM `User` JOIN Solution USING (UserID) JOIN Task USING (TaskID)
-    WHERE ResultID=1 AND UserID='".$rowuser[UserID]."'";
+    WHERE ResultID=1 AND UserID='" . $rowuser[UserID] . "'";
         //echo $query;
         $querypoints = "SELECT SUM(Price) AS Priceall FROM Task WHERE TaskID IN (" . $query . ")";
         //echo $querypoints;
@@ -58,8 +60,8 @@ if ($row['RoleID'] != 2) die("Студенту нельзя лезть к мат
         $array = mysql_fetch_array($uprice);
         //посчитали к-во баллов юзверя
         $balls = $array[Priceall];
-		//ставим ноль вручную, если вообще ни одной зачтенной задачки
-		if (!isset($balls)) $balls="0";
+        //ставим ноль вручную, если вообще ни одной зачтенной задачки
+        if (!isset($balls)) $balls = "0";
         echo "<tr><td>" . $rowuser[Surname] . " " . $rowuser[Name] . "</td><td>" . $rowuser[GroupNumber] . "</td>
         <td>" . $counttasks . "</td><td>" . $balls . "</td></tr>";
 

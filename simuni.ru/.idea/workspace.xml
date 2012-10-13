@@ -1,7 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="c97e828f-8fc2-4ea8-b434-cdf681cce879" name="Default" comment="" />
+    <list default="true" readonly="true" id="c97e828f-8fc2-4ea8-b434-cdf681cce879" name="Default" comment="">
+      <change type="DELETED" beforePath="D:\skupon.ru\files\haskell\Замечания по диплому.txt" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/filetask.hs" afterPath="$PROJECT_DIR$/files/filetask.hs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/css/style.css" afterPath="$PROJECT_DIR$/www/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/index.php" afterPath="$PROJECT_DIR$/www/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/login.php" afterPath="$PROJECT_DIR$/www/login.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/prepod/add_hometask.php" afterPath="$PROJECT_DIR$/www/prepod/add_hometask.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/prepod/add_task.php" afterPath="$PROJECT_DIR$/www/prepod/add_task.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/prepod/add_test.php" afterPath="$PROJECT_DIR$/www/prepod/add_test.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/prepod/check_solution.php" afterPath="$PROJECT_DIR$/www/prepod/check_solution.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/prepod/edit_hometask.php" afterPath="$PROJECT_DIR$/www/prepod/edit_hometask.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/prepod/edit_task.php" afterPath="$PROJECT_DIR$/www/prepod/edit_task.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/prepod/edit_test.php" afterPath="$PROJECT_DIR$/www/prepod/edit_test.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/prepod/hometasks.php" afterPath="$PROJECT_DIR$/www/prepod/hometasks.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/prepod/index.php" afterPath="$PROJECT_DIR$/www/prepod/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/prepod/results.php" afterPath="$PROJECT_DIR$/www/prepod/results.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/prepod/tasks.php" afterPath="$PROJECT_DIR$/www/prepod/tasks.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/prepod/tests.php" afterPath="$PROJECT_DIR$/www/prepod/tests.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/student/history.php" afterPath="$PROJECT_DIR$/www/student/history.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/student/index.php" afterPath="$PROJECT_DIR$/www/student/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/student/load.php" afterPath="$PROJECT_DIR$/www/student/load.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/student/profile.php" afterPath="$PROJECT_DIR$/www/student/profile.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/student/succ.php" afterPath="$PROJECT_DIR$/www/student/succ.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/student/upload.php" afterPath="$PROJECT_DIR$/www/student/upload.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/student/watch_solution.php" afterPath="$PROJECT_DIR$/www/student/watch_solution.php" />
+    </list>
     <ignored path="simuni.ru.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -13,7 +41,6 @@
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
-    <option name="REVERSE_PATCH" value="false" />
   </component>
   <component name="DaemonCodeAnalyzer">
     <disable_hints />
@@ -59,10 +86,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="tasks.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/prepod/tasks.php">
+      <file leaf-file-name="login.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/login.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="118" column="61" selection-start="4811" selection-end="4811" vertical-scroll-proportion="0.0">
+            <state line="50" column="143" selection-start="1205" selection-end="1348" vertical-scroll-proportion="-13.307693">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="check_solution.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/prepod/check_solution.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="75" column="53" selection-start="2976" selection-end="2976" vertical-scroll-proportion="-3.8846154">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="history.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/www/student/history.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="70" column="39" selection-start="2111" selection-end="2111" vertical-scroll-proportion="0.374031">
               <folding />
             </state>
           </provider>
@@ -71,52 +116,16 @@
       <file leaf-file-name="index.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/student/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="15" selection-start="519" selection-end="519" vertical-scroll-proportion="0.0">
+            <state line="101" column="54" selection-start="3524" selection-end="3524" vertical-scroll-proportion="-4.230769">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/www/prepod/index.php">
+      <file leaf-file-name="load.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/student/load.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="131" column="40" selection-start="4941" selection-end="4941" vertical-scroll-proportion="0.42885375">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="history.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/student/history.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="27" selection-start="558" selection-end="558" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="add_test.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/prepod/add_test.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="37" selection-start="1839" selection-end="1839" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="succ.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/student/succ.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="7" selection-start="370" selection-end="1275" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tests.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/prepod/tests.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="122" column="45" selection-start="4739" selection-end="4739" vertical-scroll-proportion="0.0">
+            <state line="39" column="20" selection-start="1280" selection-end="1302" vertical-scroll-proportion="-4.3846154">
               <folding />
             </state>
           </provider>
@@ -125,7 +134,7 @@
       <file leaf-file-name="edit_task.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/prepod/edit_task.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="60" column="101" selection-start="2198" selection-end="2198" vertical-scroll-proportion="-3.0769231">
               <folding />
             </state>
           </provider>
@@ -134,7 +143,16 @@
       <file leaf-file-name="edit_test.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/prepod/edit_test.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="64" selection-start="2339" selection-end="2339" vertical-scroll-proportion="0.0">
+            <state line="45" column="37" selection-start="1418" selection-end="1418" vertical-scroll-proportion="-4.076923">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/prepod/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="114" column="37" selection-start="3890" selection-end="3890" vertical-scroll-proportion="-4.230769">
               <folding />
             </state>
           </provider>
@@ -143,7 +161,16 @@
       <file leaf-file-name="upload.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/student/upload.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="80" column="49" selection-start="3209" selection-end="3209" vertical-scroll-proportion="0.0">
+            <state line="109" column="126" selection-start="4182" selection-end="4182" vertical-scroll-proportion="-11.192307">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="add_test.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/prepod/add_test.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="44" column="0" selection-start="1646" selection-end="1646" vertical-scroll-proportion="-5.3846154">
               <folding />
             </state>
           </provider>
@@ -156,30 +183,25 @@
       <setting name="OPEN_NEW_TAB" value="false" />
     </FindUsagesManager>
   </component>
-  <component name="Git.Settings">
-    <option name="CHECKOUT_INCLUDE_TAGS" value="false" />
-    <option name="UPDATE_CHANGES_POLICY" value="STASH" />
-    <option name="LINE_SEPARATORS_CONVERSION" value="ASK" />
-  </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/www/prepod/results.php" />
-        <option value="$PROJECT_DIR$/www/prepod/check_solution.php" />
-        <option value="$PROJECT_DIR$/www/student/succ.php" />
         <option value="$PROJECT_DIR$/www/student/watch_solution.php" />
         <option value="$PROJECT_DIR$/www/index.php" />
         <option value="$PROJECT_DIR$/www/common_functions.php" />
         <option value="$PROJECT_DIR$/www/prepod/hometasks.php" />
         <option value="$PROJECT_DIR$/www/prepod/tasks.php" />
-        <option value="$PROJECT_DIR$/www/student/load.php" />
-        <option value="$PROJECT_DIR$/www/student/index.php" />
-        <option value="$PROJECT_DIR$/www/student/history.php" />
         <option value="$PROJECT_DIR$/www/prepod/tests.php" />
-        <option value="$PROJECT_DIR$/www/prepod/add_test.php" />
         <option value="$PROJECT_DIR$/www/prepod/edit_test.php" />
-        <option value="$PROJECT_DIR$/www/student/upload.php" />
         <option value="$PROJECT_DIR$/www/prepod/index.php" />
+        <option value="$PROJECT_DIR$/www/login.php" />
+        <option value="$PROJECT_DIR$/www/student/upload.php" />
+        <option value="$PROJECT_DIR$/www/prepod/check_solution.php" />
+        <option value="$PROJECT_DIR$/www/prepod/edit_task.php" />
+        <option value="$PROJECT_DIR$/www/student/history.php" />
+        <option value="$PROJECT_DIR$/www/student/index.php" />
+        <option value="$PROJECT_DIR$/www/student/load.php" />
+        <option value="$PROJECT_DIR$/www/prepod/add_test.php" />
       </list>
     </option>
   </component>
@@ -194,8 +216,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="744" />
+    <option name="width" value="1380" />
+    <option name="height" value="740" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -223,8 +245,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -239,7 +259,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="simuni.ru" />
+              <option name="myItemId" value="haskell" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -249,7 +269,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="simuni.ru" />
+              <option name="myItemId" value="haskell" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -263,7 +283,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="simuni.ru" />
+              <option name="myItemId" value="haskell" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -281,7 +301,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="simuni.ru" />
+              <option name="myItemId" value="haskell" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -293,26 +313,19 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
           <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Simuni" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="simuni.ru" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="img" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Favorites" />
     </panes>
   </component>
@@ -321,6 +334,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="project.structure.proportion" value="0.15" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
@@ -329,12 +343,11 @@
   </component>
   <component name="PublishConfig" serverName="FP Course" serverId="fd2467e8-807a-4f27-8eae-0ef3f94a23ed">
     <servers>
-      <server id="fd2467e8-807a-4f27-8eae-0ef3f94a23ed">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
+      <server id="9dd9b535-421b-4b07-a1ea-feb4f264aa41">
+        <serverdata />
+      </server>
+      <server id="ea639758-d043-4ed2-b63b-ddbbb34f3ad1">
+        <serverdata />
       </server>
     </servers>
   </component>
@@ -342,7 +355,7 @@
     <list size="0" />
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
-  <component name="SvnConfiguration" maxAnnotateRevisions="500">
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="true">
     <option name="USER" value="" />
     <option name="PASSWORD" value="" />
     <option name="mySSHConnectionTimeout" value="30000" />
@@ -357,9 +370,28 @@
     <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
     <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
     <option name="FORCE_UPDATE" value="false" />
-    <configuration useDefault="false">C:\Users\Алексей\AppData\Roaming\Subversion</configuration>
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <configuration useDefault="true">C:\Users\Alexey\AppData\Roaming\Subversion</configuration>
     <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
     <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="SvnFileUrlMappingImpl">
+    <option name="myMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="D:\skupon.ru\files\haskell" />
+          <option name="myCopyRoot" value="D:\skupon.ru\files\haskell" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+    <option name="myMoreRealMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="D:\skupon.ru\files\haskell" />
+          <option name="myCopyRoot" value="D:\skupon.ru\files\haskell" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -390,27 +422,29 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="1" width="1278" height="726" extended-state="0" />
+    <frame x="-8" y="-8" width="1380" height="740" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935154" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20214522" sideWeight="0.67064846" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935154" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32931036" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935154" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20789075" sideWeight="0.67068964" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
     </layout>
@@ -442,7 +476,16 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
+    <option name="SHORT_DIFF_HORISONTALLY" value="true" />
+    <option name="SHORT_DIFF_EXTRA_LINES" value="2" />
+    <option name="SOFT_WRAPS_IN_SHORT_DIFF" value="true" />
+    <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
+    <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+    <option name="CREATE_PATCH_EXPAND_DETAILS_DEFAULT" value="true" />
+    <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
+    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
     <option name="LAST_COMMIT_MESSAGE" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
@@ -461,88 +504,102 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/www/prepod/haskell.php">
+    <entry file="file://$PROJECT_DIR$/www/prepod/tests.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="33" selection-start="556" selection-end="556" vertical-scroll-proportion="0.0" />
+        <state line="122" column="12" selection-start="4946" selection-end="4946" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/prepod/check_solution.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="22" selection-start="1604" selection-end="1604" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/common_functions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="5" selection-start="457" selection-end="457" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/prepod/results.php">
+    <entry file="file://$PROJECT_DIR$/.htaccess">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/prepod/hometasks.php">
+    <entry file="file://$PROJECT_DIR$/www/.htaccess">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="92" selection-start="3028" selection-end="3028" vertical-scroll-proportion="0.0" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/student/load.php">
+    <entry file="file://$PROJECT_DIR$/www/prepod/edit_hometask.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="15" selection-start="1541" selection-end="1541" vertical-scroll-proportion="0.0" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/prepod/tasks.php">
+    <entry file="file://$PROJECT_DIR$/www/student/watch_solution.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="118" column="61" selection-start="4811" selection-end="4811" vertical-scroll-proportion="0.0" />
+        <state line="39" column="55" selection-start="1078" selection-end="1078" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/student/index.php">
+    <entry file="file://$PROJECT_DIR$/www/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="15" selection-start="519" selection-end="519" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="143" selection-start="1205" selection-end="1348" vertical-scroll-proportion="-13.307693">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/student/history.php">
+    <entry file="file://$PROJECT_DIR$/www/student/upload.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="27" selection-start="558" selection-end="558" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/prepod/add_test.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="37" selection-start="1839" selection-end="1839" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/student/succ.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="7" selection-start="370" selection-end="1275" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/prepod/tests.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="122" column="45" selection-start="4739" selection-end="4739" vertical-scroll-proportion="0.0" />
+        <state line="109" column="126" selection-start="4182" selection-end="4182" vertical-scroll-proportion="-11.192307">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/prepod/edit_task.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+        <state line="60" column="101" selection-start="2198" selection-end="2198" vertical-scroll-proportion="-3.0769231">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/prepod/edit_test.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="64" selection-start="2339" selection-end="2339" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/student/upload.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="49" selection-start="3209" selection-end="3209" vertical-scroll-proportion="0.0">
+        <state line="45" column="37" selection-start="1418" selection-end="1418" vertical-scroll-proportion="-4.076923">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/prepod/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="131" column="40" selection-start="4941" selection-end="4941" vertical-scroll-proportion="0.42885375">
+        <state line="114" column="37" selection-start="3890" selection-end="3890" vertical-scroll-proportion="-4.230769">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/prepod/check_solution.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="75" column="53" selection-start="2976" selection-end="2976" vertical-scroll-proportion="-3.8846154">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/student/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="101" column="54" selection-start="3524" selection-end="3524" vertical-scroll-proportion="-4.230769">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/student/load.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="20" selection-start="1280" selection-end="1302" vertical-scroll-proportion="-4.3846154">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/prepod/add_test.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="0" selection-start="1646" selection-end="1646" vertical-scroll-proportion="-5.3846154">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/student/history.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="70" column="39" selection-start="2111" selection-end="2111" vertical-scroll-proportion="0.374031">
           <folding />
         </state>
       </provider>

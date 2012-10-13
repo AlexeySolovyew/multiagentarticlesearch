@@ -1,1 +1,1 @@
-gkuboinpinkiln
+myreverse x = foldr (\x f -> (\y -> f $ x:y)) id x []

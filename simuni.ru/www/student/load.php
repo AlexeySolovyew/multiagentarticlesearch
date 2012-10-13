@@ -14,18 +14,21 @@ isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожа
  * Time: 11:51
  * To change this template use File | Settings | File Templates.
  */
-mysql_connect("localhost", "root", "12345678");
+mysql_connect("localhost", "root", "sTRS9LDpJMTXuUwE");
 mysql_select_db("simuni");
 ?>
 <table width="100%">
-<tr>
-<td align="right"><a href="index.php">На главную</a><td>
-</tr>
+    <tr>
+        <td align="right"><a href="index.php">На главную</a>
+        <td>
+    </tr>
 </table>
 <br/>
 <br/>
-<h2 align = "center">Загрузка решения</h2>
+
+<h2 align="center">Загрузка решения</h2>
 <br/>
+
 <form action="upload.php" method="post" enctype="multipart/form-data">
     <u>Номер задачи:</u> <br>
     <?php
@@ -36,19 +39,19 @@ mysql_select_db("simuni");
     echo "<option disabled>Выберите задачу</option>";
     for ($i = 0; $i < $q; $i++) {
         $row = mysql_fetch_array($tasks);
-        if (isset($_POST['taskid']) && strcmp($_POST['taskid'],$row['TaskID'])==0) {
-            $cond = $row['Condition'];
+        if (isset($_POST['taskid']) && strcmp($_POST['taskid'], $row['TaskID']) == 0) {
+            $cond = nl2br(htmlspecialchars($row['Condition']));
             echo "<option selected value=" . $row['TaskID'] . ">" . $row['HometaskID'] . " - " . $row['TaskForHometask'] . "</option>";
         } else {
             echo "<option value=" . $row['TaskID'] . ">" . $row['HometaskID'] . " - " . $row['TaskForHometask'] . "</option>";
         }
     }
     echo "</select><br>";
-    if (isset($cond)) echo "<u>Условие:</u> <br/>".$cond."<br/><br/>";
+    if (isset($cond)) echo "<u>Условие:</u> <br/>" . $cond . "<br/><br/>";
     ?>
-	<br/>
-	Пожалуйста, выберите вариант формата загружаемого решения (необходимо выбрать ровно один из вариантов)
-	<br/><br/>
+    <br/>
+    Пожалуйста, выберите вариант формата загружаемого решения (необходимо выбрать ровно один из вариантов)
+    <br/><br/>
     <u>Файл с задачей:</u> (поддерживаемые форматы: *.hs, *.txt, *.lhs) <br>
     <input type="file" name="filename"><br>
     или<br>

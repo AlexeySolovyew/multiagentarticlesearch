@@ -8,12 +8,12 @@ isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожа
  * Time: 13:06
  * To change this template use File | Settings | File Templates.
  */
-mysql_connect("localhost", "root", "12345678");
+mysql_connect("localhost", "root", "sTRS9LDpJMTXuUwE");
 mysql_select_db("simuni");
-$queryyuser = "SELECT RoleID FROM `User` WHERE UserID='".$_SESSION['user_id']."'";
+$queryyuser = "SELECT RoleID FROM `User` WHERE UserID='" . $_SESSION['user_id'] . "'";
 $resuser = mysql_query($queryyuser);
 $row = mysql_fetch_array($resuser);
-if ($row[RoleID]!=2) die("Студенту нельзя лезть к материалам преподавателя!");
+if ($row[RoleID] != 2) die("Студенту нельзя лезть к материалам преподавателя!");
 ?>
 <html>
 <head>
@@ -26,7 +26,7 @@ if ($row[RoleID]!=2) die("Студенту нельзя лезть к матер
 <body>
 <?php
 if ($_POST['code'] != null) {
-    $query = "UPDATE Solution SET Code='" . $_POST['code'] . "',ResultID=" . $_POST['resultid'] . " WHERE SolutionID=" . $_POST['solutionid'];
+    $query = "UPDATE Solution SET Code='" . str_replace("'", "''", $_POST['code']) . "',ResultID=" . $_POST['resultid'] . " WHERE SolutionID=" . $_POST['solutionid'];
     if (mysql_query($query)) {
         echo "<font color=\"green\">Решение студента успешно отредактировано.</font><br>";
     } else {
@@ -38,45 +38,48 @@ $solution = mysql_query($query);
 $row = mysql_fetch_array($solution);
 ?>
 <form action="check_solution.php" method="POST">
-<table width="100%">
-<tr>
-<td>
-<u>Статус решения:</u>
-<select size="1" name="resultid">
-        <?php
-        $hts = mysql_query("SELECT * FROM Result");
-        $q = mysql_num_rows($hts);
-        for ($i = 0; $i < $q; $i++) {
-            $tmprow = mysql_fetch_array($hts);
-            if (strcmp($row['ResultID'], $tmprow['ResultID']) == 0) {
-                echo "<option selected value=\"" . $tmprow['ResultID'] . "\">" . $tmprow['Text'] . "</option>";
-            } else {
-                echo "<option value=\"" . $tmprow['ResultID'] . "\">" . $tmprow['Text'] . "</option>";
-            }
-        }
-        ?>
-    </select>
-</td>
-<td>
-<input type="submit" value="Сохранить изменения">
+    <table width="100%">
+        <tr>
+            <td>
+                <u>Статус решения:</u>
+                <select size="1" name="resultid">
+                    <?php
+                    $hts = mysql_query("SELECT * FROM Result");
+                    $q = mysql_num_rows($hts);
+                    for ($i = 0; $i < $q; $i++) {
+                        $tmprow = mysql_fetch_array($hts);
+                        if (strcmp($row['ResultID'], $tmprow['ResultID']) == 0) {
+                            echo "<option selected value=\"" . $tmprow['ResultID'] . "\">" . $tmprow['Text'] . "</option>";
+                        } else {
+                            echo "<option value=\"" . $tmprow['ResultID'] . "\">" . $tmprow['Text'] . "</option>";
+                        }
+                    }
+                    ?>
+                </select>
+            </td>
+            <td>
+                <input type="submit" value="Сохранить изменения">
 </form>
 </td>
-<td><form action="add_test.php" method="post">
-    <input type="hidden" name="taskid" value="<?php echo $row[TaskID]?>">
-    <input type="submit" value="Новый тест для этой задачи">
-</form></td>
+<td>
+    <form action="add_test.php" method="post">
+        <input type="hidden" name="taskid" value="<?php echo $row[TaskID]?>">
+        <input type="submit" value="Новый тест для этой задачи">
+    </form>
+</td>
 <td><a href="../index.php">На главную</a></td>
 </tr>
 </table>
 <br/>
-<h2 align = "center">Работа с присланным решением</h2>
+
+<h2 align="center">Работа с присланным решением</h2>
 <br/>
-    <input type="hidden" name="solutionid" value="<?php echo $_POST['solutionid'];?>">
-    <u>Задача:</u> <br/><?php echo $row[HometaskID]." - ".$row[TaskForHometask]?><br/><br/>
-    <u>Условие:</u> <br/><?php echo $row[Condition]?><br/><br/>
-    <u>Текст решения*:</u> <br>
-	* комментарии, помеченные "---", будут выделяться цветом в системе студента</br>
-    <textarea id="code" rows="15" cols="115" name="code"><?php echo $row['Code'];?></textarea><br>
+<input type="hidden" name="solutionid" value="<?php echo $_POST['solutionid'];?>">
+<u>Задача:</u> <br/><?php echo $row[HometaskID] . " - " . $row[TaskForHometask]?><br/><br/>
+<u>Условие:</u> <br/><?php echo nl2br(htmlspecialchars($row[Condition]));?><br/><br/>
+<u>Текст решения*:</u> <br>
+* комментарии, помеченные "---", будут выделяться цветом в системе студента</br>
+<textarea id="code" rows="15" cols="115" name="code"><?php echo htmlspecialchars($row['Code']);?></textarea><br>
 </form>
 
 
