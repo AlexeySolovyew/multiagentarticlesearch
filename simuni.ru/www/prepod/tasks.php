@@ -126,7 +126,7 @@ else if ($_POST['taskid'] != null) {
     $q = mysql_num_rows($alltasks);
     for ($i = 0; $i < $q; $i++) {
         $row = mysql_fetch_array($alltasks);
-        echo "<tr><td>" . $row[HometaskID] . "</td><td>" . $row[TaskForHometask] . "</td><td>" . $row[Condition] . "</td>
+        echo "<tr><td>" . $row[HometaskID] . "</td><td>" . $row[TaskForHometask] . "</td><td>" . nl2br(htmlspecialchars($row[Condition])) . "</td>
         <td>" .
             "<form action=\"tests.php\" method=\"POST\"><input type=\"hidden\" name=\"taskid\" value=\"$row[TaskID]\">
         <input type=\"submit\" style=\"background: url(../img/view.png); height:50px; width:50px; line-height:12px;\" value=\"\"></form></td><td>" . $row[Price] . "</td>
