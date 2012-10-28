@@ -62,7 +62,7 @@ if ($row[RoleID] != 2) die("Студенту нельзя лезть к мате
         Номер теста для задачи:<br>
         <input name="testfortask" value="<?php echo $currrow['TestForTaskID']?>"><br>
         Выражение:<br>
-        <input name="expr" value="<?php echo $currrow['Expression']?>"><br>
+        <input name="expr" size="150" value="<?php echo htmlspecialchars($currrow['Expression'])?>"><br>
         Ожидаемое значение:<br>
         <input name="val" value="<?php echo $currrow['Result']?>"><br>
         Хитрый?:<br>

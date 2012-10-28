@@ -3,6 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="c97e828f-8fc2-4ea8-b434-cdf681cce879" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/dz7.hs" afterPath="$PROJECT_DIR$/files/dz7.hs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/prepod/add_test.php" afterPath="$PROJECT_DIR$/www/prepod/add_test.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/prepod/edit_test.php" afterPath="$PROJECT_DIR$/www/prepod/edit_test.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/prepod/tests.php" afterPath="$PROJECT_DIR$/www/prepod/tests.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/student/upload.php" afterPath="$PROJECT_DIR$/www/student/upload.php" />
     </list>
     <ignored path="simuni.ru.iws" />
@@ -61,45 +65,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="load.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/student/load.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="52" selection-start="266" selection-end="266" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="login.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/login.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="36" selection-start="288" selection-end="288" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding>
-                <marker date="1350158939072" expanded="true" signature="603:699" placeholder="..." />
-                <marker date="1350158939072" expanded="true" signature="760:855" placeholder="..." />
-                <marker date="1350158939072" expanded="true" signature="3919:4007" placeholder="..." />
-                <marker date="1350158939072" expanded="true" signature="4173:4269" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="favicon.ico" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/favicon.ico">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="common_functions.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/common_functions.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -121,7 +86,59 @@
       <file leaf-file-name="upload.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/student/upload.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="161" column="19" selection-start="6166" selection-end="6166" vertical-scroll-proportion="0.58064514">
+            <state line="125" column="27" selection-start="4729" selection-end="4729" vertical-scroll-proportion="0.05120482">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="add_test.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/prepod/add_test.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="46" column="80" selection-start="1731" selection-end="1731" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tests.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/prepod/tests.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="63" column="89" selection-start="3053" selection-end="3053" vertical-scroll-proportion="0.0">
+              <folding>
+                <marker date="1351378056346" expanded="true" signature="2885:3479" placeholder="..." />
+                <marker date="1351378056346" expanded="true" signature="2894:3479" placeholder="..." />
+                <marker date="1351378056346" expanded="true" signature="2907:3479" placeholder="..." />
+                <marker date="1351378056346" expanded="true" signature="2962:3479" placeholder="..." />
+                <marker date="1351378056346" expanded="true" signature="3272:3479" placeholder="..." />
+                <marker date="1351378056346" expanded="true" signature="4106:4561" placeholder="..." />
+                <marker date="1351378056346" expanded="true" signature="4221:4561" placeholder="..." />
+                <marker date="1351378056346" expanded="true" signature="4229:4561" placeholder="..." />
+                <marker date="1351378056346" expanded="true" signature="4260:4561" placeholder="..." />
+                <marker date="1351378056346" expanded="true" signature="5013:5697" placeholder="..." />
+                <marker date="1351378056346" expanded="true" signature="5022:5605" placeholder="..." />
+                <marker date="1351378056346" expanded="true" signature="6015:6633" placeholder="..." />
+                <marker date="1351378056346" expanded="true" signature="6275:6543" placeholder="..." />
+                <marker date="1351378056346" expanded="true" signature="6339:6538" placeholder="..." />
+                <marker date="1351378056346" expanded="true" signature="6547:6633" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="edit_test.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/prepod/edit_test.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="64" column="98" selection-start="2343" selection-end="2343" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="resres.txt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/student/resres.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -130,7 +147,7 @@
       <file leaf-file-name="standard_1.php" pinned="false" current="false" current-in-tab="false">
         <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_1.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="715" column="9" selection-start="21191" selection-end="21191" vertical-scroll-proportion="-7.076923">
+            <state line="715" column="9" selection-start="21191" selection-end="21191" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -139,7 +156,7 @@
       <file leaf-file-name="mysql.php" pinned="false" current="false" current-in-tab="false">
         <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/mysql.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="148" column="9" selection-start="5421" selection-end="5421" vertical-scroll-proportion="-10.5">
+            <state line="148" column="9" selection-start="5421" selection-end="5421" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -164,13 +181,10 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/www/prepod/edit_task.php" />
-        <option value="$PROJECT_DIR$/www/prepod/edit_test.php" />
         <option value="$PROJECT_DIR$/www/prepod/hometasks.php" />
         <option value="$PROJECT_DIR$/www/prepod/index.php" />
         <option value="$PROJECT_DIR$/www/prepod/results.php" />
         <option value="$PROJECT_DIR$/www/prepod/tasks.php" />
-        <option value="$PROJECT_DIR$/www/prepod/tests.php" />
         <option value="$PROJECT_DIR$/www/student/history.php" />
         <option value="$PROJECT_DIR$/www/student/index.php" />
         <option value="$PROJECT_DIR$/www/student/profile.php" />
@@ -179,6 +193,9 @@
         <option value="$PROJECT_DIR$/www/student/load.php" />
         <option value="$PROJECT_DIR$/www/login.php" />
         <option value="$PROJECT_DIR$/www/register.php" />
+        <option value="$PROJECT_DIR$/www/prepod/add_test.php" />
+        <option value="$PROJECT_DIR$/www/prepod/tests.php" />
+        <option value="$PROJECT_DIR$/www/prepod/edit_test.php" />
         <option value="$PROJECT_DIR$/www/student/upload.php" />
       </list>
     </option>
@@ -194,8 +211,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1380" />
-    <option name="height" value="740" />
+    <option name="width" value="1040" />
+    <option name="height" value="576" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -211,7 +228,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1" splitterProportion="0.5">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -223,6 +240,86 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Simuni" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Simuni" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="haskell" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Simuni" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="haskell" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Simuni" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="haskell" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="student" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Simuni" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="haskell" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="prepod" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="PackagesPane" />
       <pane id="Favorites" />
     </panes>
@@ -313,7 +410,11 @@
       <created>1350159370101</created>
       <updated>1350159370101</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="-some fixes of file upload">
+      <created>1350166386104</created>
+      <updated>1350166386104</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -337,7 +438,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1380" height="740" extended-state="6" />
+    <frame x="-8" y="-8" width="1040" height="576" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -346,7 +447,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935154" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20789075" sideWeight="0.67068964" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21063395" sideWeight="0.67068964" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
@@ -402,7 +503,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="-add favicon" />
+    <option name="LAST_COMMIT_MESSAGE" value="-some fixes of file upload" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -417,31 +518,12 @@
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
     <MESSAGE value="-some nl2br" />
     <MESSAGE value="-add favicon" />
+    <MESSAGE value="-some fixes of file upload" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/www/prepod/tasks.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="207" selection-end="207" vertical-scroll-proportion="-2.6153846" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/prepod/tests.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="0" selection-start="532" selection-end="532" vertical-scroll-proportion="-4.230769" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/student/history.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="291" selection-end="291" vertical-scroll-proportion="-4.230769" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/student/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="446" selection-end="446" vertical-scroll-proportion="-4.230769" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/student/profile.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="34" column="0" selection-start="1085" selection-end="1085" vertical-scroll-proportion="-4.5" />
@@ -449,23 +531,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/register.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="36" selection-start="218" selection-end="218" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="13" column="36" selection-start="218" selection-end="218" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/student/load.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="52" selection-start="266" selection-end="266" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="5" column="52" selection-start="266" selection-end="266" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/login.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="36" selection-start="288" selection-end="288" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="12" column="36" selection-start="288" selection-end="288" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/index.php">
@@ -480,42 +556,54 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/common_functions.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="14" selection-start="300" selection-end="300" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="13" column="14" selection-start="300" selection-end="300" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/student/succ.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="288" selection-end="288" vertical-scroll-proportion="0.0">
+        <state line="7" column="0" selection-start="288" selection-end="288" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/prepod/add_test.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="80" selection-start="1731" selection-end="1731" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/prepod/tests.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="89" selection-start="3053" selection-end="3053" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/prepod/edit_test.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="98" selection-start="2343" selection-end="2343" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/student/watch_solution.php">
+    <entry file="file://$PROJECT_DIR$/www/student/resres.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="0" selection-start="446" selection-end="446" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/mysql.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="148" column="9" selection-start="5421" selection-end="5421" vertical-scroll-proportion="-10.5">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_1.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="715" column="9" selection-start="21191" selection-end="21191" vertical-scroll-proportion="-7.076923">
-          <folding />
-        </state>
+        <state line="715" column="9" selection-start="21191" selection-end="21191" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/mysql.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="148" column="9" selection-start="5421" selection-end="5421" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/student/watch_solution.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="0" selection-start="446" selection-end="446" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/student/upload.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="161" column="19" selection-start="6166" selection-end="6166" vertical-scroll-proportion="0.58064514">
+        <state line="125" column="27" selection-start="4729" selection-end="4729" vertical-scroll-proportion="0.05120482">
           <folding />
         </state>
       </provider>

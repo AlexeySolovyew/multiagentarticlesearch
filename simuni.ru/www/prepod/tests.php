@@ -27,8 +27,8 @@ if ($_POST['val'] != null) {
         /*echo "INSERT INTO Test (Expression,Result,TaskID,Smart,TestForTaskID,SmartHelp) VALUES (\"" . $_POST['expr'] . "\",\"" .
 $_POST['val'] . "\",\"" . $_POST['taskid'] . "\",\""
 . $smart . "\",\"" . $_POST['testfortask'] . "\",\"" . $_POST['help'] . "\")";*/
-        if (mysql_query("INSERT INTO Test (Expression,Result,TaskID,Smart,TestForTaskID,SmartHelp) VALUES (\"" . $_POST['expr'] . "\",\"" .
-            $_POST['val'] . "\",\"" . $_POST['taskid'] . "\",\""
+        if (mysql_query("INSERT INTO Test (Expression,Result,TaskID,Smart,TestForTaskID,SmartHelp) VALUES (\"" . str_replace("\"", "\\\"", $_POST['expr']) . "\",\"" .
+            str_replace("\"", "\\\"", $_POST['val']) . "\",\"" . $_POST['taskid'] . "\",\""
             . $smart . "\",\"" . $_POST['testfortask'] . "\",\"" . $_POST['help'] . "\")")
         ) {
             echo "<div><font color=\"green\">Тест успешно добавлен.</font></div><br>";
@@ -39,7 +39,7 @@ $_POST['val'] . "\",\"" . $_POST['taskid'] . "\",\""
         //редактирование теста
         //echo "UPDATE Test SET Expression='" . $_POST['expr'] . "',Result='" . $_POST['val'] . "',TaskID='" . $_POST['taskid'] . "',
         //Smart='" . $smart . "' WHERE TestID=" . $_POST['testid'];
-        if (mysql_query("UPDATE Test SET Expression='" . $_POST['expr'] . "',Result='" . $_POST['val'] . "',TaskID='" . $_POST['taskid'] . "',
+        if (mysql_query("UPDATE Test SET Expression='" . str_replace("'", "''", $_POST['expr']) . "',Result='" . str_replace("'", "''", $_POST['val']) . "',TaskID='" . $_POST['taskid'] . "',
         Smart='" . $smart . "',TestForTaskID='" . $_POST['testfortask'] . "',SmartHelp='" . $_POST['help'] . "' WHERE TestID=" . $_POST['testid'])
         ) {
             echo "<font color=\"green\">Тест успешно отредактирован.</font><br>";
@@ -61,7 +61,8 @@ $_POST['val'] . "\",\"" . $_POST['taskid'] . "\",\""
     <tr>
         <td>
             <form action="add_test.php" method="post">
-                Задачи в списке отображаются в виде:<br> <b>{номер домашнего задания - номер задачи в этом задании}</b>
+                Задачи в списке отображаются в виде:<br> <b>{номер домашнего задания} - {номер задачи в этом
+                задании}</b>
                 <?php
                 $tasks = mysql_query("SELECT * FROM Task");
                 $q = mysql_num_rows($tasks);

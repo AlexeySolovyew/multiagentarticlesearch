@@ -88,8 +88,9 @@ if ($tasktests) {
         $row = mysql_fetch_array($tasktests);
         echo "Прогоняется тест номер: " . $i . "<br>";
         //запуск в фоновом режиме интерпретатора
+        //popen("start /b C:\\ghc\\ghc-7.4.2\\bin\\ghc.exe -e '" . str_replace("'","\"",$row[Expression]) ."' " . $real_file_path . " > " . $resfiledir, "r");
         popen("start /b C:\\ghc\\ghc-7.4.2\\bin\\ghc.exe -e \"" . $row[Expression] . "\" " . $real_file_path . " > " . $resfiledir, "r");
-        //echo "Command: "."start /b C:\\ghc\\ghc-7.4.2\\bin\\ghc.exe -e \"" . $row[Expression] . "\" " . $real_file_path . " > ".$resfiledir;
+        //echo "start /b C:\\ghc\\ghc-7.4.2\\bin\\ghc.exe -e '" . str_replace("'","\"",$row[Expression]) ."' " . $real_file_path . " > " . $resfiledir;
 
         //echo "execution result: <br/>";
         //$line = exec("C:\\ghc\\ghc-7.4.2\\bin\\ghc.exe -e \"" . $row[Expression] . "\" " . $real_file_path);
@@ -155,9 +156,9 @@ if ($tasktests) {
          VALUES (" . $_POST['tasknum'] . ",'" . $_SESSION['user_id'] . "',NOW(),0,'" . str_replace("'", "''", $code) . "','" . $testresult . "')";*/
     //записываем попытку в базу
     $saved = mysql_query("INSERT INTO Solution (TaskID,UserID,LoadTimestamp,ResultID,Code,TestResult)
-         VALUES (" . $_POST['tasknum'] . ",'" . $_SESSION['user_id'] . "',NOW(),0,'" . str_replace("'", "''", $code) . "','" . $testresult . "')");
+         VALUES (" . $_POST['tasknum'] . ",'" . $_SESSION['user_id'] . "',NOW(),0,'" . str_replace("'", "''", $code) . "','" . str_replace("'", "''", $testresult) . "')");
     if ($saved == 0) {
-        echo "<br/>Не удалось сохранить попытку в системе, проверьте кодировку файла, рекомендуемая кодировка: UTF-8";
+        echo "<br/>Не удалось сохранить попытку в системе, проверьте кодировку файла или текста, рекомендуемая кодировка: UTF-8";
     } else {
         echo "<br/>Решение успешно сохранено!";
     }
