@@ -99,7 +99,7 @@ if (isset($_SESSION['user_id'])) {
         if (!mysql_query($queryIns)) die("<font color=\"red\">Трудности с новыми пользователями, пожалуйста, попробуйте позже.</font>" . $queryIns);
 
     } else {
-        //сравниваем хэш для серкьюрности
+        //сравниваем хэш для секьюрности
         //echo md5("2910180".$_GET['uid']."kudiQOGdUMycn0QKYaRe");
         //echo $_GET['hash'];
         if (strcmp($_GET['hash'], md5("2910180" . $_GET['uid'] . "kudiQOGdUMycn0QKYaRe")) != 0) die("<font color=\"red\">Ошибка входа.
