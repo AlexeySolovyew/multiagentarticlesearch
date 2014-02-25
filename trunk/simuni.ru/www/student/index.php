@@ -115,7 +115,9 @@ $row = mysql_fetch_array($resuser);
 </table>
 <p>* отображены задачи, которые не зачтены, но крайний срок сдачи ещё не прошел<br/><br/>
 
-<div align="center"><i>The System created by Alexey Solovyew as the diploma work<br/> mailto:
-    alexey.solovyew@gmail.com<br/>2011-2012</i></div>
+<?php
+include "../footer.php";
+?>
+
 </body>
 </html>
