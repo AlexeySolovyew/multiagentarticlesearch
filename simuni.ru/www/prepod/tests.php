@@ -1,8 +1,8 @@
 ﻿<?php session_start();
 if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожалуйста, авторизуйтесь <a href=\"../index.php\">здесь</a>");
-mysql_connect("localhost", "root", "sTRS9LDpJMTXuUwE");
-mysql_select_db("simuni");
+include "../db.php";
+
 $queryyuser = "SELECT RoleID FROM `User` WHERE UserID='" . $_SESSION['user_id'] . "'";
 $resuser = mysql_query($queryyuser);
 $row = mysql_fetch_array($resuser);

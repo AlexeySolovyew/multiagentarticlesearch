@@ -9,8 +9,8 @@
 
 if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожалуйста, авторизуйтесь <a href=\"../index.php\">здесь</a>");
-mysql_connect("localhost", "root", "sTRS9LDpJMTXuUwE");
-mysql_select_db("simuni");
+include "../db.php";
+
 
 if (isset($_POST['login'])) {
     $updateSql = "UPDATE `User` SET Name='" . $_POST['name'] . "', Surname='" . $_POST['surname'] . "', GroupNumber=" . $_POST['gnum'] . ", Password='" . $_POST['password'] . "' WHERE UserID='" . $_POST['login'] . "'";

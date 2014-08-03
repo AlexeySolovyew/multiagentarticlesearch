@@ -19,8 +19,8 @@ isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожа
 </head>
 <body>
 <?php
-mysql_connect("localhost", "root", "sTRS9LDpJMTXuUwE");
-mysql_select_db("simuni");
+include "../db.php";
+
 $queryyuser = "SELECT RoleID FROM `User` WHERE UserID='" . $_SESSION['user_id'] . "'";
 $resuser = mysql_query($queryyuser);
 $row = mysql_fetch_array($resuser);

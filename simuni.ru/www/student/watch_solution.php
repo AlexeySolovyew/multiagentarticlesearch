@@ -9,8 +9,8 @@ isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожа
  * Time: 13:06
  * To change this template use File | Settings | File Templates.
  */
-mysql_connect("localhost", "root", "sTRS9LDpJMTXuUwE");
-mysql_select_db("simuni");
+include "../db.php";
+
 ?>
 <html>
 <head>
