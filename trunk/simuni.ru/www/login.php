@@ -50,9 +50,7 @@ if (isset($_GET['exit'])) unset($_SESSION['user_id']);
     </tr>
 </table>
 
-<div align="center"><i>The System created by Alexey Solovyew as the diploma work<br/> mailto:
-    alexey.solovyew@gmail.com<br/>2011-2012</i></div>
-
+<?php include "footer.php"; ?>
 
 </body>
 </html>

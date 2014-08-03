@@ -11,8 +11,8 @@ isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожа
 </head>
 <body>
 <?php
-mysql_connect("localhost", "root", "sTRS9LDpJMTXuUwE");
-mysql_select_db("simuni");
+include "../db.php";
+
 ?>
 <table width="100%">
     <tr>
@@ -89,7 +89,7 @@ if ($tasktests) {
         echo "Прогоняется тест номер: " . $i . "<br>";
         //запуск в фоновом режиме интерпретатора
         //popen("start /b C:\\ghc\\ghc-7.4.2\\bin\\ghc.exe -e '" . str_replace("'","\"",$row[Expression]) ."' " . $real_file_path . " > " . $resfiledir, "r");
-        popen("start /b C:\\ghc\\ghc-7.4.2\\bin\\ghc.exe -e \"" . $row[Expression] . "\" " . $real_file_path . " > " . $resfiledir, "r");
+        popen("start /b D:\\ghc\\bin\\ghc.exe -e \"" . $row[Expression] . "\" " . $real_file_path . " > " . $resfiledir, "r");
         //echo "start /b C:\\ghc\\ghc-7.4.2\\bin\\ghc.exe -e '" . str_replace("'","\"",$row[Expression]) ."' " . $real_file_path . " > " . $resfiledir;
 
         //echo "execution result: <br/>";

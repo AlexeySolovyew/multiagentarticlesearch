@@ -11,7 +11,7 @@ $code = $_GET['code'];
 $testresult = "";
 //$ghc_path= "C:\ghc\ghc-7.4.1\bin\ghc";
 //$line = exec($ghc_path." -e \"" . $_GET['cmd'] . "\" " . $real_file_path, $array, $result);
-$line = exec("ghc -e \"" . $_GET['cmd'] . "\" " . $real_file_path, $array, $result);
+$line = exec("D:\ghc\bin\ghc -e \"" . $_GET['cmd'] . "\" " . $real_file_path, $array, $result);
 //echo "ghc -e \"" . $_GET['cmd'] . "\" " . $real_file_path;
 //echo print_r($array);
 if ($result != 0 || $line == "") {

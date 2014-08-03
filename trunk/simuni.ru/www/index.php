@@ -29,8 +29,7 @@ function redirectToStartPage($row)
     }
 }
 
-mysql_connect("localhost", "root", "sTRS9LDpJMTXuUwE");
-mysql_select_db("simuni");
+include("db.php");
 
 if (isset($_SESSION['user_id'])) {
     $query = "SELECT *
@@ -120,6 +119,10 @@ if (isset($_SESSION['user_id'])) {
 <a href="login.php">Войти</a>
 
 <p><a href="register.php">Зарегистрироваться</a></p>
+
+<?php
+include "footer.php";
+?>
 
 </body>
 </html>
