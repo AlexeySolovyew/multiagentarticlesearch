@@ -1,4 +1,4 @@
-<?php session_start();
+<?php session_start(); include "../db.php";
 if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожалуйста, авторизуйтесь <a href=\"../index.php\">здесь</a>");
 /**
@@ -8,7 +8,7 @@ isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожа
  * Time: 13:06
  * To change this template use File | Settings | File Templates.
  */
-include "../db.php";
+connect_db();
 
 $queryyuser = "SELECT RoleID FROM `User` WHERE UserID='" . $_SESSION['user_id'] . "'";
 $resuser = mysql_query($queryyuser);

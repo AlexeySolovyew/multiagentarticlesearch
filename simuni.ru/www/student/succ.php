@@ -1,7 +1,7 @@
-<?php session_start();
+<?php session_start(); include "../db.php";
 if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожалуйста, авторизуйтесь <a href=\"index.php\">здесь</a>");
-include "../db.php";
+connect_db();
 
 ?>
 <html>

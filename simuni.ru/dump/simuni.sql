@@ -2,17 +2,17 @@
 SQLyog Ultimate v11.11 (64 bit)
 MySQL - 5.6.16-log : Database - simuni
 *********************************************************************
-*/
+*/
 
-/*!40101 SET NAMES utf8 */;
+SET NAMES utf8 ;
 
-/*!40101 SET SQL_MODE=''*/;
+SET SQL_MODE='';
 
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`simuni` /*!40100 DEFAULT CHARACTER SET utf8 */;
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 ;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 ;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' ;
+SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 ;
+CREATE DATABASE IF NOT EXISTS`simuni`  DEFAULT CHARACTER SET utf8 ;
 
 USE `simuni`;
 
@@ -150,7 +150,7 @@ CREATE TABLE `user` (
 
 insert  into `user`(`UserID`,`Password`,`Name`,`Surname`,`RoleID`,`GroupNumber`) values ('alexey.solovyew@gmail.com','Phoenix','Alexey','Solovyew',1,541),('msimuni','12345','Michael','Simuni',2,NULL),('Olga.Bezrukavaya','9036517775vmb','Ольга','Безрукавая',1,543),('54411321','haloween','Александр','Калмук',1,545),('397095','haloween','Артём','',1,0),('12828920','haloween','Tolyan','',1,0),('432992','haloween','Антон','',1,0),('10558725','haloween','Artur','',1,0),('4019402','haloween','Анна','',1,0),('5122688','haloween','Катюшка','Пискунова',1,543),('p.kate','2323641','Екатерина','Пискунова',1,443),('1676722','haloween','Анна','',1,0),('1835693','haloween','Александр','Ильин',1,542),('Anton','Futurama777','Антон','Калинкин',1,542),('62628590','haloween','Никита','Осипов',1,541),('5247795','haloween','Юлия','',1,0),('egeorge','quethapper360','Георгий','Ерохин',1,545),('3301494','haloween','Даша','Диденко',1,543),('641524','haloween','Олег','',1,0),('Yaro_t','03121991Yy','Ярослав','Цимоха',1,542),('ip','12345','pavel','ignat`ev',1,542),('SNNatalieS','genifique','Наталья','Соковикова',1,545),('5543298','haloween','Дмитрий','Зубаревич',1,545),('artem.gomerman','haskell123581321','Артем','Гомерман',1,541),('617015','haloween','Алёна','',1,0),('Julia','nik50392','Юлия','Байцерова',1,545),('1619139','haloween','Nikita','',1,0),('nbumakov','>head246','Nikita','Bumakov',1,545),('Valentina Guleva','happymilk','Valentina','Guleva',1,542),('55363692','access>240','Павел','Федотовский',1,545),('480387','haloween','Олег','',1,541),('toskira','18002','Кирилл','Чередник',1,545),('Jery','441085','Александр','Пономарев',1,543),('4076083','haloween','Антон','',1,0),('3270666','haloween','Борис','Воробьев',1,543),('8519021','haloween','Алина','Птахина',1,545),('1170660','haloween','Влад','Сергеев',1,541),('ArtemK','160392','Артем','Кириенко',1,542),('3226573','haloween','Виктор','Дудин',1,545),('284427','haloween','Николай','Домнин',1,543),('domninnickolay','79602683146','Николай','Домнин',1,543),('215827','haloween','Sergey','',1,0),('anna','rollin445>','Анна','Михайлова',1,543),('1595828','haloween','Севастиан','Шостак',1,541),('4604056','haloween','Ефим','Нефёдов',1,545),('1545234','haloween','Катерина','Ипатова',1,543),('87635585','haloween','Антон','',1,0),('15309342','haloween','Настя','Кузенкова',1,545),('deripaska','576qwerty13','Анна','Дерипаска',1,545),('nomeansno','ybrbajhjd','Юрий','Шахматов',1,541),('matklad','5407_o','Алексей','Кладов',1,545),('6053606','haloween','Екатерина','Соса',1,545),('MaryK','123','Мария','Крень',1,541),('3320654','haloween','Леша','Шершнев',1,542),('2501950','haloween','Елена','Павлячек',1,541),('1048693','rabekta4ti35me16','Кирилл','Таран',1,545),('2156724','haloween','Владимир','Филатов',1,545),('115753099','haloween','Даня','',1,0),('romos2007','romos551992','Роман','Одеров',1,545),('anlun','pr1vet','Антон','Подкопаев',1,545),('419892','haloween','Алекс&','',1,0),('517309','haloween','Михаил','Симуни',1,99),('187177580','haloween','Константин','',1,0),('alebystr','haskell','Алена','Быстрова',1,542),('1526701','haloween','Евгений','Тимофеев',1,542),('1990147','haloween','Андрей','',1,0),('190863485','haloween','Максим','',1,0),('FutureBoy','evcalipt23','Путин','Евгений',1,541),('42284313','haloween','Михаил','Спицин',1,542),('Leonid','1ioZX(!!func','Леонид','Лукьянов',1,541),('ilia','0022025','Илья','Киряновский',1,541),('bazhutin','vbif4634083','Михаил','Бажутин',1,542),('2260659','haloween','Сергей','Серко',1,545),('Artur','1234567890skupon','Артур','Гудиев',1,444),('18625267','haloween','Natasha','',1,0),('48167667','haloween','Кирилл','',1,0),('522234','haloween','Виктор','',1,0),('p.ekaterina','2323641','Екатерина','Пискунова',1,543),('23959','haloween','Мария','',1,0),('14693','haloween','Николай','',1,0);
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+SET SQL_MODE=@OLD_SQL_MODE ;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS ;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS ;
+SET SQL_NOTES=@OLD_SQL_NOTES ;
