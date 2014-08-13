@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php session_start(); include("db.php");?>
 <html>
 <head>
     <title>Functional Programming</title>
@@ -29,7 +29,8 @@ function redirectToStartPage($row)
     }
 }
 
-include("db.php");
+connect_db();
+
 
 if (isset($_SESSION['user_id'])) {
     $query = "SELECT *

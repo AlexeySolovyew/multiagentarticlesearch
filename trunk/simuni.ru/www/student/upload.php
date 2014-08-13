@@ -1,4 +1,4 @@
-<?php session_start();
+<?php session_start(); include "../db.php";
 if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожалуйста, авторизуйтесь <a href=\"index.php\">здесь</a>");
 ?>
@@ -11,8 +11,7 @@ isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожа
 </head>
 <body>
 <?php
-include "../db.php";
-
+connect_db();
 ?>
 <table width="100%">
     <tr>
@@ -88,16 +87,9 @@ if ($tasktests) {
         $row = mysql_fetch_array($tasktests);
         echo "Прогоняется тест номер: " . $i . "<br>";
         //запуск в фоновом режиме интерпретатора
-        //popen("start /b C:\\ghc\\ghc-7.4.2\\bin\\ghc.exe -e '" . str_replace("'","\"",$row[Expression]) ."' " . $real_file_path . " > " . $resfiledir, "r");
-        popen("start /b D:\\ghc\\bin\\ghc.exe -e \"" . $row[Expression] . "\" " . $real_file_path . " > " . $resfiledir, "r");
-        //echo "start /b C:\\ghc\\ghc-7.4.2\\bin\\ghc.exe -e '" . str_replace("'","\"",$row[Expression]) ."' " . $real_file_path . " > " . $resfiledir;
-
-        //echo "execution result: <br/>";
-        //$line = exec("C:\\ghc\\ghc-7.4.2\\bin\\ghc.exe -e \"" . $row[Expression] . "\" " . $real_file_path);
-        //echo "<br/>";
-
-        //echo "C:\ghc\ghc-7.4.2\bin\ghc.exe -e \"" . $row[Expression] . "\" " . $real_file_path . " > ".$resfiledir;
-
+		$ghc_path= "/usr/bin/ghc";
+        $process_id = shell_exec($ghc_path." -e \"" . $row[Expression] . "\" " . $real_file_path . " > " . $resfiledir." &");
+        
         //ждем 30 секунд, потом насильно завершаем процесс
         $cur = 0;
         // пока не истекло время отведенное на выполнение скрипта продолжаем ждать
@@ -106,14 +98,12 @@ if ($tasktests) {
             sleep($sleep);
             $cur += $sleep;
             //echo "Current timeout: ".$cur;
-            $tasklist = exec("tasklist | find /c /i \"ghc.exe\"");
-            //echo "Result of tasklist: ".$tasklist." end result";
-            //echo "tasklist | find /c /i \"ghc.exe\"";
-            //echo $tasklist;
-            if ($tasklist != "0") {
+            $tasklist = shell_exec("ps -p ".$process_id);
+            
+            if (strpos($tasklist,$process_id)!==false) {
                 if ($cur >= $timeout) {
                     echo "Программа работает более " . $timeout . " секунд! Подозрение на бесконечный цикл. Прерывание...<br/>";
-                    $linekill = exec("taskkill /F /IM ghc.exe");
+                    $linekill = shell_exec("kill ".$process_id);
                     //echo $linekill;
                     break;
                 }
