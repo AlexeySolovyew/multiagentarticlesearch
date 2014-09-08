@@ -7,7 +7,7 @@ connect_db();
 <html>
 <head>
     <LINK REL="SHORTCUT ICON" href="../favicon.ico">
-    <title>Интерфейс студента</title>
+    <title>История</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>

@@ -23,11 +23,14 @@ if ($row[RoleID] != 2) die("Студенту нельзя лезть к мате
     <script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="../js/jquery.mousewheel-min.js"></script>
     <script type="text/javascript" src="../js/jquery.terminal-0.4.11.js"></script>
+	<title>Проверка решения</title>
 </head>
 <body>
 <?php
 if ($_POST['code'] != null) {
-    $query = "UPDATE Solution SET Code='" . str_replace("'", "''", $_POST['code']) . "',ResultID=" . $_POST['resultid'] . " WHERE SolutionID=" . $_POST['solutionid'];
+    $query = "UPDATE Solution SET 
+		Code='" . mysql_real_escape_string($_POST['code']) . "',ResultID=" . $_POST['resultid'] . " 
+		WHERE SolutionID=" . $_POST['solutionid'];
     if (mysql_query($query)) {
         echo "<font color=\"green\">Решение студента успешно отредактировано.</font><br>";
     } else {
@@ -80,7 +83,7 @@ $row = mysql_fetch_array($solution);
 <u>Условие:</u> <br/><?php echo nl2br(htmlspecialchars($row[Condition]));?><br/><br/>
 <u>Текст решения*:</u> <br>
 * комментарии, помеченные "---", будут выделяться цветом в системе студента</br>
-<textarea id="code" rows="15" cols="115" name="code"><?php echo htmlspecialchars($row['Code']);?></textarea><br>
+<textarea id="code" rows="15" cols="115" name="code"><?php echo stripslashes(htmlspecialchars($row['Code']));?></textarea><br>
 </form>
 
 
