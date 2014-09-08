@@ -1,16 +1,7 @@
 ﻿<?php session_start(); include "../db.php";
-/**
- * Created by JetBrains PhpStorm.
- * User: Алексей
- * Date: 20.03.12
- * Time: 12:49
- * To change this template use File | Settings | File Templates.
- */
-
 if (isset($_GET['exit'])) unset($_SESSION['user_id']);
 isset($_SESSION['user_id']) or die("Вы не авторизованы. Пожалуйста, авторизуйтесь <a href=\"../index.php\">здесь</a>");
 connect_db();
-
 
 if (isset($_POST['login'])) {
     $updateSql = "UPDATE `User` SET Name='" . $_POST['name'] . "', Surname='" . $_POST['surname'] . "', GroupNumber=" . $_POST['gnum'] . ", Password='" . $_POST['password'] . "' WHERE UserID='" . $_POST['login'] . "'";
@@ -34,6 +25,7 @@ $row = mysql_fetch_assoc($sql);
 <html>
 <head>
     <LINK REL="SHORTCUT ICON" href="../favicon.ico">
+	<title>Профиль</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
